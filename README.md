@@ -13,7 +13,7 @@ In order to build the RTC application
   2. vue run dev
   3. cd ../server
   4. npm start 
-    4.a (If nodemon installed) Nodemon
+  4.a (If nodemon installed) Nodemon
 
 ### Prerequisites
 
