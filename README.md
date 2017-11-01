@@ -21,4 +21,4 @@ In order to build the RTC application
 * [Vue.js](https://vuejs.org/) - Javascript user interface framework
 * [Socket.io](https://socket.io/) - JavaScript library for realtime web applications
 * [Quill.js](https://quilljs.com) - Powerful rich text editor
-* [Bootstrap](https://getbootstrap.com) Front-end library 
+* [Bootstrap](https://getbootstrap.com) - Front-end library 
