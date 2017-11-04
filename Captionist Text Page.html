@@ -1,0 +1,101 @@
+<!--Kevin Enario-->
+<!--Any section can be edited to fit a different design style-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- quill.js scripts and links -->
+    <script src="https://cdn.quilljs.com/1.3.3/quill.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.3/quill.min.js"></script>
+    <script src="https//cdnjs.cloudfare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- bootstrap script -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+            integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+            crossorigin="anonymous"></script>
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.quilljs.com/1.3.3/quill.snow.css" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.3/quill.bubble.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <!-- title of page -->
+    <title>Captionist Text Page</title>
+</head>
+
+<body style = "background-color: #c6f1ff;">
+    <div class = "container-fluid">
+        <!-- quill toolbar container -->
+        <div class = "row">
+            <div class = "col-sm-12 col-md-12 col-lg-12">
+                <div id="toolbar">
+                    <!-- font type -->
+                    <select class="ql-font"></select>
+
+                    <!-- font size -->
+                    <select class="ql-size"></select>
+
+                    <!-- font color -->
+                    <select class = "ql-color"></select>
+
+                    <!-- bold, italics, underlined -->
+                    <button class = "ql-bold"></button>
+                    <button class = "ql-italic"></button>
+                    <button class = "ql-underline"></button>
+
+                    <!-- bullet points and list of numbers -->
+                    <button class = "ql-list" value = "ordered"></button>
+                    <button class = "ql-list" value = "bullet"></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- quill editor -->
+        <div class = "row">
+            <div class = "col-sm-12 col-md-12 col-lg-12">
+                <div id="editor"></div>
+            </div>
+        </div>
+
+        <script>
+            //create an options object to pass for the quill editor
+            var options = {
+                debug: "info",
+                modules: {
+                    toolbar: "#toolbar"},
+                placeholder: "Look both ways before typing...",
+                theme: "snow"
+            };
+
+            //initialize quill
+            var editor = new Quill("#editor", options);
+        </script>
+
+        <!-- footer with a fixed position -->
+        <div class = "row">
+            <div class = "col-xs-12 col-sm-12 col-mid-12 col-lg-12">
+                <div class = "footer">
+                    <!-- footer button styling-->
+                    <div class = "footerButtons">
+                        <!-- footer buttons -->
+                        <div>
+                            <!-- buttons don't actually work yet -->
+                            <button class = "footerButtons">About Retica</button>
+                            <button class = "footerButtons">Contact Us</button>
+                            <button class = "footerButtons">Testing1</button>
+                            <button class = "footerButtons">Testing2</button>
+                            <button class = "footerButtons">Testing3</button>
+                            <button class = "footerButtons">Testing4</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
