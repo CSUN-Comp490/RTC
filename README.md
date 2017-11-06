@@ -9,10 +9,10 @@ RTC (Real-Time Captioning) is a web-based application that serves captions to mu
 
 In order to build the RTC application
   1. cd client && npm install
-  2. npm run dev
+  2. vue run dev
   3. cd ../server && npm install
   4. npm start 
-  4.a (If nodemon installed) Nodemon
+  4.a (If nodemon installed) nodemon
 
 ## Built With
 * [Node.js](https://nodejs.org/en/) - Javascript Server-side environment

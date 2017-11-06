@@ -2,10 +2,10 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node node_modules/nodemon/bin/nodemon.js src/app.js --exec",
+    "lint": "node node_modules/.bin/eslint **.*.js"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +13,16 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "morgan": "^1.9.0"
+  },
+  "devDependencies": {
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "eslint": "^4.10.0",
+    "nodemon": "^1.12.1"
   }
 }
