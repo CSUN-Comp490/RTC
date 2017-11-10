@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/app.js",
   "scripts": {
     "start": "node node_modules/nodemon/bin/nodemon.js src/app.js --exec",
     "lint": "node node_modules/.bin/eslint **.*.js"
@@ -11,10 +11,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
+    "eslint": "^4.10.0",
     "express": "^4.16.2",
-    "morgan": "^1.9.0"
+    "joi": "^13.0.1",
+    "jsonwebtoken": "^8.1.0",
+    "morgan": "^1.9.0",
+    "sequelize": "^4.22.0",
+    "sqlite3": "^3.1.8"
   },
   "devDependencies": {
     "eslint-config-standard": "^10.2.1",
@@ -22,7 +29,6 @@
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1",
-    "eslint": "^4.10.0",
     "nodemon": "^1.12.1"
   }
 }
