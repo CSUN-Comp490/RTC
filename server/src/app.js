@@ -14,15 +14,16 @@ app.use(cors())
 
 require('./routes')(app)
 
-
 sequelize.sync({force: false}).then(() => {
+    //this is the socket port
+    http.listen(8082)
+    app.listen(config.port)
     io.on('connection', function (socket) {
+        console.log('USER CONNECTED')
         socket.on('chat message', function(msg){
             io.emit('chat message', msg);
           })
     })
-
-    app.listen(config.port)
     console.log(`Server started on port ${config.port}`)
     
 })
