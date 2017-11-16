@@ -11,7 +11,7 @@ function jwtSignUser (user){
 }
 
 module.exports = {
-    async register(req, res) {
+    async register (req, res) {
         try {
             //Creates a user
             const user = await User.create(req.body)
@@ -59,7 +59,6 @@ module.exports = {
                 user: userJson,
                 token: jwtSignUser(userJson)
             })
-
         }catch(err){
             res.status(500).send({
                 error: 'An error has occurred trying to log in'
