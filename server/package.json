@@ -21,8 +21,8 @@
     "jsonwebtoken": "^8.1.0",
     "morgan": "^1.9.0",
     "sequelize": "^4.22.0",
-    "sqlite3": "^3.1.8",
-    "socket.io": "^2.0.4"
+    "socket.io": "^2.0.4",
+    "sqlite3": "^3.1.13"
   },
   "devDependencies": {
     "eslint-config-standard": "^10.2.1",

@@ -20,9 +20,15 @@ sequelize.sync({force: false}).then(() => {
     app.listen(config.port)
     io.on('connection', function (socket) {
         console.log('USER CONNECTED')
+
         socket.on('chat message', function(msg){
-            io.emit('chat message', msg);
+            io.emit('chat message', msg)
           })
+
+        socket.on('text change', function(delta){
+            console.log(delta)
+            socket.broadcast.emit('text change', delta)
+        })  
     })
     console.log(`Server started on port ${config.port}`)
     
