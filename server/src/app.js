@@ -23,10 +23,6 @@ sequelize.sync({force: false}).then(() => {
     io.on('connection', function (socket) {
         console.log('USER CONNECTED')
 
-        socket.on('chat message', function(msg){
-            io.emit('chat message', msg)
-          })
-
         socket.on('text change', function(delta){
             console.log(delta)
             socket.broadcast.emit('text change', delta)
