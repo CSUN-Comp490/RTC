@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <link href="https://cdn.quilljs.com/1.3.3/quill.snow.css" rel="stylesheet">
+    <title>Socket.IO chat</title>
+  </head>
+
+  <body>
+    <div id="editor"></div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.3/quill.js"></script>
+    <script>
+        var socket = io();
+        var quill = new Quill('#editor', {
+            theme: 'snow'
+        })
+
+        quill.on('text-change', function(delta, oldDelta, source) {
+          if (source == 'api') {
+            console.log("An API call triggered this change.");
+          } else if (source == 'user') {
+            console.log("A user action triggered this change.");
+            socket.emit('text change', quill.getContents());
+          }
+        })
+
+        socket.on('text change', function(delta){
+          quill.setContents(delta, 'api')
+        })
+    </script>
+  </body>
+</html>
