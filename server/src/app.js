@@ -17,7 +17,9 @@ require('./routes')(app)
 sequelize.sync({force: false}).then(() => {
     //this is the socket port
     http.listen(8082)
+
     app.listen(config.port)
+
     io.on('connection', function (socket) {
         console.log('USER CONNECTED')
 
@@ -30,6 +32,7 @@ sequelize.sync({force: false}).then(() => {
             socket.broadcast.emit('text change', delta)
         })  
     })
+
     console.log(`Server started on port ${config.port}`)
-    
+
 })
