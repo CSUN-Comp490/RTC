@@ -8,6 +8,9 @@ module.exports = {
     register(req, res, next){
             const schema = {
             //Email must be a string and password must satisfy regular expression
+            firstName: Joi.string(),
+            lastName: Joi.string(),
+            school: Joi.string(),
             email: Joi.string().email(),
             password: Joi.string().regex(
                 new RegExp('^[a-zA-Z0-9]{8,32}$')
@@ -17,6 +20,16 @@ module.exports = {
         const {error} = Joi.validate(req.body, schema)
         if(error){
             switch(error.details[0].context.key){
+                case 'firstName':
+                case 'lastName':
+                    res.status(400).send({
+                        error: 'First and Last Name cannot contain numbers or special characters'
+                    })
+                    break
+                case 'school': 
+                    res.status(400).send({
+                        error: 'School can not contain numbers or special characters'
+                    })
                 //If email invalid
                 case 'email':
                     res.status(400).send({
