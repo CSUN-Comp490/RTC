@@ -1,6 +1,6 @@
 # client
 
-> Real-Time Captioning Web Application (Client)
+> A Vue.js project
 
 ## Build Setup
 

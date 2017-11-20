@@ -4,13 +4,10 @@
       <page-header />
         <main>
           <v-container fluid>
-            <router-view/>
+            <router-view></router-view>
           </v-container>
       </main>
     </v-app>
-
-    <!-- <img src="./assets/logo.png"> -->
-
   </div>
 </template>
 
