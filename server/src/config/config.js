@@ -1,3 +1,6 @@
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op
+
 module.exports = {
   port: process.env.PORT || 8081,
   db: {
@@ -5,9 +8,19 @@ module.exports = {
     user: process.env.DB_USER || 'retica',
     password: process.env.DB_PASS || 'retica',
     options: {
-      dialect: process.env.DIALECT || 'sqlite',
       host: process.env.HOST || 'localhost',
-      storage: './retica.sqlite'
+      dialect: process.env.DIALECT || 'sqlite',
+      storage: './retica.sqlite',
+      operatorsAliases: false
+      // {
+      //   $and: Op.and,
+      //   $or: Op.or,
+      //   $eq: Op.eq,
+      //   $gt: Op.gt,
+      //   $lt: Op.lt,
+      //   $lte: Op.lte,
+      //   $like: Op.like
+      // }
     }
   },
   //Signing the jwt token. Checks if token is valid
