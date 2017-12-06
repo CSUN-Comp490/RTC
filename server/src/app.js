@@ -14,21 +14,17 @@ app.use(cors())
 
 require('./routes')(app)
 
-sequelize.sync({force: false}).then(() => {
-    //this is the socket port
-    http.listen(8082)
+sequelize.sync().then(() => {
+  // socket port
+  http.listen(8082)
+  app.listen(config.port)
 
-    app.listen(config.port)
-
-    io.on('connection', function (socket) {
-        console.log('USER CONNECTED')
-
-        socket.on('text change', function(delta){
-            console.log(delta)
-            socket.broadcast.emit('text change', delta)
-        })  
+  io.on('connection', function (socket) {
+    console.log('User Connected')
+    socket.on('room', function (room) {
+      console.log(room)
+      socket.join(room)
     })
-
-    console.log(`Server started on port ${config.port}`)
-
+  })
+  console.log(`Server started on port ${config.port}`)
 })
