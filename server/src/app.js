@@ -2,7 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
-const {sequelize} = require('./models')
+const {connection} = require('./models')
 const config = require('./config/config')
 
 const app = express()
@@ -14,21 +14,21 @@ app.use(cors())
 
 require('./routes')(app)
 
-sequelize.sync({force: false}).then(() => {
-    //this is the socket port
-    http.listen(8082)
+connection.sync({force: false}).then(() => {
+  // this is the socket port
+  http.listen(8082)
 
-    app.listen(config.port)
+  app.listen(config.port)
 
-    io.on('connection', function (socket) {
-        console.log('USER CONNECTED')
+  io.on('connection', function (socket) {
+    console.log('USER CONNECTED')
 
-        socket.on('text change', function(delta){
-            console.log(delta)
-            socket.broadcast.emit('text change', delta)
-        })  
+    socket.on('text change', function (delta) {
+      console.log(delta)
+      socket.broadcast.emit('text change', delta)
     })
+  })
 
-    console.log(`Server started on port ${config.port}`)
+  console.log(`Server started on port ${config.port}`)
 
 })
