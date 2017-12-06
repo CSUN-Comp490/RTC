@@ -4,7 +4,7 @@ const Sequelize = require('sequelize')
 const config = require('../config/config')
 const db = {}
 
-const connection = new Sequelize(
+const sequelize = new Sequelize(
   config.db.database,
   config.db.user,
   config.db.password,
@@ -12,13 +12,15 @@ const connection = new Sequelize(
 )
 
 fs.readdirSync(__dirname)
-  .filter((file) => file !== 'index.js')
+  .filter((file) => {
+      return (file.indexOf(".") !== 0) && (file !== "index.js");
+  })
   .forEach((file) => {
-    const model = connection.import(path.join(__dirname, file))
+    const model = sequelize.import(path.join(__dirname, file))
     db[model.name] = model
   })
 
-db.connection = connection
+db.sequelize = sequelize
 db.Sequelize = Sequelize
 
 module.exports = db

@@ -2,7 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
-const {connection} = require('./models')
+const {sequelize} = require('./models')
 const config = require('./config/config')
 
 const app = express()
@@ -14,7 +14,7 @@ app.use(cors())
 
 require('./routes')(app)
 
-connection.sync({force: false}).then(() => {
+sequelize.sync({force: false}).then(() => {
   // this is the socket port
   http.listen(8082)
 

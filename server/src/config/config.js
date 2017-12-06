@@ -12,15 +12,6 @@ module.exports = {
       dialect: process.env.DIALECT || 'sqlite',
       storage: './retica.sqlite',
       operatorsAliases: false
-      // {
-      //   $and: Op.and,
-      //   $or: Op.or,
-      //   $eq: Op.eq,
-      //   $gt: Op.gt,
-      //   $lt: Op.lt,
-      //   $lte: Op.lte,
-      //   $like: Op.like
-      // }
     }
   },
   //Signing the jwt token. Checks if token is valid
