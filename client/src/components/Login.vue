@@ -1,23 +1,19 @@
 <template>
   <v-layout column>
     <v-flex xs6 offset-xs3>
-      <div class="white elevation-2">
-        <v-toolbar flat dense class="blue">
-          <v-toolbar-title>Login</v-toolbar-title>
-        </v-toolbar>
-        <div class="pl-4 pr-4 pt-2 pb-2">
-          <v-text-field label="Email" v-model="email"/> <br>
-          <v-text-field label="Password" type="password" v-model="password"/> <br>
-          <div class="error" v-html="error"></div> <br>
-          <v-btn class="blue" v-on:click="login">Login</v-btn>
-        </div>
-      </div>
+      <Panel title="Login">
+        <v-text-field label="Email" v-model="email"/> <br>
+        <v-text-field label="Password" type="password" v-model="password"/> <br>
+        <div class="error" v-html="error"></div> <br>
+        <v-btn class="blue" v-on:click="login">Login</v-btn>
+      </Panel>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
+import Panel from '@/components/Panel'
 export default {
   data () {
     return {
@@ -29,21 +25,27 @@ export default {
   methods: {
     async login () {
       try {
-        await AuthenticationService.login({
+        const response = await AuthenticationService.login({
           email: this.email,
           password: this.password
+        })
+        this.$store.dispatch('setToken', response.data.token)
+        this.$store.dispatch('setUser', response.data.user)
+        this.$router.push({
+          name: 'home'
         })
       } catch (error) {
         this.error = error.response.data.error
       }
     }
+  },
+  components: {
+    Panel
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .error{
 
-  }
 </style>
