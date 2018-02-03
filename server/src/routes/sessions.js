@@ -10,7 +10,7 @@ module.exports = function(io) {
   router.post("/", controller.storeSession);
   
   // Deletes an session with the specified ID.
-  router.delete("/id/:id", controller.destroyById);
+  router.delete("/id/:id", controller.deleteSessionById);
   
   //Get a session by id
   router.get("/id/:id", controller.getSessionById);

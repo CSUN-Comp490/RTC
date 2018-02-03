@@ -10,7 +10,7 @@ module.exports = function(io) {
   router.post("/", controller.storeAdmin);
   
   // Deletes an admin with the specified ID.
-  router.delete("/id/:id", controller.destroyById);
+  router.delete("/id/:id", controller.deleteAdminById);
   
   // Get an admin by id
   router.get("/id/:id", controller.getAdminById);

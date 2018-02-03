@@ -10,7 +10,7 @@ module.exports = function(io) {
   router.post("/", controller.storeCaptionist);
   
   // Deletes an Captionist with the specified ID.
-  router.delete("/id/:id", controller.destroyById);
+  router.delete("/id/:id", controller.deleteCaptionistById);
   
   // Get an Captionist by id
   router.get("/id/:id", controller.getCaptionistById);

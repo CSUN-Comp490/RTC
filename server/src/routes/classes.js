@@ -10,7 +10,7 @@ module.exports = function(io) {
   router.post("/", controller.storeClasses);
   
   // Deletes an course with the specified ID.
-  router.delete("/id/:id", controller.destroyById);
+  router.delete("/id/:id", controller.deleteClassById);
   
   // Get an course by id
   router.get("/id/:id", controller.getClassById);

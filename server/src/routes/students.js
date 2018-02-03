@@ -10,7 +10,7 @@ module.exports = function(io) {
   router.post("/", controller.storeStudent);
   
   // Deletes an student with the specified ID.
-  router.delete("/id/:id", controller.destroyById);
+  router.delete("/id/:id", controller.deleteStudentById);
   
   // Get an student by id
   router.get("/id/:id", controller.getStudentById);
