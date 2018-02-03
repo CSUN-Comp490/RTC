@@ -1,3 +1,4 @@
+/*not really used anymore rn*/
 const AuthenticationController = require('./controllers/AuthenticationController')
 const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy')
 const path = require('path')

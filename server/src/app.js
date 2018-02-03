@@ -7,11 +7,16 @@ const http = require("http");
 const app = express();
 const server = http.Server(app);
 const io = require("socket.io")(server);//not used yet 
+const socketIO = require("./controllers/socket");
 const dbInfo = require("./config/config.js");
 mongoose.Promise = global.Promise;
 
-//import routes here later
-
+//Import routes
+const AdminRoutes = require("./routes/admins");
+const CaptionistRoutes = require("./routes/captionists");
+const ClassRoutes = require("./routes/classes");
+const SessionRoutes = require("./routes/sessions");
+const StudentRoutes = require("./routes/students");
 
 // Connect to our mongoDB instance
 mongoose.connect(
@@ -35,7 +40,12 @@ const port = process.env.PORT || 8080;
 // CORS Middleware
 app.use(cors());
 
-//set up routes here later
+//Setup routes
+app.use("/api/admins", AdminRoutes(io));
+app.use("/api/captionists", CaptionistRoutes(io));
+app.use("/api/classes", ClassRoutes(io));
+app.use("/api/students", StudentRoutes(io));
+app.use("/api/sessions", SessionRoutes(io));
 
 // Index Route
 app.get("*", (req, res) => {

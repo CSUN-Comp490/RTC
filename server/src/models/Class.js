@@ -3,7 +3,7 @@ mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
 
 const ClassSchema = new Schema({
-  courseID: {
+  classID: {
     required: true,
     type: String,
     index: {
@@ -15,7 +15,7 @@ const ClassSchema = new Schema({
     type: String
   },
 
-  courseName: {
+  classeName: {
     type: String,
     required: true
   },
