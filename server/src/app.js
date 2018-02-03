@@ -7,7 +7,7 @@ const http = require("http");
 const app = express();
 const server = http.Server(app);
 const io = require("socket.io")(server);//not used yet 
-const dbInfo = require("/config/config.js");
+const dbInfo = require("./config/config.js");
 mongoose.Promise = global.Promise;
 
 //import routes here later
