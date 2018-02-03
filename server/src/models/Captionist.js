@@ -12,10 +12,10 @@ const CaptionistSchema = new Schema({
     required: true
   },
 
-  transcripts: [
+  sessions: [
     {
       type: Schema.Types.ObjectId,
-      ref: "trancripts"
+      ref: "session"
     }
   ],
 
