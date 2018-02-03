@@ -1,18 +1,34 @@
-const Promise = require('bluebird')
-const uuidv4 = require('uuid/v4');
+const mongoose = require("mongoose");
+mongoose.Promise = global.Promise;
+const Schema = mongoose.Schema;
 
-module.exports = (sequelize, DataTypes) => {
+const CaptionistSchema = new Schema({
+  username: {
+    type: String,
+    required: true
+  },
+  name: {
+    type: String,
+    required: true
+  },
 
-    const Captionist = sequelize.define('Captionist', {
-        captionistId: DataTypes.STRING,
-        name: DataTypes.STRING,
-        email: {
-            type: DataTypes.STRING,
-            unique: true
-        },
-        createdAt: DataTypes.DATE,
-        updatedAt: DataTypes.DATE
-    })
+  transcripts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "trancripts"
+    }
+  ],
 
-    return Captionist
-}
+  classes: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "class"
+    }
+  ],
+
+  createdAt: DataTypes.DATE,
+  updatedAt: DataTypes.Date
+
+});
+
+module.exports = mongoose.model("captionist", CaptionistSchema);

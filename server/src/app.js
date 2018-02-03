@@ -1,34 +1,52 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const cors = require('cors')
-const morgan = require('morgan')
-const {sequelize} = require('./models')
-const config = require('./config/config')
+const express = require("express");
+const path = require("path");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const mongoose = require("mongoose");
+const http = require("http");
+const app = express();
+const server = http.Server(app);
+const io = require("socket.io")(server);//not used yet 
+const dbInfo = require("/config/config.js");
+mongoose.Promise = global.Promise;
 
-const app = express()
-const http = require('http').Server(app)
-const io = require('socket.io')(http)
-app.use(morgan('combined'))
-app.use(bodyParser.json())
-app.use(cors())
+//import routes here later
 
-require('./routes')(app)
 
-sequelize.sync({force: false}).then(() => {
-  // this is the socket port
-  http.listen(8082)
+// Connect to our mongoDB instance
+mongoose.connect(
+  "mongodb://dbInfo.username:dbInfo.pw@ds221258.mlab.com:21258/retica",
+  { useMongoClient: true },
+  err => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Connected");
+    }
+  }
+);
 
-  app.listen(config.port)
+// Body Parser Middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-  io.on('connection', function (socket) {
-    console.log('USER CONNECTED')
+const port = process.env.PORT || 8080;
 
-    socket.on('text change', function (delta) {
-      console.log(delta)
-      socket.broadcast.emit('text change', delta)
-    })
-  })
+// CORS Middleware
+app.use(cors());
 
-  console.log(`Server started on port ${config.port}`)
+//set up routes here later
 
-})
+// Index Route
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../dist/index.html"));
+});
+
+app.set("port", port);
+
+// Start Server
+server.listen(port, () => {
+  console.log("Server started on port: " + port);
+});
+
+module.exports = app;
