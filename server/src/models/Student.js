@@ -34,8 +34,7 @@ const StudentSchema = new Schema({
     }
   ],
 
-  createdAt: DataTypes.DATE,
-  updatedAt: DataTypes.Date
+  timestamps: true,
 
 });
 

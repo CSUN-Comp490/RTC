@@ -32,8 +32,7 @@ const SessionSchema = new Schema({
     default: false
   },
 
-  createdAt: DataTypes.DATE,
-  updatedAt: DataTypes.Date
+  timestamps: true,
 
 });
 
