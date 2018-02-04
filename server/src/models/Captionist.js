@@ -12,10 +12,10 @@ const CaptionistSchema = new Schema({
     required: true
   },
 
-  transcripts: [
+  sessions: [
     {
       type: Schema.Types.ObjectId,
-      ref: "trancripts"
+      ref: "session"
     }
   ],
 
@@ -26,8 +26,7 @@ const CaptionistSchema = new Schema({
     }
   ],
 
-  createdAt: DataTypes.DATE,
-  updatedAt: DataTypes.Date
+  timestamps: true,
 
 });
 

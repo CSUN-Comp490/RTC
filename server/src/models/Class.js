@@ -25,10 +25,12 @@ const ClassSchema = new Schema({
     required: true,
     default: "staff"
   },
+
   days: {
     type: String,
     required: true
   },
+  
   time: {
     type: Date,
     required: true
@@ -41,8 +43,7 @@ const ClassSchema = new Schema({
     }
   ],
 
-  createdAt: DataTypes.DATE,
-  updatedAt: DataTypes.Date
+  timestamps: true,
   
 });
 

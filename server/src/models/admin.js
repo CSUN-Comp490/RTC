@@ -22,9 +22,8 @@ const AdminSchema = new Schema({
     required: true
   },
 
-  createdAt: DataTypes.DATE,
-  updatedAt: DataTypes.Date
-  
+  timestamps: true,
+
 });
 
 module.exports = mongoose.model("admin", AdminSchema);
