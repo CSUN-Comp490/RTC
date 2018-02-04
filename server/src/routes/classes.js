@@ -7,7 +7,7 @@ module.exports = function(io) {
   router.get("/", controller.getAllClasses);
   
   // Create a new class.
-  router.post("/", controller.storeClasses);
+  router.post("/", controller.storeClass);
   
   // Deletes an course with the specified ID.
   router.delete("/id/:id", controller.deleteClassById);

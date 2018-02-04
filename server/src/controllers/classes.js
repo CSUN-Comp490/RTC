@@ -1,9 +1,11 @@
+//class is a reserved keyword in Javascript
+//class and course are used interchangably
 const _ = require("underscore");
 const ClassModel = require("../models/class");
 let ClassController = {};
 
 // Storing classes.
-ClassController.storeCourse = (req, res) => {
+ClassController.storeClass = (req, res) => {
   let course = new ClassModel(req.body);
   let createCourse_Promise = course.save();
 
@@ -20,7 +22,7 @@ ClassController.storeCourse = (req, res) => {
 };
 
 // Retrieving classes.
-ClassController.getAllCourses = (req, res) => {
+ClassController.getAllClasses = (req, res) => {
   let getAllCourses_Promise = ClassModel.find({}).exec();
   getAllCourses_Promise
     .then(courses => {
@@ -31,7 +33,7 @@ ClassController.getAllCourses = (req, res) => {
     });
 };
 
-ClassController.getCourseById = (req, res) => {
+ClassController.getClassById = (req, res) => {
   let courseID = req.params.id;
   let getCourseById_Promise = ClassModel.findById(courseID).exec();
 
@@ -69,7 +71,7 @@ ClassController.getClassByCourseId = (req, res) => {
 
 
 // Updating courses.
-ClassController.updateCourseById = (req, res) => {
+ClassController.updateClassById = (req, res) => {
   let courseID = req.params.id;
   let updateCourseById_Promise = ClassModel.findById(courseID).exec();
   updateCourseById_Promise
