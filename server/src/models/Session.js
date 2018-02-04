@@ -8,6 +8,7 @@ const SessionSchema = new Schema({
     required: true,
     default: "Untitled"
   },
+  
   courseID: {
     type: Schema.Types.ObjectId,
     ref: "class",

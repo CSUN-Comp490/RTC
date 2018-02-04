@@ -12,7 +12,7 @@ module.exports = function(io) {
   //Get a session by id
   router.get("/id/:id", controller.getSessionById);
   // Get a session by course id
-  router.get("/courseID/:id", controller.getSessionByCourseId);
+  router.get("/courseid/:id", controller.getSessionByCourseId);
   
   // Update session by id
   router.put("/id/:id", controller.updateSessionById);

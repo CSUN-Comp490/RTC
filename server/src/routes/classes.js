@@ -12,7 +12,7 @@ module.exports = function(io) {
   // Get an course by id
   router.get("/id/:id", controller.getClassById);
   // Get a class by course id
-  router.get("/courseID/:id", controller.getClassByCourseId);  
+  router.get("/courseid/:id", controller.getClassByCourseId);  
   
   // Update course by id
   router.put("/id/:id", controller.updateClassById);

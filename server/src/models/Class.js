@@ -36,6 +36,10 @@ const ClassSchema = new Schema({
     required: true
   },
 
+  semester: {
+    type: String //ex Spring 2018
+  },
+
   sessions: [
     {
       type: Schema.Types.ObjectId,
