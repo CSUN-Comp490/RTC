@@ -8,7 +8,7 @@ const app = express();
 const server = http.Server(app);
 const io = require("socket.io")(server);
 const socketIO = require("./controllers/socket");
-const dbInfo = require("./config/config.js");
+const config = require("./config/config.js");
 mongoose.Promise = global.Promise;
 
 //Import routes
@@ -20,7 +20,7 @@ const StudentRoutes = require("./routes/students");
 
 // Connect to our mongoDB instance
 mongoose.connect(
-  "mongodb://dbInfo.username:dbInfo.pw@ds221258.mlab.com:21258/retica",
+  "mongodb://" + config.user + ":" + config.pw + "@ds221258.mlab.com:21258/retica",
   err => {
     if (err) {
       console.log(err);

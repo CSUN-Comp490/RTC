@@ -1,5 +1,5 @@
 /*mongodb username and password will go here for privacy*/
 module.exports = {
-  username:'retica',
+  user:'retica',
   pw: 'Retica69!'
 };
