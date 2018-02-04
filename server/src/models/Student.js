@@ -32,12 +32,7 @@ const StudentSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: "class"
     }
-  ],
-
-  timestamps: { 
-    createdAt: 'created_at', 
-    updatedAt: 'updated_at' 
-  }
+  ]
 
 });
 

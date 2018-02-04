@@ -30,13 +30,8 @@ const SessionSchema = new Schema({
     type: Boolean,
     required: true,
     default: false
-  },
-
-  timestamps: { 
-    createdAt: 'created_at', 
-    updatedAt: 'updated_at' 
   }
 
 });
 
-module.exports = mongoose.model("transcript", TranscriptSchema);
+module.exports = mongoose.model("sesssion", SessionSchema);

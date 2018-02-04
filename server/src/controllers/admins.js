@@ -67,7 +67,7 @@ AdminController.updateAdminById = (req, res) => {
 };
 
 // Destroying Admins.
-AdminController.destroyById = (req, res) => {
+AdminController.deleteAdminById = (req, res) => {
   let adminID = req.params.id;
   let findByIdAndRemove_Promise = AdminModel.findByIdAndRemove(adminID).exec();
 
