@@ -32,7 +32,10 @@ const SessionSchema = new Schema({
     default: false
   },
 
-  timestamps: true,
+  timestamps: { 
+    createdAt: 'created_at', 
+    updatedAt: 'updated_at' 
+  }
 
 });
 
