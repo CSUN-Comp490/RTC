@@ -4,7 +4,7 @@ const _ = require("underscore");
 const ClassModel = require("../models/class");
 let ClassController = {};
 
-// Storing classes.
+//Create classes.
 ClassController.storeClass = (req, res) => {
   let course = new ClassModel(req.body);
   let createCourse_Promise = course.save();
@@ -21,7 +21,7 @@ ClassController.storeClass = (req, res) => {
     });
 };
 
-// Retrieving classes.
+//Retrieve classes.
 ClassController.getAllClasses = (req, res) => {
   let getAllCourses_Promise = ClassModel.find({}).exec();
   getAllCourses_Promise
@@ -70,7 +70,7 @@ ClassController.getClassByCourseId = (req, res) => {
 };
 
 
-// Updating courses.
+//Update courses.
 ClassController.updateClassById = (req, res) => {
   let courseID = req.params.id;
   let updateCourseById_Promise = ClassModel.findById(courseID).exec();
@@ -87,7 +87,7 @@ ClassController.updateClassById = (req, res) => {
     });
 };
 
-// Destroying courses.
+//Delete courses.
 ClassController.deleteClassById = (req, res) => {
   let courseID = req.params.id;
   let findByIdAndRemove_Promise = ClassModel.findByIdAndRemove(courseID).exec();

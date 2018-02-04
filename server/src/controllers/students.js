@@ -2,7 +2,7 @@ const _ = require("underscore");
 const StudentModel = require("../models/student");
 let StudentController = {};
 
-// Storing students.
+//Create students.
 StudentController.storeStudent = (req, res) => {
   let student = new StudentModel(req.body);
   let createStudent_Promise = student.save();
@@ -19,7 +19,8 @@ StudentController.storeStudent = (req, res) => {
     });
 };
 
-// Retrieving Students.
+// Retrieve Students.
+//TODO: Retrieve Student by username
 StudentController.getAllStudents = (req, res) => {
   let getAllStudents_Promise = StudentModel.find({}).exec();
   getAllStudents_Promise
@@ -49,7 +50,12 @@ StudentController.getStudentById = (req, res) => {
     });
 };
 
-// Updating students.
+StudentController.getStudentByUsername = (req, res) => {
+  //coming soon
+};
+
+// Update students.
+//TODO: Update Student by username
 StudentController.updateStudentById = (req, res) => {
   let studentID = req.params.id;
   let updateStudentById_Promise = StudentModel.findById(studentID).exec();
@@ -66,7 +72,12 @@ StudentController.updateStudentById = (req, res) => {
     });
 };
 
-// Destroying students.
+StudentController.updateStudentByUsername = (req, res) => {
+  //coming soon
+};
+
+// Delete students.
+//TODO: Update Student by username
 StudentController.deleteStudentById = (req, res) => {
   let studentID = req.params.id;
   let findByIdAndRemove_Promise = StudentModel.findByIdAndRemove(
@@ -85,6 +96,10 @@ StudentController.deleteStudentById = (req, res) => {
       console.log("Error: " + err.message);
       return res.status(500).json({ error: err.message });
     });
+};
+
+StudentController.deleteStudentByUsername = (req, res) => {
+  //in progress
 };
 
 module.exports = StudentController;

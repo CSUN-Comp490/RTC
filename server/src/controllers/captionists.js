@@ -2,7 +2,7 @@ const _ = require("underscore");
 const CaptionistModel = require("../models/captionist");
 let CaptionistController = {};
 
-// Storing Captionists.
+//Create Captionists.
 CaptionistController.storeCaptionist = (req, res) => {
   let captionist = new CaptionistModel(req.body);
   let createCaptionist_Promise = captionist.save();
@@ -19,7 +19,8 @@ CaptionistController.storeCaptionist = (req, res) => {
     });
 };
 
-// Retrieving Captionists.
+//Retrieve Captionists.
+//TODO: Retrieve Captionist by username
 CaptionistController.getAllCaptionists = (req, res) => {
   let getAllCaptionists_Promise = CaptionistModel.find({}).exec();
   getAllCaptionists_Promise
@@ -51,7 +52,12 @@ CaptionistController.getCaptionistById = (req, res) => {
     });
 };
 
-// Updating Captionists.
+CaptionistController.getCaptionistByUsername = (req, res) => {
+  //in progress
+};
+
+// Update Captionists.
+//TODO: Update Captionist by username
 CaptionistController.updateCaptionistById = (req, res) => {
   let captionistID = req.params.id;
   let updateCaptionistById_Promise = CaptionistModel.findById(
@@ -70,7 +76,12 @@ CaptionistController.updateCaptionistById = (req, res) => {
     });
 };
 
-// Destroying Captionists.
+CaptionistController.updateCaptionistByUsername = (req, res) => {
+  //TODO
+};
+
+// Delete Captionists.
+//TODO: Delete Captionist by username
 CaptionistController.deleteCaptionistById = (req, res) => {
   let captionistID = req.params.id;
   let findByIdAndRemove_Promise = CaptionistModel.findByIdAndRemove(
@@ -89,6 +100,10 @@ CaptionistController.deleteCaptionistById = (req, res) => {
       console.log("Error: " + err.message);
       return res.status(500).json({ error: err.message });
     });
+};
+
+CaptionistController.deleteCaptionistByUsername = (req, res) => {
+  //TODO
 };
 
 module.exports = CaptionistController;

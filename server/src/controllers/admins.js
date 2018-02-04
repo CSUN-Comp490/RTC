@@ -2,7 +2,7 @@ const _ = require("underscore");
 const AdminModel = require("../models/admin");
 let AdminController = {};
 
-// Storing Admins.
+// Create Admins.
 AdminController.storeAdmin = (req, res) => {
   let admin = new AdminModel(req.body);
   let createAdmin_Promise = admin.save();
@@ -19,7 +19,8 @@ AdminController.storeAdmin = (req, res) => {
     });
 };
 
-// Retrieving Admins.
+// Retrieve Admins.
+//TODO: Retrieve Admin by username
 AdminController.getAllAdmins = (req, res) => {
   let getAllAdmins_Promise = AdminModel.find({}).exec();
   getAllAdmins_Promise
@@ -49,7 +50,12 @@ AdminController.getAdminById = (req, res) => {
     });
 };
 
-// Updating Admins.
+AdminController.getAdminByUsername = (req, res) => {
+  //TODO
+};
+
+// Update Admins.
+//TODO: Update Admin by username
 AdminController.updateAdminById = (req, res) => {
   let adminID = req.params.id;
   let updateAdminById_Promise = AdminModel.findById(adminID).exec();
@@ -66,7 +72,12 @@ AdminController.updateAdminById = (req, res) => {
     });
 };
 
-// Destroying Admins.
+AdminController.updateAdminByUsername = (req, res) => {
+  //TODO
+};
+
+// Delete Admins.
+//TODO: Delete Admin by username
 AdminController.deleteAdminById = (req, res) => {
   let adminID = req.params.id;
   let findByIdAndRemove_Promise = AdminModel.findByIdAndRemove(adminID).exec();
@@ -81,6 +92,10 @@ AdminController.deleteAdminById = (req, res) => {
       console.log("Error: " + err.message);
       return res.status(500).json({ error: err.message });
     });
+};
+
+AdminController.deleteAdminByUsername = (req, res) => {
+  //coming soon
 };
 
 module.exports = AdminController;

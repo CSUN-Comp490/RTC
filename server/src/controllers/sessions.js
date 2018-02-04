@@ -2,7 +2,7 @@ const _ = require("underscore");
 const SessionModel = require("../models/Session");
 let SessionController = {};
 
-// Storing Sessions.
+//Create Sessions.
 SessionController.storeSession = (req, res) => {
   let Session = new SessionModel(req.body);
   let createSession_Promise = Session.save();
@@ -19,7 +19,7 @@ SessionController.storeSession = (req, res) => {
     });
 };
 
-// Retrieving Sessions.
+//Retrieve Sessions.
 SessionController.getAllSessions = (req, res) => {
   let getAllSessions_Promise = SessionModel.find({}).exec();
   getAllSessions_Promise
@@ -67,7 +67,7 @@ SessionController.getSessionByCourseId = (req, res) => {
     });
 };
 
-// Updating Sessions.
+//Update Sessions.
 SessionController.updateSessionById = (req, res) => {
   console.log(req.body);
   let SessionID = req.params.id;
@@ -87,7 +87,7 @@ SessionController.updateSessionById = (req, res) => {
     });
 };
 
-// Destroying Sessions.
+//Delete Sessions.
 SessionController.deleteSessionById = (req, res) => {
   let SessionID = req.params.id;
   let findByIdAndRemove_Promise = SessionModel.findByIdAndRemove(
