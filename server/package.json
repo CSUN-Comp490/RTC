@@ -4,8 +4,7 @@
   "description": "",
   "main": "src/app.js",
   "scripts": {
-    "start": "node node_modules/nodemon/bin/nodemon.js src/app.js --exec",
-    "lint": "node node_modules/.bin/eslint **.*.js"
+    "start": "node node_modules/nodemon/bin/nodemon.js src/app.js --exec"
   },
   "keywords": [],
   "author": "",
@@ -15,14 +14,14 @@
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
-    "eslint": "^4.10.0",
     "express": "^4.16.2",
     "joi": "^13.0.1",
     "jsonwebtoken": "^8.1.0",
+    "mongoose": "^5.0.3",
     "morgan": "^1.9.0",
-    "sequelize": "^4.22.0",
     "socket.io": "^2.0.4",
-    "sqlite3": "^3.1.8"
+    "underscore": "^1.8.3",
+    "uuid": "^3.1.0"
   },
   "devDependencies": {
     "eslint-config-standard": "^10.2.1",

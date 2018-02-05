@@ -25,8 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       unique: true
     },
     password: DataTypes.STRING
-  },
-  {
+  }, {
     // run before we create, update or save the object
     hooks: {
       beforeCreate: hashPassword,

@@ -1,30 +1,62 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const cors = require('cors')
-const morgan = require('morgan')
-const {sequelize} = require('./models')
-const config = require('./config/config')
+const express = require("express");
+const path = require("path");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const mongoose = require("mongoose");
+const http = require("http");
+const app = express();
+const server = http.Server(app);
+const io = require("socket.io")(server);
+const socketIO = require("./controllers/socket");
+const config = require("./config/config.js");
+mongoose.Promise = global.Promise;
 
-const app = express()
-const http = require('http').Server(app)
-const io = require('socket.io')(http)
-app.use(morgan('combined'))
-app.use(bodyParser.json())
-app.use(cors())
+//Import routes
+const AdminRoutes = require("./routes/admins");
+const CaptionistRoutes = require("./routes/captionists");
+const ClassRoutes = require("./routes/classes");
+const SessionRoutes = require("./routes/sessions");
+const StudentRoutes = require("./routes/students");
 
-require('./routes')(app)
+// Connect to our mongoDB instance
+mongoose.connect(
+  "mongodb://" + config.user + ":" + config.pw + "@ds221258.mlab.com:21258/retica",
+  err => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Connected");
+    }
+  }
+);
 
-sequelize.sync().then(() => {
-  // socket port
-  http.listen(8082)
-  app.listen(config.port)
+// Body Parser Middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-  io.on('connection', function (socket) {
-    console.log('User Connected')
-    socket.on('room', function (room) {
-      console.log(room)
-      socket.join(room)
-    })
-  })
-  console.log(`Server started on port ${config.port}`)
-})
+const port = process.env.PORT || 8080;
+
+// CORS Middleware
+app.use(cors());
+
+//Setup routes
+app.use("/api/admins", AdminRoutes(io));
+app.use("/api/captionists", CaptionistRoutes(io));
+app.use("/api/classes", ClassRoutes(io));
+app.use("/api/students", StudentRoutes(io));
+app.use("/api/sessions", SessionRoutes(io));
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "./index.html"));
+});
+
+app.set("port", port);
+
+io.on("connection", socket => socketIO(socket));
+
+// Start Server
+server.listen(port, () => {
+  console.log("Server started on port: " + port);
+});
+
+module.exports = app;
