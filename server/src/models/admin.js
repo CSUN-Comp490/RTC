@@ -27,6 +27,7 @@ const AdminSchema = new Schema({
     required: true
   },
 
+
 });
 
 module.exports = mongoose.model("admin", AdminSchema);
