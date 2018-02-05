@@ -12,6 +12,11 @@ const CaptionistSchema = new Schema({
     required: true
   },
 
+  email: {
+    type: String,
+    required: true
+  },
+
   sessions: [
     {
       type: Schema.Types.ObjectId,
