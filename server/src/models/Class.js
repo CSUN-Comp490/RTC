@@ -15,7 +15,7 @@ const ClassSchema = new Schema({
     type: String
   },
 
-  classeName: {
+  className: {
     type: String,
     required: true
   },
@@ -32,7 +32,7 @@ const ClassSchema = new Schema({
   },
   
   time: {
-    type: Date,
+    type: String,
     required: true
   },
 
@@ -45,7 +45,7 @@ const ClassSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: "session"
     }
-  ]
+  ],
 
 });
 
