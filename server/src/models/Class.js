@@ -1,16 +1,52 @@
-const Promise = require('bluebird')
-const uuidv4 = require('uuid/v4');
+const mongoose = require("mongoose");
+mongoose.Promise = global.Promise;
+const Schema = mongoose.Schema;
 
-module.exports = (sequelize, DataTypes) => {
+const ClassSchema = new Schema({
+  classID: {
+    required: true,
+    type: String,
+    index: {
+      unique: true
+    }
+  },
 
-  const Class = sequelize.define('Class', {
-    classId: DataTypes.STRING,
-    course: DataTypes.STRING,
-    section: DataTypes.STRING,
-    school: DataTypes.STRING,
-    createdAt: DataTypes.DATE,
-    updatedAt: DataTypes.DATE
-  })
+  school: {
+    type: String
+  },
 
-  return Class
-}
+  classeName: {
+    type: String,
+    required: true
+  },
+
+  professor: {
+    type: String,
+    required: true,
+    default: "staff"
+  },
+
+  days: {
+    type: String,
+    required: true
+  },
+  
+  time: {
+    type: Date,
+    required: true
+  },
+
+  semester: {
+    type: String //ex Spring 2018
+  },
+
+  sessions: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "session"
+    }
+  ]
+
+});
+
+module.exports = mongoose.model("class", ClassSchema);

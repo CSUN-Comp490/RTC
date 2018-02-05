@@ -2,13 +2,18 @@ const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
 
-const StudentSchema = new Schema({
+const AdminSchema = new Schema({
   username: {
     type: String,
     required: true,
     index: {
       unique: true
     }
+  },
+
+  email:{
+    type: String,
+    required:true
   },
 
   password: {
@@ -22,18 +27,7 @@ const StudentSchema = new Schema({
     required: true
   },
 
-  email: {
-    type: String,
-    required: true
-  },
-
-  classes: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "class"
-    }
-  ]
 
 });
 
-module.exports = mongoose.model("student", StudentSchema);
+module.exports = mongoose.model("admin", AdminSchema);
