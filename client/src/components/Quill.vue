@@ -7,7 +7,6 @@
 
 <script>
 import { VueEditor } from 'vue2-editor'
-import socket from 'socket.io-client'
 export default{
   components: {
     VueEditor
