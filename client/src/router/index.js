@@ -8,7 +8,6 @@ import CaptionSession from '@/components/CaptionSession'
 import Home from '@/components/Home'
 import PastSessions from '@/components/PastSessions'
 
-
 Vue.use(Router)
 
 export default new Router({
