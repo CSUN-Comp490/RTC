@@ -2,10 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
+import CaptionistHome from '@/components/CaptionistHome'
 import Main from '@/components/Main'
 import CaptionSession from '@/components/CaptionSession'
 import Home from '@/components/Home'
-import CaptionistClassPage from '@/components/CaptionistClassPage'
 import PastSessions from '@/components/PastSessions'
 
 Vue.use(Router)
@@ -28,6 +28,11 @@ export default new Router({
       component: Register
     },
     {
+      path: '/captionisthome',
+      name: 'captionisthome',
+      component: CaptionistHome
+    },
+    {
       path: '/captionsession',
       name: 'captionsession',
       component: CaptionSession
@@ -36,11 +41,6 @@ export default new Router({
       path: '/home',
       name: 'home',
       component: Home
-    },
-    {
-      path: '/CaptionistClassPage',
-      name: 'CaptionistClassPage',
-      component: CaptionistClassPage
     },
     {
       path: '/PastSessions',
