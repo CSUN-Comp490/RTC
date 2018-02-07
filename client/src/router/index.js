@@ -1,9 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
 import CaptionistHome from '@/components/CaptionistHome'
+import Main from '@/components/Main'
+import CaptionSession from '@/components/CaptionSession'
+import Home from '@/components/Home'
+import PastSessions from '@/components/PastSessions'
+
 
 Vue.use(Router)
 
@@ -12,7 +16,7 @@ export default new Router({
     {
       path: '/',
       name: 'root',
-      component: HelloWorld
+      component: Main
     },
     {
       path: '/login',
@@ -28,6 +32,21 @@ export default new Router({
       path: '/captionisthome',
       name: 'captionisthome',
       component: CaptionistHome
+    },
+    {
+      path: '/captionsession',
+      name: 'captionsession',
+      component: CaptionSession
+    },
+    {
+      path: '/home',
+      name: 'home',
+      component: Home
+    },
+    {
+      path: '/PastSessions',
+      name: 'PastSessions',
+      component: PastSessions
     }
   ]
 })

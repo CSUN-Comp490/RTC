@@ -3,14 +3,21 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import BootstrapVue from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Vuetify from 'vuetify'
-// import { sync } from 'vuex-router-sync'
+import { sync } from 'vuex-router-sync'
 import 'vuetify/dist/vuetify.min.css'
 import ClassGenerator from '@/components/ClassGenerator'
+import store from '@/store/store'
 
 Vue.config.productionTip = false
 
 Vue.use(Vuetify)
+Vue.use(BootstrapVue)
+
+sync(store, router)
 
 Vue.component('classGenerator', ClassGenerator) // component to generate classes
 
@@ -18,6 +25,7 @@ Vue.component('classGenerator', ClassGenerator) // component to generate classes
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })
