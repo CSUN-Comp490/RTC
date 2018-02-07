@@ -50,9 +50,9 @@
             classSchedule: 'MoWe 11:00 a.m. to 12:15 p.m.'
           },
           {
-            classID: 'Testing 101',
-            className: 'Testing Life',
-            classSchedule: 'Everyday'
+            classID: 'COMP 469',
+            className: 'Artificial Intelligence',
+            classSchedule: 'TuTh 2:00 p.m. to 3:15 p.m.'
           }
         ]
       }
