@@ -16,7 +16,7 @@ require('./routes')(app)
 
 sequelize.sync({force: false}).then(() => {
   // this is the socket port
-  http.listen(8082)
+  http.listen(8080)
 
   app.listen(config.port)
 
