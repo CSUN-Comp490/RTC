@@ -3,7 +3,7 @@ mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
 
 const SessionSchema = new Schema({
-  SessionName: {
+  sessionName: {
     type: String,
     required: true,
     default: "Untitled"
