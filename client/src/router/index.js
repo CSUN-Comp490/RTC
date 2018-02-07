@@ -12,57 +12,61 @@ import Main from '@/components/Main'
 
 Vue.use(Router)
 
-const routes = [
-  {
-    path: '/',
-    name: 'root',
-    component: Main
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: Login
-  },
-  {
-    path: '/register',
-    name: 'register',
-    component: Register
-  },
-  {
-    path: '/student',
-    name: 'student',
-    component: StudentHome,
-    meta: { requiresAuth: true, studentAuth: true, captionistAuth: false, adminAuth: false }
-  },
-  {
-    path: '/captionist',
-    name: 'captionist',
-    component: CaptionistHome,
-    meta: { requiresAuth: true, studentAuth: false, captionistAuth: true, adminAuth: false }
-  },
-  {
-    path: '/admin',
-    name: 'admin',
-    component: AdminHome,
-    meta: { requiresAuth: true, studentAuth: false, captionistAuth: false, adminAuth: true }
-  },
-  {
-    path: '/captionsession',
-    name: 'captionsession',
-    component: CaptionSession
-  },
-  {
-    path: '/pastSessions',
-    name: 'pastSessions',
-    component: PastSessions
-  },
-  {
-    path: '/Quill',
-    name: 'QuillTest',
-    component: Quill
-  }
-]
-
+export default new Router({
+  routes: [
+    {
+      path: '/',
+      name: 'root',
+      component: Main
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: Register
+    },
+    {
+      path: '/session',
+      name: 'captionsession',
+      component: CaptionSession
+    },
+    {
+      path: '/home',
+      name: 'home',
+      component: Main
+    },
+    {
+      path: '/captionist',
+      name: 'captionist',
+      component: CaptionistHome
+    },
+    {
+      path: '/pastsession',
+      name: 'PastSessions',
+      component: PastSessions
+    },
+    {
+      path: '/quill',
+      name: 'quill',
+      component: Quill
+    },
+    {
+      path: '/student',
+      name: 'student',
+      component: StudentHome
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: AdminHome
+    }
+  ]
+})
+/*
 const router = new Router({routes, mode: 'history'})
 
 router.beforeEach((to, from, next) => {
@@ -104,3 +108,4 @@ router.beforeEach((to, from, next) => {
 })
 
 export default router
+*/
