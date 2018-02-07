@@ -6,10 +6,13 @@ import router from './router'
 import Vuetify from 'vuetify'
 // import { sync } from 'vuex-router-sync'
 import 'vuetify/dist/vuetify.min.css'
+import ClassGenerator from '@/components/ClassGenerator'
 
 Vue.config.productionTip = false
 
 Vue.use(Vuetify)
+
+Vue.component('classGenerator', ClassGenerator) // component to generate classes
 
 /* eslint-disable no-new */
 new Vue({
