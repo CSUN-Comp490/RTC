@@ -1,5 +1,5 @@
 const _ = require("underscore");
-const SessionModel = require("../models/Session");
+const SessionModel = require("../models/session");
 let SessionController = {};
 
 //Create Sessions.
