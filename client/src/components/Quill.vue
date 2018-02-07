@@ -1,25 +1,54 @@
 <template>
-    <div id="editor"></div>
+    <div id="quill-container">
+        <input type="button" id="downloadButton" value="Download" @click="download()">
+        <vue-editor v-model="content" id="editor"></vue-editor>
+    </div>
 </template>
 
 <script>
-    var socket = io();
-
-    // Quill functionality
-    var quill = new Quill('#editor', {
-        theme: 'snow'
-    })
-
-    quill.on('text-change', function(delta, oldDelta, source) {
-        if (source == 'api') {
-            console.log("An API call triggered this change.")
-        } else if (source == 'user') {
-            console.log("A user action triggered this change.")
-            socket.emit('text change', quill.getContents())
-        }
-    })
-
-    socket.on('text change', function(delta){
-      quill.setContents(delta, 'api')
-    })
+import { VueEditor } from 'vue2-editor'
+import socket from 'socket.io-client'
+export default{
+  components: {
+    VueEditor
+  },
+  data () {
+    return {
+      content: null
+    }
+  },
+  methods: {
+    handleSavingContent () {
+      console.log(this.content)
+    },
+    setEditorContent () {
+      this.content = 'Html for Editor'
+    },
+    download () {
+      // Creates an anchor tag
+      var element = document.createElement('a')
+      // Parses HTML to plain text
+      var captions = document.createElement('DIV')
+      // Add new line after each end tag
+      var addedBreaksToCaptions = this.content.replace('>', '>\n').replace(/\s/g, '')
+      captions.innerHTML = addedBreaksToCaptions
+      var parsedCaptions = captions.textContent || captions.innerText || ''
+      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(parsedCaptions))
+      element.setAttribute('download', 'captions.txt')
+      element.style.display = 'none'
+      document.body.appendChild(element)
+      element.click()
+      document.body.removeChild(element)
+    }
+  }
+}
 </script>
+<style scoped>
+#editor {
+    height: 375px;
+}
+
+#quill-container {
+    position: relative;
+}
+</style>

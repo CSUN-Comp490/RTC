@@ -25,7 +25,7 @@ export default {
     }
   },
   async mounted () {
-    // do a request for all the songs
+    // do a request for all the classes
     this.classes = await ClassService.index()
   }
 }

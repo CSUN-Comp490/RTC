@@ -53,6 +53,11 @@ app.get("/", (req, res) => {
 app.set("port", port);
 
 io.on("connection", socket => socketIO(socket));
+io.sockets.on('connection', function(socket) {
+  socket.on('join', function(room) {
+  socket.join(room);
+  });
+});
 
 // Start Server
 server.listen(port, () => {
