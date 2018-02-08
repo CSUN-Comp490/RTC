@@ -1,27 +1,30 @@
 <template>
-  <v-toolbar fixed class="blue" dark>
-    <v-toolbar-title class="mr-4">
-      <span class="home" v-on:click="navigateTo({name: 'root'})">Retica</span>
-    </v-toolbar-title>
-    
-    <v-spacer></v-spacer>
+  <nav class="navbar fixed-top navbar-collapse varela">
+    <div class="navbar-brand col-sm-2 col-sm-offset-1 home nav-item">
+      <span v-on:click="navigateTo({name: 'root'})">Retica</span>
+    </div>
 
-    <v-toolbar-items>
-      <v-btn v-if="!$store.state.isUserLoggedIn" flat dark router to="login">
+    <!--<v-spacer></v-spacer>-->
+
+    <div class="">
+      <v-btn v-if="!$store.state.isUserLoggedIn" flat router to="login" class="nav-item">
         Log In
       </v-btn>
 
-      <v-btn v-if="!$store.state.isUserLoggedIn" flat dark router to="register">
-        Sign Up
+      <span class="nav-divider"> | </span>
+
+      <v-btn v-if="!$store.state.isUserLoggedIn" flat router to="register" class="nav-item">
+        Register
       </v-btn>
 
-      <v-btn v-if="$store.state.isUserLoggedIn" flat dark @click="logout">
+
+      <v-btn v-if="$store.state.isUserLoggedIn" flat @click="logout" class="nav-item ">
         Log Out
       </v-btn>
 
-    </v-toolbar-items>
+    </div>
 
-  </v-toolbar>
+  </nav>
 </template>
 
 <script>
@@ -44,10 +47,29 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.home{
-  cursor: pointer;
-}
-.home:hover{
-  color: #E9E;
-}
+  .home{
+    cursor: pointer;
+  }
+  .home:hover{
+    color: #000;
+  }
+  nav {
+    display: inline;
+    position: fixed;
+    top: 0;
+    border-radius: 0px 0px 25px 25px;
+    box-shadow: 0px 5px 5px #aaa;
+  }
+  .navbar {
+    background-color: #0a1d3b;
+  }
+  .nav-item {
+    color: #ffffff;
+  }
+  .nav-divider {
+    color: #fff;
+    font-family: garamond;
+    font-size: 2em;
+    font-weight: 100;
+  }
 </style>
