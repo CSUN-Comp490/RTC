@@ -39,16 +39,21 @@ export default {
         // Redirect to respective page based on role
         var routeName = null
         var userRole = this.$store.state.role
+        var username = response.data.user.username
         if (userRole === 'admin') {
-          routeName = '/admin/' + response.data.user.username
+          routeName = 'admin'
         } else if (userRole === 'captionist') {
-          routeName = '/captionist/' + response.data.user.username
+          routeName = 'captionist'
         } else {
-          routeName = '/student/' + response.data.user.username
+          routeName = 'student'
         }
-        // Push page
+        // Push page - similar to router-link :to'...'
         this.$router.push({
-          name: routeName
+          name: routeName,
+          // retica.cc/#/routeName/username
+          params: {
+           username
+         }
         })
       } catch (error) {
         this.error = error.response.data.error
