@@ -1,59 +1,54 @@
 <template>
-  <v-layout column>
-    <v-flex xs6 offset-xs3>
-      <v-text-field label="Room" v-model="room"/>
-      <v-btn class="enterRoom" v-on:click="enterRoom">Enter Room</v-btn>
-      <div class="error" v-html="error"></div>
-      <div id="app">
-        <quill-editor ref="myTextEditor" v-model="content" :options="editorOption" @blur="onEditorBlur($event)" @focus="onEditorFocus($event)" @ready="onEditorReady($event)"/></quill-editor>
-      </div>
-    </v-flex>
-  </v-layout>
+    <div id="quill-container">
+        <input type="button" id="downloadButton" value="Download" @click="download()">
+        <vue-editor v-model="content" id="editor"></vue-editor>
+    </div>
 </template>
 
 <script>
-import io from 'socket.io-client'
-import { VueQuillEditor } from 'vue-quill-editor'
 
-export default {
+import { VueEditor } from 'vue2-editor'
+export default{
   components: {
-    io,
-    VueQuillEditor
+    VueEditor
   },
   data () {
     return {
-      name: 'app',
-      content: '<p>example content</p>',
-      editorOption: { },
-      room: '',
-      error: null
+      content: null
     }
   },
-  mounted () {
-    console.log('this is a current quill instance object', this.myQuillEditor)
-  },
   methods: {
-    async enterRoom () {
-      var socket = io.connect()
-      socket.on('connect', function () {
-        socket.emit('room', this.room)
-      })
-
-      socket.on('message', function (data) {
-        console.log('Incoming message: ', data)
-      })
+    handleSavingContent () {
+      console.log(this.content)
     },
-    onEditorChange (event) {
-      console.log('onEditorChange')
+    setEditorContent () {
+      this.content = 'Html for Editor'
+    },
+    download () {
+      // Creates an anchor tag
+      var element = document.createElement('a')
+      // Parses HTML to plain text
+      var captions = document.createElement('DIV')
+      // Add new line after each end tag
+      var addedBreaksToCaptions = this.content.replace('>', '>\n').replace(/\s/g, '')
+      captions.innerHTML = addedBreaksToCaptions
+      var parsedCaptions = captions.textContent || captions.innerText || ''
+      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(parsedCaptions))
+      element.setAttribute('download', 'captions.txt')
+      element.style.display = 'none'
+      document.body.appendChild(element)
+      element.click()
+      document.body.removeChild(element)
     }
   }
 }
 </script>
-
 <style scoped>
-  .quill-editor:not(.bubble) .ql-container,
-  .quill-editor:not(.bubble) .ql-container .ql-editor {
-    height: 30rem;
-    padding-bottom: 1rem;
-  }
+#editor {
+    height: 375px;
+}
+
+#quill-container {
+    position: relative;
+}
 </style>

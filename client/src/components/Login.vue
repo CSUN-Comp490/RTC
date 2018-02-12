@@ -29,10 +29,26 @@ export default {
           email: this.email,
           password: this.password
         })
+        window.localStorage.setItem('userToken', JSON.stringify(response))
+        // Test token from server
+        var responseToken = window.localStorage.getItem('userToken')
+        console.log(responseToken)
         this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
+        this.$store.dispatch('setRole', response.data.role)
+        // Redirect to respective page based on role
+        var routeName = null
+        var userRole = this.$store.state.role
+        if (userRole === 'admin') {
+          routeName = '/admin/' + response.data.user.username
+        } else if (userRole === 'captionist') {
+          routeName = '/captionist/' + response.data.user.username
+        } else {
+          routeName = '/student/' + response.data.user.username
+        }
+        // Push page
         this.$router.push({
-          name: 'home'
+          name: routeName
         })
       } catch (error) {
         this.error = error.response.data.error

@@ -7,12 +7,11 @@ import CaptionistHome from '@/components/CaptionistHome'
 import AdminHome from '@/components/AdminHome'
 import CaptionSession from '@/components/CaptionSession'
 import PastSessions from '@/components/PastSession'
-import Quill from '@/components/Quill'
 import Main from '@/components/Main'
 
 Vue.use(Router)
 
-export default new Router({
+var router = new Router({
   routes: [
     {
       path: '/',
@@ -30,82 +29,59 @@ export default new Router({
       component: Register
     },
     {
-      path: '/session',
+      path: '/session/:roomnumber',
       name: 'captionsession',
       component: CaptionSession
     },
     {
-      path: '/home',
-      name: 'home',
-      component: Main
-    },
-    {
-      path: '/captionist',
+      path: '/captionist/:id',
       name: 'captionist',
-      component: CaptionistHome
+      component: CaptionistHome,
+      meta: {requiresAuth: true, adminAuth: false, captionistAuth: true, studentAuth: false}
     },
     {
-      path: '/pastsession',
+      path: '/pastsession/:sessionid',
       name: 'PastSessions',
       component: PastSessions
     },
     {
-      path: '/quill',
-      name: 'quill',
-      component: Quill
-    },
-    {
-      path: '/student',
+      path: '/student/:id',
       name: 'student',
-      component: StudentHome
+      component: StudentHome,
+      meta: {requiresAuth: true, adminAuth: false, captionistAuth: false, studentAuth: true}
     },
     {
-      path: '/admin',
+      path: '/admin/:id',
       name: 'admin',
-      component: AdminHome
+      component: AdminHome,
+      meta: {requiresAuth: true, adminAuth: true, captionistAuth: false, studentAuth: false}
     }
-  ]
+  ],
+  mode: 'history'
 })
-/*
-const router = new Router({routes, mode: 'history'})
 
+// Routes must be checked before they change pages
 router.beforeEach((to, from, next) => {
+  // Get the token from server
+  const authUser = JSON.parse(window.localStorage.getItem('userToken'))
+  // If the page requires authentication
   if (to.meta.requiresAuth) {
-    const authUser = JSON.parse(window.localStorage.getItem('lbUser'))
-    if (!authUser || !authUser.token) {
-      next({name: 'login'})
-    } else if (to.meta.adminAuth) {
-      const authUser = JSON.parse(window.localStorage.getItem('lbUser'))
-      if (authUser.data.role_id === 'ADMIN') {
-        next()
-      } else if (authUser.data.role_id === 'CAPTIONIST') {
-        next('/captionist')
-      } else {
-        next('/student')
-      }
-    } else if (to.meta.captionistAuth) {
-      const authUser = JSON.parse(window.localStorage.getItem('lbUser'))
-      if (authUser.data.role_id === 'CAPTIONIST') {
-        next()
-      } else if (authUser.data.role_id === 'ADMIN') {
-        next('/admin')
-      } else {
-        next('/student')
-      }
-    } else if (to.meta.studentAuth) {
-      const authUser = JSON.parse(window.localStorage.getItem('lbUser'))
-      if (authUser.data.role_id === 'STUDENT') {
-        next()
-      } else if (authUser.data.role_id === 'CAPTIONIST') {
-        next('/captionist')
-      } else {
-        next('/admin')
-      }
+    // If the page requires admin authentication and the user is an admin
+    if (to.meta.adminAuth && authUser.data.role === 'admin') {
+      next({name: 'admin'})
+    // If the page requires captionist authentication and the user is a captionist
+    } else if (to.meta.captionistAuth && authUser.data.role === 'captionist') {
+      next({name: 'captionist'})
+    // If the page requires student authentication and the user is a student
+    } else if (to.meta.studentAuth && authUser.data.role === 'student') {
+      next({name: 'student'})
+    // If the user is not a valid user, just route them to the login page
     } else {
-      next()
+      next({name: 'login'})
     }
+  } else {
+    next()
   }
 })
 
 export default router
-*/

@@ -1,5 +1,8 @@
 const Promise = require('bluebird')
 const bcrypt = Promise.promisifyAll(require('bcrypt-nodejs'))
+const mongoose = require('mongoose')
+mongoose.Promise = global.Promise
+const Schema = mongoose.Schema
 
 function hashPassword (user, options) {
   const SALT_FACTOR = 8
@@ -14,7 +17,7 @@ function hashPassword (user, options) {
       user.setDataValue('password', hash)
     })
 }
-
+/*
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     firstName: DataTypes.STRING,
@@ -37,7 +40,6 @@ module.exports = (sequelize, DataTypes) => {
   // Any user model can call comparePassword
   User.prototype.comparePassword = function (password) {
     return bcrypt.compareAsync(password, this.password)
-  }
-
-  return User
+  }  
 }
+*/

@@ -20,7 +20,7 @@ const StudentRoutes = require("./routes/students");
 
 // Connect to our mongoDB instance
 mongoose.connect(
-  "mongodb://" + config.user + ":" + config.pw + "@ds221258.mlab.com:21258/retica",
+  "mongodb://" + config.user + ":" + config.pw + config.db,
   err => {
     if (err) {
       console.log(err);

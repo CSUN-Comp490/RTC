@@ -10,6 +10,11 @@ function jwtSignUser (user) {
   })
 }
 
+//figures out role based on user
+function assignRole (user) {
+  return user.role
+}
+
 module.exports = {
   async register (req, res) {
     try {
@@ -54,10 +59,11 @@ module.exports = {
         })
       }
 
-      const userJson = user.toJSON()
+      const userJson = user
       res.send({
         user: userJson,
-        token: jwtSignUser(userJson)
+        token: jwtSignUser(userJson),
+        role: assignRole(userJson),
       })
     } catch (err) {
       res.status(500).send({
