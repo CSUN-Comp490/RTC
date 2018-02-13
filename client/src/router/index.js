@@ -6,6 +6,7 @@ import StudentHome from '@/components/StudentHome'
 import CaptionistHome from '@/components/CaptionistHome'
 import AdminHome from '@/components/AdminHome'
 import CaptionSession from '@/components/CaptionSession'
+import StudentSession from '@/components/StudentSession'
 import PastSessions from '@/components/PastSession'
 import Main from '@/components/Main'
 
@@ -29,7 +30,7 @@ var router = new Router({
       component: Register
     },
     {
-      path: '/session/:roomnumber',
+      path: '/captionist/session/:roomnumber',
       name: 'captionsession',
       component: CaptionSession
     },
@@ -49,6 +50,11 @@ var router = new Router({
       name: 'student',
       component: StudentHome,
       meta: {requiresAuth: true, adminAuth: false, captionistAuth: false, studentAuth: true}
+    },
+    {
+      path: '/student/session/:roomnumber',
+      name: 'studentsession',
+      component: StudentSession
     },
     {
       path: '/admin/:id',

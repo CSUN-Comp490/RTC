@@ -52,8 +52,8 @@ export default {
           name: routeName,
           // retica.cc/#/routeName/username
           params: {
-           username
-         }
+            username
+          }
         })
       } catch (error) {
         this.error = error.response.data.error

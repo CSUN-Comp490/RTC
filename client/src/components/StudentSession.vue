@@ -1,14 +1,14 @@
 <template>
     <div id="quill-container">
         <input type="button" id="downloadButton" value="Download" @click="download()">
-        <vue-editor v-model="content" id="editor"></vue-editor>
+        <vue-editor v-model="content" id="editor" disabled></vue-editor>
     </div>
 </template>
 
 <script>
 import { VueEditor } from 'vue2-editor'
 import io from 'socket.io-client'
-var socket = io.connect('http://localhost:8080') // connect to socket server
+var socket = io('localhost:8080') // connect to socket server
 export default{
   components: {
     VueEditor
@@ -16,7 +16,9 @@ export default{
   data () {
     return {
       room: null,
-      content: null
+      content: socket.on('updatechat', (data) => {
+        this.content = data
+      })
     }
   },
   mounted () {
@@ -26,35 +28,28 @@ export default{
       socket.emit('join', this.room)
     })
   },
-  watch: {
-    // sends text from editor to server
-    content: function (editorText) {
-      socket.emit('sendchat', this.parseHTML(editorText.toString()))
-    }
-  },
   methods: {
     handleSavingContent () {
       console.log(this.content)
     },
+    setEditorContent () {
+      this.content = 'Html for Editor'
+    },
     download () {
       // Creates an anchor tag
       var element = document.createElement('a')
-      var parsedCaptions = this.parseHTML(this.content)
+      // Parses HTML to plain text
+      var captions = document.createElement('DIV')
+      // Add new line after each end tag
+      var addedBreaksToCaptions = this.content.replace('>', '>\n').replace(/\s/g, '')
+      captions.innerHTML = addedBreaksToCaptions
+      var parsedCaptions = captions.textContent || captions.innerText || ''
       element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(parsedCaptions))
       element.setAttribute('download', 'captions.txt')
       element.style.display = 'none'
       document.body.appendChild(element)
       element.click()
       document.body.removeChild(element)
-    },
-    parseHTML (text) {
-      // Parses HTML to plain text
-      var captions = document.createElement('DIV')
-      // Add new line after each end tag
-      var addedBreaksToCaptions = text.replace('>', '>\n').replace(/\s/g, '')
-      captions.innerHTML = addedBreaksToCaptions
-      var parsedCaptions = captions.textContent || captions.innerText || ''
-      return parsedCaptions
     }
   }
 }

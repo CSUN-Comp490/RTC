@@ -52,12 +52,23 @@ app.get("/", (req, res) => {
 
 app.set("port", port);
 
-io.on("connection", socket => socketIO(socket));
-io.sockets.on('connection', function(socket) {
-  socket.on('join', function(room) {
-  socket.join(room);
-  });
-});
+io.on('connection', (socket) => {
+  socket.on('join', (room) => {
+    console.log('user has connected to room#' + room)
+    socket.room = room
+    console.log(room)
+    socket.join(room)
+  })
+
+  socket.on('sendchat', (data) => {
+    io.sockets.to(socket.room).emit('updatechat', data)
+    console.log('Sending to room #' + socket.room + ': ' + data)
+  })
+
+  socket.on('disconnect', () => {
+    console.log('user has disconnected from ' + socket.room)
+  })
+})
 
 // Start Server
 server.listen(port, () => {
