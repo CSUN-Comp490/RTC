@@ -1,17 +1,4 @@
 <template>
-  <!--<v-layout column>-->
-    <!--<v-flex xs6 offset-xs3>-->
-      <!--<Panel title="Login">-->
-        <!--<input type="text" label="Email" v-model="email" placeholder="email"-->
-          <!--class="email"> <br>-->
-        <!--<input label="Password" type="password" v-model="password" placeholder="password"-->
-          <!--class="password"> <br>-->
-        <!--<div class="error" v-html="error"></div> <br>-->
-        <!--<v-btn class="blue" v-on:click="login">Login</v-btn>-->
-      <!--</Panel>-->
-    <!--</v-flex>-->
-  <!--</v-layout>-->
-
   <!--TODO:
     background
     logo side
