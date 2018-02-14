@@ -9,6 +9,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Vuetify from 'vuetify'
 import { sync } from 'vuex-router-sync'
 import 'vuetify/dist/vuetify.min.css'
+import ClassGenerator from '@/components/ClassGenerator'
 import store from '@/store/store'
 
 Vue.config.productionTip = false
@@ -17,6 +18,8 @@ Vue.use(Vuetify)
 Vue.use(BootstrapVue)
 
 sync(store, router)
+
+Vue.component('classGenerator', ClassGenerator) // component to generate classes
 
 /* eslint-disable no-new */
 new Vue({
