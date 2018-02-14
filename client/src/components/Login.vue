@@ -29,10 +29,31 @@ export default {
           email: this.email,
           password: this.password
         })
+        window.localStorage.setItem('userToken', JSON.stringify(response))
+        // Test token from server
+        var responseToken = window.localStorage.getItem('userToken')
+        console.log(responseToken)
         this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
+        this.$store.dispatch('setRole', response.data.role)
+        // Redirect to respective page based on role
+        var routeName = null
+        var userRole = this.$store.state.role
+        var username = response.data.user.username
+        if (userRole === 'admin') {
+          routeName = 'admin'
+        } else if (userRole === 'captionist') {
+          routeName = 'captionist'
+        } else {
+          routeName = 'student'
+        }
+        // Push page - similar to router-link :to'...'
         this.$router.push({
-          name: 'home'
+          name: routeName,
+          // retica.cc/#/routeName/username
+          params: {
+            username
+          }
         })
       } catch (error) {
         this.error = error.response.data.error

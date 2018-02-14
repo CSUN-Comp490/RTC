@@ -33,7 +33,6 @@ const StudentSchema = new Schema({
       ref: "class"
     }
   ]
-
 });
 
 module.exports = mongoose.model("student", StudentSchema);

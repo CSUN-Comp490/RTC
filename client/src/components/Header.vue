@@ -57,9 +57,10 @@
       logout () {
         this.$store.dispatch('setToken', null)
         this.$store.dispatch('setUser', null)
+        this.$store.dispatch('setRole', null)
         // TODO: Redirect to homepage
         this.$router.push({
-          name: 'login'
+          name: 'root'
         })
       }
     }
