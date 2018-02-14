@@ -1,5 +1,4 @@
 <!--NOT FULLY WEB RESPONSIVE-->
-<!--MISSING LOGO-->
 <!--NEED BETTER DESIGN-->
 <!--NEED TO REMOVE HEADER-->
 <!--NEED TO ADD BUTTON STYLING-->
@@ -9,8 +8,10 @@
     <div class="backgroundColor">
       <div class="welcome">
         <div class="row">
-          Welcome To Retica
-          <!--<img src="Retica/client/src/assets/logo.png"/>-->
+          Welcome To
+          <div class="logoStyle">
+            <img src="../assets/reticaLogo.png"/>
+          </div>
         </div>
       </div>
       <div class="information">
@@ -55,7 +56,7 @@
     margin-left: auto;
     margin-right: auto;
     width: 850px;
-    height: 500px;
+    height: 600px;
     font-family: "Varela Round";
     font-style: normal;
     font-variant: normal;
@@ -63,7 +64,7 @@
   }
   .welcome {
     font-size: 80px;
-    display: inline;
+    display: block;
     position: relative;
     left: 50px;
   }
@@ -71,6 +72,7 @@
     text-align: left;
     position: relative;
     left: 50px;
+    top: 170px;
   }
   .buttonStyle {
     display: inline-block;
@@ -80,5 +82,10 @@
     text-align: center;
     margin: 5px;
     height: 30px;
+  }
+  .logoStyle {
+    position: absolute;
+    top: 120px;
+    left: 200px;
   }
 </style>
