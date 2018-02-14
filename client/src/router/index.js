@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
-<<<<<<< HEAD
 import StudentHome from '@/components/StudentHome'
 import CaptionistHome from '@/components/CaptionistHome'
 import AdminHome from '@/components/AdminHome'
@@ -10,13 +9,6 @@ import CaptionSession from '@/components/CaptionSession'
 import StudentSession from '@/components/StudentSession'
 import PastSessions from '@/components/PastSession'
 import Main from '@/components/Main'
-=======
-import CaptionistHome from '@/components/CaptionistHome'
-import Main from '@/components/Main'
-import CaptionSession from '@/components/CaptionSession'
-import Home from '@/components/Home'
-import PastSessions from '@/components/PastSessions'
->>>>>>> 936427c9bf8c4ef83d2167476a8e1a47a2c4149d
 
 Vue.use(Router)
 
@@ -38,21 +30,11 @@ var router = new Router({
       component: Register
     },
     {
-<<<<<<< HEAD
       path: '/captionist/session/:roomnumber',
-=======
-      path: '/captionisthome',
-      name: 'captionisthome',
-      component: CaptionistHome
-    },
-    {
-      path: '/captionsession',
->>>>>>> 936427c9bf8c4ef83d2167476a8e1a47a2c4149d
       name: 'captionsession',
       component: CaptionSession
     },
     {
-<<<<<<< HEAD
       path: '/captionist/:id',
       name: 'captionist',
       component: CaptionistHome,
@@ -60,14 +42,6 @@ var router = new Router({
     },
     {
       path: '/pastsession/:sessionid',
-=======
-      path: '/home',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/PastSessions',
->>>>>>> 936427c9bf8c4ef83d2167476a8e1a47a2c4149d
       name: 'PastSessions',
       component: PastSessions
     },
