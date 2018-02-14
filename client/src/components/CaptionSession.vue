@@ -1,6 +1,7 @@
 <template>
     <div id="quill-container">
-        <input type="button" id="downloadButton" value="Download" @click="download()">
+        <span><input type="button" id="downloadButton" value="Download" @click="download()"></span>
+        <span><input type="button" id="endsessionButton" value="End Session" @click="returnPage()"></span>
         <vue-editor v-model="content" id="editor"></vue-editor>
     </div>
 </template>
@@ -29,7 +30,8 @@ export default{
   watch: {
     // sends text from editor to server
     content: function (editorText) {
-      socket.emit('sendchat', this.parseHTML(editorText.toString()))
+      socket.emit('sendchat', editorText)
+      console.log(editorText)
     }
   },
   methods: {
@@ -55,6 +57,23 @@ export default{
       captions.innerHTML = addedBreaksToCaptions
       var parsedCaptions = captions.textContent || captions.innerText || ''
       return parsedCaptions
+    },
+    // Fix this method to return to captionist home page
+    returnPage () {
+      this.$router.push({
+        name: 'root',
+        params: {
+          id: this.$router.params.id
+        }
+      })
+    }
+  },
+  beforeRouteLeave (to, from, next) {
+    const answer = window.confirm('Do you really want to leave? You still have unsaved changes!')
+    if (answer) {
+      next()
+    } else {
+      next(false)
     }
   }
 }
@@ -66,5 +85,9 @@ export default{
 
 #quill-container {
     position: relative;
+}
+
+span {
+  border: 1px solid blue;
 }
 </style>
