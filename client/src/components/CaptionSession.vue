@@ -1,59 +1,93 @@
 <template>
-  <v-layout column>
-    <v-flex xs6 offset-xs3>
-      <v-text-field label="Room" v-model="room"/>
-      <v-btn class="enterRoom" v-on:click="enterRoom">Enter Room</v-btn>
-      <div class="error" v-html="error"></div>
-      <div id="app">
-        <quill-editor ref="myTextEditor" v-model="content" :options="editorOption" @blur="onEditorBlur($event)" @focus="onEditorFocus($event)" @ready="onEditorReady($event)"/></quill-editor>
-      </div>
-    </v-flex>
-  </v-layout>
+    <div id="quill-container">
+        <span><input type="button" id="downloadButton" value="Download" @click="download()"></span>
+        <span><input type="button" id="endsessionButton" value="End Session" @click="returnPage()"></span>
+        <vue-editor v-model="content" id="editor"></vue-editor>
+    </div>
 </template>
 
 <script>
+import { VueEditor } from 'vue2-editor'
 import io from 'socket.io-client'
-import { VueQuillEditor } from 'vue-quill-editor'
-
-export default {
+var socket = io.connect('http://localhost:8080') // connect to socket server
+export default{
   components: {
-    io,
-    VueQuillEditor
+    VueEditor
   },
   data () {
     return {
-      name: 'app',
-      content: '<p>example content</p>',
-      editorOption: { },
-      room: '',
-      error: null
+      room: null,
+      content: null
     }
   },
   mounted () {
-    console.log('this is a current quill instance object', this.myQuillEditor)
+    // join room from room number (defined in url)
+    this.room = this.$route.params.roomnumber.toString()
+    socket.on('connect', () => {
+      socket.emit('join', this.room)
+    })
+  },
+  watch: {
+    // sends text from editor to server
+    content: function (editorText) {
+      socket.emit('sendchat', editorText)
+      console.log(editorText)
+    }
   },
   methods: {
-    async enterRoom () {
-      var socket = io.connect()
-      socket.on('connect', function () {
-        socket.emit('room', this.room)
-      })
-
-      socket.on('message', function (data) {
-        console.log('Incoming message: ', data)
-      })
+    handleSavingContent () {
+      console.log(this.content)
     },
-    onEditorChange (event) {
-      console.log('onEditorChange')
+    download () {
+      // Creates an anchor tag
+      var element = document.createElement('a')
+      var parsedCaptions = this.parseHTML(this.content)
+      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(parsedCaptions))
+      element.setAttribute('download', 'captions.txt')
+      element.style.display = 'none'
+      document.body.appendChild(element)
+      element.click()
+      document.body.removeChild(element)
+    },
+    parseHTML (text) {
+      // Parses HTML to plain text
+      var captions = document.createElement('DIV')
+      // Add new line after each end tag
+      var addedBreaksToCaptions = text.replace('>', '>\n').replace(/\s/g, '')
+      captions.innerHTML = addedBreaksToCaptions
+      var parsedCaptions = captions.textContent || captions.innerText || ''
+      return parsedCaptions
+    },
+    // Fix this method to return to captionist home page
+    returnPage () {
+      this.$router.push({
+        name: 'root',
+        params: {
+          id: this.$router.params.id
+        }
+      })
+    }
+  },
+  beforeRouteLeave (to, from, next) {
+    const answer = window.confirm('Do you really want to leave? You still have unsaved changes!')
+    if (answer) {
+      next()
+    } else {
+      next(false)
     }
   }
 }
 </script>
-
 <style scoped>
-  .quill-editor:not(.bubble) .ql-container,
-  .quill-editor:not(.bubble) .ql-container .ql-editor {
-    height: 30rem;
-    padding-bottom: 1rem;
-  }
+#editor {
+    height: 375px;
+}
+
+#quill-container {
+    position: relative;
+}
+
+span {
+  border: 1px solid blue;
+}
 </style>

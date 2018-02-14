@@ -17,7 +17,7 @@
     "express": "^4.16.2",
     "joi": "^13.0.1",
     "jsonwebtoken": "^8.1.0",
-    "mongoose": "^5.0.3",
+    "mongoose": "^5.0.4",
     "morgan": "^1.9.0",
     "socket.io": "^2.0.4",
     "underscore": "^1.8.3",

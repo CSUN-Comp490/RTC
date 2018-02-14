@@ -20,7 +20,7 @@ const StudentRoutes = require("./routes/students");
 
 // Connect to our mongoDB instance
 mongoose.connect(
-  "mongodb://" + config.user + ":" + config.pw + "@ds221258.mlab.com:21258/retica",
+  "mongodb://" + config.user + ":" + config.pw + config.db,
   err => {
     if (err) {
       console.log(err);
@@ -52,7 +52,23 @@ app.get("/", (req, res) => {
 
 app.set("port", port);
 
-io.on("connection", socket => socketIO(socket));
+io.on('connection', (socket) => {
+  socket.on('join', (room) => {
+    console.log('user has connected to room#' + room)
+    socket.room = room
+    console.log(room)
+    socket.join(room)
+  })
+
+  socket.on('sendchat', (data) => {
+    io.sockets.to(socket.room).emit('updatechat', data)
+    console.log('Sending to room #' + socket.room + ': ' + data)
+  })
+
+  socket.on('disconnect', () => {
+    console.log('user has disconnected from ' + socket.room)
+  })
+})
 
 // Start Server
 server.listen(port, () => {
