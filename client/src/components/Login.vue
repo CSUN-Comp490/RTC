@@ -7,7 +7,7 @@
 
   <div id="login" class="varela">
 
-    <form class=" login__form col-md-6 col-lg-6 col-sm-12 col-xs-12 pull-left align-middle">
+    <form class=" login__form col-md-7 col-lg-6 col-sm-12 col-xs-12 pull-left align-middle">
 
       <div class=" login__innerContainer ">
 
@@ -22,9 +22,24 @@
           <input label="Password" type="password" v-model="password" placeholder="password" size="30"
                  class="password input raleway--regular"> <br>
         </div>
+
+
+
         <div class="error" v-html="error"></div> <br>
 
-        <button class="btn varela" v-on:click="login">Login</button>
+        <div class="login__loginButton">
+          <button class="btn varela" v-on:click="login">Login</button>
+        </div>
+
+        <div class="login__extraLinks pull-right">
+          <p><a href="" class="login__forgotPassword">Forgot password?</a></p>
+
+          <p><a href="" class="pull-right">Register</a></p>
+        </div>
+
+
+
+
 
       </div>
 
@@ -80,14 +95,14 @@ export default {
 
   .login__form {
     background-color: #fff;
-    border-radius: 20px;
-    padding: 80px;
+    border-radius: 0px 20px 20px 0px;
+    padding: 80px 200px;
     text-align: left;
     display: flex;
     justify-content: center;
     box-shadow: 8px 8px 5px #000033;
+    margin-left: -40px;
 
-    /*align-items: center;*/
   }
 
   .login__heading {
@@ -99,9 +114,16 @@ export default {
     margin-bottom: 30px;
   }
 
+  .login__loginButton {
+    margin-left: -10px;
+  }
+  .login__extraLinks {
+    margin-top: 10px;
+  }
 
 
-  /*<!--For the text fields-->*/
+
+
   input {
     background-color: #fff;
     padding: 8px 15px;
@@ -109,10 +131,13 @@ export default {
     border-radius: 8px;
   }
   button {
-    /*!important overrides the bootstrap stylings*/
+    /*!important overrides the bootstrap stylings! */
     border-radius: 6px;
     background-color: #0A1D3B !important;
     color: #fff !important;
+  }
+  a {
+    color: #1F286A;
   }
 
 </style>

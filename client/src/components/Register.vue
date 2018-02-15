@@ -132,7 +132,46 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .error{
+  #register {
+    /*-- background color for, well... background. after figuring out container first*/
+    background-color: #1F286A;
+    /*background-color: #fff;*/
+  }
 
+  .register__form {
+    background-color: #fff;
+    border-radius: 20px 0px 0px 20px;
+    padding: 80px;
+    text-align: left;
+    display: flex;
+    justify-content: center;
+    box-shadow: 8px 8px 5px #000033;
+    margin-right: -40px;
+
+    /*align-items: center;*/
+  }
+
+  .register__heading {
+    font-size: 3em;
+    margin-bottom: 50px;
+  }
+
+  .form-group {
+    margin-bottom: 30px;
+  }
+
+
+  /*<!--For the text fields-->*/
+  input {
+    background-color: #fff;
+    padding: 8px 15px;
+    border: 1px solid #bbb;
+    border-radius: 8px;
+  }
+  button {
+    /*!important overrides the bootstrap stylings*/
+    border-radius: 6px;
+    background-color: #0A1D3B !important;
+    color: #fff !important;
   }
 </style>

@@ -82,7 +82,8 @@
     position: fixed;
     top: 0;
     border-radius: 0px 0px 25px 25px;
-    box-shadow: 0px 5px 5px #aaa;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.20);
+    z-index: 1000;
   }
   .navbar {
     background-color: #0a1d3b;
@@ -92,7 +93,6 @@
     padding: 5px 10px;
   }
   .navbar-toggler {
-    /*background-color: white;*/
     padding: 5px;
     border-radius: 5px;
   }
