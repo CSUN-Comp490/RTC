@@ -2,8 +2,7 @@
 
   <!--TODO:
       how to glyphicons
-      how to images
-      float .link right?
+      logo
       -->
 
   <nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse col-xs-12" style="background-color: #0a1d3b;">
@@ -18,11 +17,12 @@
 
     <div class="collapse navbar-collapse container" id="navbarSupportedContent">
 
-      <ul class="navbar-nav mx-auto ">
+      <ul class="navbar-nav mx-auto pull-right header__list">
 
         <li class="nav-item">
           <button v-on:click="navigateTo({name: 'login'})" v-if="!$store.state.isUserLoggedIn" flat to="login" class="nav-item link">
             <!--TODO: Glyphicon for login?-->
+            <img src="../assets/svg/si-glyph-abacus.svg" alt="">
             Log In
           </button>
         </li>
@@ -40,7 +40,6 @@
             Log Out
           </button>
         </li>
-
       </ul>
     </div>
   </nav>
@@ -87,6 +86,9 @@
   }
   .navbar {
     background-color: #0a1d3b;
+  }
+  .header__list {
+    padding-right: 8%;
   }
   .nav-item {
     color: #ffffff;
