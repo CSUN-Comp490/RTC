@@ -43,7 +43,7 @@
 <template>
   <div id="register" class="varela">
 
-    <form class=" register__form col-md-6 col-lg-6 col-sm-12 col-xs-12 pull-right align-middle">
+    <form class=" register__form col-md-7 col-lg-6 col-sm-12 col-xs-12 pull-right align-middle">
 
       <div class=" register__innerContainer ">
 
@@ -64,7 +64,7 @@
                  class="email inputs raleway--regular"> <br>
         </div>
         <div class="form-group">
-          <p>Email</p>
+          <p>School</p>
           <input type="text" label="School" v-model="school" placeholder="school" size="30"
                  class="school inputs raleway--regular"> <br>
         </div>
@@ -74,19 +74,19 @@
                  class="password input raleway--regular"> <br>
         </div>
         <div class="form-group">
-          <p>Password</p>
-          <input label="Repeat Password" type="password" autocomplete="new-password" placeholder="repeat password" size="30"
+          <p>Confirm password</p>
+          <input label="Repeat Password" type="password" autocomplete="new-password" placeholder="confirm password" size="30"
                  class="repeatPassword input raleway--regular"> <br>
         </div>
+
+        <div class="error" v-html="error"></div> <br>
+
+        <button class="btn varela" v-on:click="register">Register</button>
       </div>
     </form>
 
-          <br>
-          <div class="error" v-html="error"></div> <br>
 
-        <button class="btn varela" v-on:click="register">Register</button>
-          <!--<v-btn class="blue" v-on:click="register">Register</v-btn>-->
-    </div>
+  </div>
 
 
 
@@ -134,19 +134,21 @@ export default {
 <style scoped>
   #register {
     /*-- background color for, well... background. after figuring out container first*/
-    background-color: #1F286A;
+    /*background-color: #1F286A;*/
     /*background-color: #fff;*/
   }
 
   .register__form {
     background-color: #fff;
     border-radius: 20px 0px 0px 20px;
-    padding: 80px;
+    padding: 60px;
     text-align: left;
     display: flex;
     justify-content: center;
-    box-shadow: 8px 8px 5px #000033;
-    margin-right: -40px;
+    box-shadow: -7px 7px 5px #000033;
+    margin-right: -20px;
+    margin-top: 60px;
+    margin-bottom: 50px;
 
     /*align-items: center;*/
   }
@@ -157,7 +159,7 @@ export default {
   }
 
   .form-group {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
 
 

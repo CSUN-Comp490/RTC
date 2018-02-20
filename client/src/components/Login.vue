@@ -3,9 +3,9 @@
     background
     logo side
     repeating image tile for background?
-    have login__innerContainer bleed into window from left side?-->
+    -->
 
-  <div id="login" class="varela">
+  <div id="login" class="varela" v-bind:style="{ backgroundImage: 'url(' + backgroundtile + ')' }">
 
     <form class=" login__form col-md-7 col-lg-6 col-sm-12 col-xs-12 pull-left align-middle">
 
@@ -45,6 +45,7 @@
 
     </form>
   </div>
+
 </template>
 
 
@@ -57,7 +58,8 @@ export default {
     return {
       email: '',
       password: '',
-      error: null
+      error: null,
+      backgroundtile: '../assets/backgroundTile.png'
     }
   },
   methods: {
@@ -90,37 +92,32 @@ export default {
   #login {
     /*-- background color for, well... background. after figuring out container first*/
     background-color: #1F286A;
-    /*background-color: #fff;*/
+    background-size: auto;
+    background-repeat: repeat;
   }
-
   .login__form {
     background-color: #fff;
     border-radius: 0px 20px 20px 0px;
-    padding: 80px 200px;
+    padding: 60px;
     text-align: left;
     display: flex;
     justify-content: center;
     box-shadow: 8px 8px 5px #000033;
     margin-left: -40px;
-
   }
-
   .login__heading {
     font-size: 3em;
     margin-bottom: 50px;
   }
-
   .form-group {
     margin-bottom: 30px;
   }
-
   .login__loginButton {
     margin-left: -10px;
   }
   .login__extraLinks {
     margin-top: 10px;
   }
-
 
 
 
