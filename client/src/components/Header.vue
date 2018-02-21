@@ -63,9 +63,10 @@
       logout () {
         this.$store.dispatch('setToken', null)
         this.$store.dispatch('setUser', null)
+        this.$store.dispatch('setRole', null)
         // TODO: Redirect to homepage
         this.$router.push({
-          name: 'login'
+          name: 'root'
         })
       }
     }
@@ -119,11 +120,10 @@
     padding: 5px 10px;
   }
   .navbar-toggler {
+    /*background-color: white;*/
     padding: 5px;
     border-radius: 5px;
   }
-
-
   .link {
     font-size: 1.2em;
   }
@@ -131,8 +131,6 @@
     background-color: #3373ed;
     border-radius: 5px;
   }
-
-
   .glyphicon {
     width: 30px;
     height: 30px;

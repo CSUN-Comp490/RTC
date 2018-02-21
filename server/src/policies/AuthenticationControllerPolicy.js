@@ -57,5 +57,8 @@ module.exports = {
     // Goto AuthenticationController.js (in controllers directory *server)
       next()
     }
+  },
+  login () {
+    
   }
 }

@@ -1,4 +1,4 @@
-const {User} = require('../models')
+const {users} = require('../models')
 const jwt = require('jsonwebtoken')
 const config = require('../config/config')
 
@@ -8,6 +8,11 @@ function jwtSignUser (user) {
   return jwt.sign(user, config.authentication.jwtSecret, {
     expiresIn: ONE_WEEK
   })
+}
+
+//figures out role based on user
+function assignRole (user) {
+  return user.role
 }
 
 module.exports = {
@@ -54,10 +59,11 @@ module.exports = {
         })
       }
 
-      const userJson = user.toJSON()
+      const userJson = user
       res.send({
         user: userJson,
-        token: jwtSignUser(userJson)
+        token: jwtSignUser(userJson),
+        role: assignRole(userJson),
       })
     } catch (err) {
       res.status(500).send({
