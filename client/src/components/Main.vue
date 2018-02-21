@@ -27,13 +27,17 @@
           <div class="col-lg-6">
             <div class="row">
               <div class="buttonStyle">
-                <button style="color: white; font-size: 18px">Sign Up</button>
+                <button v-on:click="navigateTo({name: 'register'})" v-if="!$store.state.isUserLoggedIn" flat to="register" style="color: white; font-size: 18px">
+                  Sign Up
+                </button>
               </div>
               <p style="position: absolute; left: 128px; bottom: 116px">here with school e-mail address</p>
             </div>
             <div class="row">
               <div class="buttonStyle">
-                <button style="color: white; font-size: 18px;">Sign In</button>
+                <button v-on:click="navigateTo({name: 'login'})" v-if="!$store.state.isUserLoggedIn" flat to="login" style="color: white; font-size: 18px;">
+                  Sign In
+                </button>
               </div>
               <p style="position: absolute; left: 128px; bottom: 77px">with username</p>
             </div>
@@ -45,6 +49,22 @@
 </template>
 
 <script>
+  export default{
+    methods: {
+      navigateTo (route) {
+        this.$router.push(route)
+      },
+      logout () {
+        this.$store.dispatch('setToken', null)
+        this.$store.dispatch('setUser', null)
+        this.$store.dispatch('setRole', null)
+        // TODO: Redirect to homepage
+        this.$router.push({
+          name: 'root'
+        })
+      }
+    }
+  }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
