@@ -37,10 +37,6 @@
           <p><a href="" class="pull-right">Register</a></p>
         </div>
 
-
-
-
-
       </div>
 
     </form>
