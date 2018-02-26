@@ -5,11 +5,11 @@
     repeating image tile for background?
     -->
 
-  <div id="login" class="varela" v-bind:style="{ backgroundImage: 'url(' + backgroundtile + ')' }">
+  <div id="login container-fluid" class="varela" v-bind:style="{ backgroundImage: 'url(' + backgroundtile + ')' }">
 
-    <form class=" login__form col-md-7 col-lg-6 col-sm-12 col-xs-12 pull-left align-middle">
+    <form class=" login__form col-sm-12 col-xs-12 col-md-8 col-lg-6 col-xl-6 col-sm-offset-0 col-xs-offset-0 col-md-offset- col-lg-offset-3 col-xl-offset-3 align-middle ">
 
-      <div class=" login__innerContainer ">
+      <div class=" login__innerContainer">
 
         <h1 class="login__heading">Login</h1>
         <div class="form-group">
@@ -31,11 +31,12 @@
           <button class="btn varela" v-on:click="login">Login</button>
         </div>
 
-        <div class="login__extraLinks pull-right">
-          <p><a href="" class="login__forgotPassword">Forgot password?</a></p>
+        <!--Only needed if links "Forgot Password" and extra clickable Register links are needed?-->
+        <!--<div class="login__extraLinks pull-right invisible">-->
+          <!--<p><a href="" class="login__forgotPassword">Forgot password?</a></p>-->
 
-          <p><a href="" class="pull-right">Register</a></p>
-        </div>
+          <!--<p><a href="" class="pull-right" v-on:click="navigateTo({name: 'register'})">Register</a></p>-->
+        <!--</div>-->
 
       </div>
 
@@ -114,13 +115,12 @@ export default {
   }
   .login__form {
     background-color: #fff;
-    border-radius: 0px 20px 20px 0px;
+    border-radius: 20px;
     padding: 60px;
     text-align: left;
     display: flex;
     justify-content: center;
-    box-shadow: 8px 8px 5px #000033;
-    margin-left: -40px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 51, 0.4);
   }
   .login__heading {
     font-size: 3em;
