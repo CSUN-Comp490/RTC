@@ -38,7 +38,9 @@ var router = new Router({
       path: '/captionist/:id',
       name: 'captionist',
       component: CaptionistHome,
-      meta: {requiresAuth: true, adminAuth: false, captionistAuth: true, studentAuth: false}
+      // meta: {requiresAuth: true, adminAuth: false, captionistAuth: true, studentAuth: false}
+      // FOR DEMO
+      meta: {requiresAuth: false, adminAuth: false, captionistAuth: false, studentAuth: false}
     },
     {
       path: '/pastsession/:sessionid',
