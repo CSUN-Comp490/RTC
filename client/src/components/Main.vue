@@ -137,6 +137,9 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .container-fluid {
+    top: 90px;
+  }
   .card-body {
     background-color: #d4ecff;
     border-radius: 20px;
