@@ -151,7 +151,12 @@
     width: 400px;
     height: 100px;
     left: 30px;
-    top: 90px;
-    /*border: 3px solid blue;*/
+    top: 120px;
+  }
+  .classList {
+    position: relative;
+    top: 120px;
+    margin-right: auto;
+    margin-left: auto;
   }
 </style>
