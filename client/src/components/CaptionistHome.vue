@@ -1,235 +1,157 @@
-<!--Currently contains positioning issues in regards to responsiveness.
-Header buttons needs to have separate button classes made.
-Actual logo needs to be added.
-All syntax in regards to template and grid system uses bootstrap-vue.js.
-All syntax in regards to buttons uses HTML syntax instead of bootstrap-vue.js.
-Any unknown html tag are bootstrap-vue.js syntax that are currently unidentified.-->
+<!--captionist home view, page is routed from App.vue main vue instance
+    created by main.js.  PAGE IS NOT WEB RESPONSIVE-->
+<!--ALL API RELATED CODE IS UNTESTED.  Its purpose is to pull
+    the username from the api, return the classes of that username,
+    return all of the class info from each class, store them in
+    a dynamic array, pass them to the class generator component
+    and generate the classes-->
+<!--LOTS OF COMMENTS.  For editing and testing the code later-->
+<!--CODE COMMENTED OUT FOR DEMO-->
 
 <template>
-  <b-container fluid>
-    <div class = "mainContainer">
-      <!--header-->
-      <!-- <div class = "header">
-        <b-row>
-          
-          <b-col cols="4" sm="4" md="4" lg="4" xl="6">
-            <div class = "logo">
-              RETICA
-            </div>
-          </b-col>
-          
-          <b-col cols="2" sm="2" md="2" lg="2" xl="2">
-            <button class = "headerButton">My Caption Sessions</button>
-          </b-col>
-          
-          <b-col cols="1" sm="2" md="2" lg="2" xl="1">
-            <button class = "headerButton">Settings</button>
-            <div class = "headerLine"></div>
-          </b-col>
-          
-          <b-col cols="2" sm="2" md="2" lg="2" xl="1">
-            <button class = "headerButton">Logout</button>
-            <div class = "headerLine"></div>
-          </b-col>
-        </b-row>
-      </div> -->
-
-      <!--title-->
-      <div class = "titleContainer">
-        <b-row>
-          <b-col>
-            <b>My Caption Sessions<br/></b>
-          </b-col>
-        </b-row>
-      </div>
-
-      <!--first class container-->
-      <div class = "classContainerOne">
-        <b-row>
-          <!--class description-->
-          <b-col cols="5" sm="5" md="5" lg="5" xl="5">
-            <div class="classes">
-              COMP 490 <br/>
-              SR DESIGN PROJECT <br/>
-              MoWe 9:30 a.m. - 10:45 a.m.
-            </div>
-          </b-col>
-
-          <!--division-->
-          <b-col cols="2" sm="2" md="2" lg="2" xl="2">
-            <div class="verticalLine"></div>
-          </b-col>
-
-          <!--buttons-->
-          <b-col cols="5" sm="5" md="5" lg="5" xl="5">
-            <div class="buttonPosition">
-              <b-row>
-                <button class="buttonPage" v-on:click="navigateTo({name: 'CaptionSession'})">Start Session</button>
-              </b-row>
-              <b-row>
-                <button class="buttonPage">Past Captions</button>
-              </b-row>
-            </div>
-          </b-col>
-        </b-row>
-      </div>
-
-      <!--second class container-->
-      <div class="classContainerTwo">
-        <b-row>
-          <b-col cols="5" sm="5" md="5" lg="5" xl="5">
-            <div class="classes">
-              MATH 340<br/>
-              INTRO TO PROBABILITY <br/>
-              TuTh 12:30 p.m. - 1:45 p.m.
-            </div>
-          </b-col>
-
-          <b-col cols="2" sm="2" md="2" lg="2" xl="2">
-            <div class = "verticalLine"></div>
-          </b-col>
-
-          <b-col cols="5" sm="5" md="5" lg="5" xl="5">
-            <div class="buttonPosition">
-              <b-row>
-                <button class="buttonPage" v-on:click="navigateTo({name: 'CaptionSession'})">Start Session</button>
-              </b-row>
-              <b-row>
-                <button class="buttonPage">Past Captions</button>
-              </b-row>
-            </div>
-          </b-col>
-        </b-row>
-      </div>
-
-      <!--third class container-->
-      <div class="classContainerThree">
-        <b-row>
-          <b-col cols="5" sm="5" md="5" lg="5" xl="5">
-            <div class="classes">
-              COMP 424<br/>
-              NETWORK SYSTEMS SECURITY <br/>
-              Friday 11:00 a.m. - 1:45 p.m.
-            </div>
-          </b-col>
-
-          <b-col cols="2" sm="2" md="2" lg="2" xl="2">
-            <div class = "verticalLine"></div>
-          </b-col>
-
-          <b-col cols="5" sm="5" md="5" lg="5" xl="5">
-            <div class="buttonPosition">
-              <b-row>
-                <button class="buttonPage" v-on:click="navigateTo({name: 'CaptionSession'})">Start Session</button>
-              </b-row>
-              <b-row>
-                <button class="buttonPage">Past Captions</button>
-              </b-row>
-            </div>
-          </b-col>
-        </b-row>
+  <div id="CapHome" class="container-fluid">
+    <!--page title header-->
+    <div class="row">
+      <div class="pageTitle">
+        <p>My Caption Sessions</p>
       </div>
     </div>
-  </b-container>
+
+    <!--generates class list and main interface for captionist home page
+        loops through an array of objects and binds each objects
+        data fields to the ClassGenerator components props-->
+    <!--<div class="classList">-->
+      <!--<div v-for="objects in userClassInformation">-->
+        <!--<class-generator-->
+          <!--v-bind:classID="objects.classID"-->
+          <!--v-bind:classIsNamed="objects.className"-->
+          <!--v-bind:classSchedule="objects.classSchedule"-->
+        <!--&gt;</class-generator>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <!--HARD CODED FOR TESTING AND DEMO PURPOSES-->
+    <div class="classList">
+      <div v-for="objects in classArray">
+        <class-generator
+          v-bind:classID="objects.classID"
+          v-bind:classIsNamed="objects.className"
+          v-bind:classSchedule="objects.classSchedule"
+        ></class-generator>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-export default{
-  methods: {
-    navigateTo (route) {
-      this.$router.push(route)
+  import classGen from '@/components/ClassGenerator'
+  // import Api from '@/services/Api'
+  export default {
+    data: function () {
+      return {
+        // userInfo: Array,
+        // userClassInformation: Array
+        // HARD CODED FOR TESTING AND DEMO PURPOSES
+        classArray: [
+          {
+            classID: 'COMP 490',
+            className: 'Senior Design',
+            classSchedule: 'MoWe 9:30 a.m. to 10:45 a.m.'
+          },
+          {
+            classID: 'COMP 484',
+            className: 'Web Engineering I',
+            classSchedule: 'TuTh 4:30 p.m. to 6:45 p.m.'
+          },
+          {
+            classID: 'COMP 482',
+            className: 'Algorithm Design',
+            classSchedule: 'MoWe 11:00 a.m. to 12:15 p.m.'
+          },
+          {
+            classID: 'COMP 469',
+            className: 'Artificial Intelligence',
+            classSchedule: 'TuTh 2:00 p.m. to 3:15 p.m.'
+          }
+        ]
+      }
+    },
+    // created: function () { // calls the function after the vue instance is created
+    //   this.getUser()
+    //   this.getClasses()
+    // },
+    // methods: {
+    //   getUser: function () {
+    //     Api().get(this.$route.path) // calls the api using the pages current route
+    //       .then(function (response) {
+    //         console.log(response)
+    //         const userData = JSON.parse(response.data) // assign the parsed data to a variable
+    //         const userInfoArray = [] // create an array for storage
+    //         const classes = [] // for comparison
+    //
+    //         for (let element in userData) { // iterate through captionist attributes
+    //           const userElement = userData[element]
+    //           if (userElement === classes) { // if the attribute is named classes and an array
+    //             for (let userClass in userElement) { // iterate through classes array
+    //               userInfoArray.push(userClass) // add each class id to array
+    //             }
+    //           }
+    //         }
+    //
+    //         console.log(userInfoArray)
+    //         this.userInfo = userInfoArray // assign the array to an array in the data section
+    //       })
+    //       .catch(function (error) { // return message in case of error
+    //         console.log(error)
+    //         const errorMessage = 'An error occured.' + error
+    //         return errorMessage
+    //       })
+    //   },
+    //   getClasses: function () {
+    //     const classObjectArray = [] // create array for storage
+    //
+    //     for (let classID in this.userInfo) { // iterate through every class id in the array
+    //       Api().get('/courseid/' + classID) // retrieve the classes information
+    //         .then(function (res) {
+    //           console.log(res)
+    //           const classElements = JSON.parse(res.data) // assign the data to variable
+    //
+    //           // create an object and assign the selected datas elements to the
+    //           // objects elements
+    //           var classObject = {
+    //             classID: classElements[0],
+    //             className: classElements[2],
+    //             classSchedule: classElements[4] + classElements[5]
+    //           }
+    //
+    //           classObjectArray.push(classObject) // add the object to the array
+    //         })
+    //         .catch(function (error) { // generate error message
+    //           console.log(error)
+    //           const errorMessage = 'An error occured.' + error
+    //           return errorMessage
+    //         })
+    //     }
+    //
+    //     this.userClassInformation = classObjectArray // assign the array to an array in the data section
+    //   }
+    // },
+    components: {
+      'class-generator': classGen // create tags for the component
     }
   }
-}
 </script>
 
 <style>
-.header{
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  width: 100%;
-  height: 60px;
-  background-color: #192f5f;
-  color: #ffffff;
-}
-.logo{
-  font-size: 40px;
-  font-family: "Helvetica Rounded";
-  letter-spacing: 2px;
-}
-.headerButton{
-  position: absolute;
-  width: 200px;
-  top: 30%;
-  color: white;
-  background: none;
-  border: none;
-}
-.headerLine{
-  border-left: 1px solid white;
-  height: 20px;
-  position: absolute;
-  top: 20px;
-  left: 100px;
-}
-.titleContainer{
-  position: absolute;
-  right: 14%;
-  left: 0;
-  top: 150px;
-}
-.classContainerOne{
-  position: absolute;
-  width: 70%;
-  left: 7%;
-  right: 0;
-  margin: auto;
-  top: 180px;
-}
-.classContainerTwo{
-  position: absolute;
-  width: 70%;
-  left: 7%;
-  right: 0;
-  margin: auto;
-  top: 280px;
-}
-.classContainerThree{
-  position: absolute;
-  width: 70%;
-  left: 7%;
-  right: 0;
-  margin: auto;
-  top: 390px;
-}
-.classes{
-  position: absolute;
-  font-size: 14px;
-  text-align: right;
-  right: 10px;
-  left: 0;
-}
-.buttonPosition{
-  position: absolute;
-  left: -23%;
-  right: 0;
-}
-.buttonPage{
-  font-size: 12px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  border-radius: 5px;
-  border: none;
-  background-color: #cbcbcb;
-  width: 90px;
-}
-.verticalLine{
-  border-left: 1px solid black;
-  height: 70px;
-  position: absolute;
-  left: 10%;
-  right: 0;
-}
+  .pageTitle {
+    color: #00245e;
+    font-family: "Open Sans";
+    font-size: 30px;
+    position: fixed;
+    width: 400px;
+    height: 100px;
+    left: 30px;
+    top: 90px;
+    /*border: 3px solid blue;*/
+  }
 </style>
