@@ -68,7 +68,6 @@ StudentController.getStudentByUsername = (req, res) => {
 };
 
 // Update students.
-//TODO: Update Student by username
 StudentController.updateStudentById = (req, res) => {
   let studentID = req.params.id;
   let updateStudentByIdPromise = StudentModel.findById(studentID).exec();
@@ -102,7 +101,6 @@ StudentController.updateStudentByUsername = (req, res) => {
 };
 
 // Delete students.
-//TODO: Update Student by username
 StudentController.deleteStudentById = (req, res) => {
   let studentID = req.params.id;
   let findByIdAndRemovePromise = StudentModel.findByIdAndRemove(

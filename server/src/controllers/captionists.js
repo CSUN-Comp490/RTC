@@ -20,7 +20,6 @@ CaptionistController.storeCaptionist = (req, res) => {
 };
 
 //Retrieve Captionists.
-//TODO: Retrieve Captionist by username
 CaptionistController.getAllCaptionists = (req, res) => {
   let getAllCaptionistsPromise = CaptionistModel.find({}).exec();
   getAllCaptionistsPromise
@@ -74,7 +73,6 @@ CaptionistController.getCaptionistByUsername = (req, res) => {
 };
 
 // Update Captionists.
-//TODO: Update Captionist by username
 CaptionistController.updateCaptionistById = (req, res) => {
   let captionistID = req.params.id;
   let updateCaptionistByIdPromise = CaptionistModel.findById(

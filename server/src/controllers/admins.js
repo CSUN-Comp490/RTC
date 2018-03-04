@@ -68,7 +68,6 @@ AdminController.getAdminByUsername = (req, res) => {
 };
 
 // Update Admins.
-//TODO: Update Admin by username
 AdminController.updateAdminById = (req, res) => {
   let adminID = req.params.id;
   let updateAdminByIdPromise = AdminModel.findById(adminID).exec();
@@ -102,7 +101,6 @@ AdminController.updateAdminByUsername = (req, res) => {
 };
 
 // Delete Admins.
-//TODO: Delete Admin by username
 AdminController.deleteAdminById = (req, res) => {
   let adminID = req.params.id;
   let findByIdAndRemovePromise = AdminModel.findByIdAndRemove(adminID).exec();
