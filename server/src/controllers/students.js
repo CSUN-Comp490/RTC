@@ -122,7 +122,23 @@ StudentController.deleteStudentById = (req, res) => {
 };
 
 StudentController.deleteStudentByUsername = (req, res) => {
-  //in progress
+  let studentUsername = req.params.username;
+  let findByUsernameAndRemovePromise = StudentModel.findOneAndRemove(
+    {username: studentUsername}
+  ).exec();
+
+  findByUsernameAndRemovePromise
+    .then(student => {
+      return student
+        ? res.status(201).json(student)
+        : res
+            .status(404)
+            .json({ error: `No student found with username: ${studentUsername}` });
+    })
+    .catch(err => {
+      console.log("Error: " + err.message);
+      return res.status(500).json({ error: err.message });
+    });
 };
 
 module.exports = StudentController;

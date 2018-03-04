@@ -118,7 +118,19 @@ AdminController.deleteAdminById = (req, res) => {
 };
 
 AdminController.deleteAdminByUsername = (req, res) => {
-  //coming soon
+  let adminUsername = req.params.username;
+  let findByUsernameAndRemovePromise = AdminModel.findOneAndRemove({username: adminUsername}).exec();
+
+  findByUsernameAndRemovePromise
+    .then(admin => {
+      return admin
+        ? res.status(201).json(admin)
+        : res.status(404).json({ error: `No Admin found with username: ${adminUsername}` });
+    })
+    .catch(err => {
+      console.log("Error: " + err.message);
+      return res.status(500).json({ error: err.message });
+    });
 };
 
 module.exports = AdminController;
