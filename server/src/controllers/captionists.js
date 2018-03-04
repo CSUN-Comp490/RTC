@@ -5,9 +5,9 @@ let CaptionistController = {};
 //Create Captionists.
 CaptionistController.storeCaptionist = (req, res) => {
   let captionist = new CaptionistModel(req.body);
-  let createCaptionist_Promise = captionist.save();
+  let createCaptionistPromise = captionist.save();
 
-  createCaptionist_Promise
+  createCaptionistPromise
     .then(captionist => {
       return res.status(201).json(captionist);
     })
@@ -22,8 +22,8 @@ CaptionistController.storeCaptionist = (req, res) => {
 //Retrieve Captionists.
 //TODO: Retrieve Captionist by username
 CaptionistController.getAllCaptionists = (req, res) => {
-  let getAllCaptionists_Promise = CaptionistModel.find({}).exec();
-  getAllCaptionists_Promise
+  let getAllCaptionistsPromise = CaptionistModel.find({}).exec();
+  getAllCaptionistsPromise
     .then(captionists => {
       return res.status(200).json(captionists);
     })
@@ -34,9 +34,9 @@ CaptionistController.getAllCaptionists = (req, res) => {
 
 CaptionistController.getCaptionistById = (req, res) => {
   let captionistID = req.params.id;
-  let getCaptionistById_Promise = CaptionistModel.findById(captionistID).exec();
+  let getCaptionistByIdPromise = CaptionistModel.findById(captionistID).exec();
 
-  getCaptionistById_Promise
+  getCaptionistByIdPromise
     .then(captionist => {
       return captionist
         ? res.status(200).json(captionist)
@@ -54,10 +54,10 @@ CaptionistController.getCaptionistById = (req, res) => {
 
 CaptionistController.getCaptionistByUsername = (req, res) => {
   let captionistUsername = req.params.username;
-  let getCaptionistByUsername_Promise = CaptionistModel.findOne(
+  let getCaptionistByUsernamePromise = CaptionistModel.findOne(
     {username: captionistUsername}).exec();
 
-  getCaptionistByUsername_Promise
+  getCaptionistByUsernamePromise
     .then(captionist => {
       return captionist
         ? res.status(200).json(captionist)
@@ -77,10 +77,10 @@ CaptionistController.getCaptionistByUsername = (req, res) => {
 //TODO: Update Captionist by username
 CaptionistController.updateCaptionistById = (req, res) => {
   let captionistID = req.params.id;
-  let updateCaptionistById_Promise = CaptionistModel.findById(
+  let updateCaptionistByIdPromise = CaptionistModel.findById(
     captionistID
   ).exec();
-  updateCaptionistById_Promise
+  updateCaptionistByIdPromise
     .then(captionist => {
       _.extend(captionist, req.body);
       return captionist.save();
@@ -94,18 +94,32 @@ CaptionistController.updateCaptionistById = (req, res) => {
 };
 
 CaptionistController.updateCaptionistByUsername = (req, res) => {
-  //TODO
+  let captionistUsername = req.params.username;
+  let updateCaptionistByUsernamePromise = CaptionistModel.findOne(
+    {username: captionistUsername}
+  ).exec();
+  updateCaptionistByUsernamePromise
+    .then(captionist => {
+      _.extend(captionist, req.body);
+      return captionist.save();
+    })
+    .then(captionist => {
+      return res.status(201).json(captionist);
+    })
+    .catch(err => {
+      return res.status(500).json({ error: err.message });
+    });
 };
 
 // Delete Captionists.
 //TODO: Delete Captionist by username
 CaptionistController.deleteCaptionistById = (req, res) => {
   let captionistID = req.params.id;
-  let findByIdAndRemove_Promise = CaptionistModel.findByIdAndRemove(
+  let findByIdAndRemovePromise = CaptionistModel.findByIdAndRemove(
     captionistID
   ).exec();
 
-  findByIdAndRemove_Promise
+  findByIdAndRemovePromise
     .then(captionist => {
       return captionist
         ? res.status(201).json(captionist)

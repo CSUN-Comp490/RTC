@@ -5,9 +5,9 @@ let AdminController = {};
 // Create Admins.
 AdminController.storeAdmin = (req, res) => {
   let admin = new AdminModel(req.body);
-  let createAdmin_Promise = admin.save();
+  let createAdminPromise = admin.save();
 
-  createAdmin_Promise
+  createAdminPromise
     .then(admin => {
       return res.status(201).json(admin);
     })
@@ -21,8 +21,8 @@ AdminController.storeAdmin = (req, res) => {
 
 // Retrieve Admins.
 AdminController.getAllAdmins = (req, res) => {
-  let getAllAdmins_Promise = AdminModel.find({}).exec();
-  getAllAdmins_Promise
+  let getAllAdminsPromise = AdminModel.find({}).exec();
+  getAllAdminsPromise
     .then(admins => {
       return res.status(200).json(admins);
     })
@@ -35,7 +35,7 @@ AdminController.getAdminById = (req, res) => {
   let adminID = req.params.id;
   let getAdminById_Promise = AdminModel.findById(adminID).exec();
 
-  getAdminById_Promise
+  getAdminByIdPromise
     .then(admin => {
       return admin
         ? res.status(200).json(admin)
@@ -51,9 +51,9 @@ AdminController.getAdminById = (req, res) => {
 
 AdminController.getAdminByUsername = (req, res) => {
   let adminUsername = req.params.username;
-  let getAdminByUsername_Promise = AdminModel.findOne({username: adminUsername}).exec();
+  let getAdminByUsernamePromise = AdminModel.findOne({username: adminUsername}).exec();
 
-  getAdminByUsername_Promise
+  getAdminByUsernamePromise
     .then(admin => {
       return admin
         ? res.status(200).json(admin)
@@ -71,8 +71,8 @@ AdminController.getAdminByUsername = (req, res) => {
 //TODO: Update Admin by username
 AdminController.updateAdminById = (req, res) => {
   let adminID = req.params.id;
-  let updateAdminById_Promise = AdminModel.findById(adminID).exec();
-  updateAdminById_Promise
+  let updateAdminByIdPromise = AdminModel.findById(adminID).exec();
+  updateAdminByIdPromise
     .then(admin => {
       _.extend(admin, req.body);
       return admin.save();
@@ -86,16 +86,28 @@ AdminController.updateAdminById = (req, res) => {
 };
 
 AdminController.updateAdminByUsername = (req, res) => {
-  //TODO
+  let adminUsername = req.params.username;
+  let updateAdminByUsernamePromise = AdminModel.findOne({username: adminUsername}).exec();
+  updateAdminByUsernamePromise
+    .then(admin => {
+      _.extend(admin, req.body);
+      return admin.save();
+    })
+    .then(admin => {
+      return res.status(201).json(admin);
+    })
+    .catch(err => {
+      return res.status(500).json({ error: err.message });
+    });
 };
 
 // Delete Admins.
 //TODO: Delete Admin by username
 AdminController.deleteAdminById = (req, res) => {
   let adminID = req.params.id;
-  let findByIdAndRemove_Promise = AdminModel.findByIdAndRemove(adminID).exec();
+  let findByIdAndRemovePromise = AdminModel.findByIdAndRemove(adminID).exec();
 
-  findByIdAndRemove_Promise
+  findByIdAndRemovePromise
     .then(admin => {
       return admin
         ? res.status(201).json(admin)

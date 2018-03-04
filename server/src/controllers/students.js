@@ -5,9 +5,9 @@ let StudentController = {};
 //Create students.
 StudentController.storeStudent = (req, res) => {
   let student = new StudentModel(req.body);
-  let createStudent_Promise = student.save();
+  let createStudentPromise = student.save();
 
-  createStudent_Promise
+  createStudentPromise
     .then(student => {
       return res.status(201).json(student);
     })
@@ -21,8 +21,8 @@ StudentController.storeStudent = (req, res) => {
 
 // Retrieve Students.
 StudentController.getAllStudents = (req, res) => {
-  let getAllStudents_Promise = StudentModel.find({}).exec();
-  getAllStudents_Promise
+  let getAllStudentsPromise = StudentModel.find({}).exec();
+  getAllStudentsPromise
     .then(students => {
       return res.status(200).json(students);
     })
@@ -33,9 +33,9 @@ StudentController.getAllStudents = (req, res) => {
 
 StudentController.getStudentById = (req, res) => {
   let studentID = req.params.id;
-  let getStudentById_Promise = StudentModel.findById(studentID).exec();
+  let getStudentByIdPromise = StudentModel.findById(studentID).exec();
 
-  getStudentById_Promise
+  getStudentByIdPromise
     .then(student => {
       return student
         ? res.status(200).json(student)
@@ -51,9 +51,9 @@ StudentController.getStudentById = (req, res) => {
 
 StudentController.getStudentByUsername = (req, res) => {
   let studentUsername = req.params.username;
-  let getStudentByUsername_Promise = StudentModel.findOne({username: studentUsername}).exec();
+  let getStudentByUsernamePromise = StudentModel.findOne({username: studentUsername}).exec();
 
-  getStudentByUsername_Promise
+  getStudentByUsernamePromise
     .then(student => {
       return student
         ? res.status(200).json(student)
@@ -71,8 +71,8 @@ StudentController.getStudentByUsername = (req, res) => {
 //TODO: Update Student by username
 StudentController.updateStudentById = (req, res) => {
   let studentID = req.params.id;
-  let updateStudentById_Promise = StudentModel.findById(studentID).exec();
-  updateStudentById_Promise
+  let updateStudentByIdPromise = StudentModel.findById(studentID).exec();
+  updateStudentByIdPromise
     .then(student => {
       _.extend(student, req.body);
       return student.save();
@@ -86,18 +86,30 @@ StudentController.updateStudentById = (req, res) => {
 };
 
 StudentController.updateStudentByUsername = (req, res) => {
-  //coming soon
+  let studentUsername = req.params.username;
+  let updateStudentByUsernamePromise = StudentModel.findOne({username: studentUsername}).exec();
+  updateStudentByUsernamePromise
+    .then(student => {
+      _.extend(student, req.body);
+      return student.save();
+    })
+    .then(student => {
+      return res.status(201).json(student);
+    })
+    .catch(err => {
+      return res.status(500).json({ error: err.message });
+    });
 };
 
 // Delete students.
 //TODO: Update Student by username
 StudentController.deleteStudentById = (req, res) => {
   let studentID = req.params.id;
-  let findByIdAndRemove_Promise = StudentModel.findByIdAndRemove(
+  let findByIdAndRemovePromise = StudentModel.findByIdAndRemove(
     studentID
   ).exec();
 
-  findByIdAndRemove_Promise
+  findByIdAndRemovePromise
     .then(student => {
       return student
         ? res.status(201).json(student)
