@@ -121,6 +121,7 @@ export default {
     display: flex;
     justify-content: center;
     box-shadow: 5px 5px 5px rgba(0, 0, 51, 0.4);
+    top: 60px;
   }
   .login__heading {
     font-size: 3em;
