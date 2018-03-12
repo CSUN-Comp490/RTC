@@ -20,7 +20,6 @@ AdminController.storeAdmin = (req, res) => {
 };
 
 // Retrieve Admins.
-//TODO: Retrieve Admin by username
 AdminController.getAllAdmins = (req, res) => {
   let getAllAdmins_Promise = AdminModel.find({}).exec();
   getAllAdmins_Promise
@@ -42,7 +41,7 @@ AdminController.getAdminById = (req, res) => {
         ? res.status(200).json(admin)
         : res
             .status(404)
-            .json({ error: `Can not find Admin with id: ${adminID}` });
+            .json({ error: `Cannot find Admin with id: ${adminID}` });
     })
     .catch(err => {
       console.log(err);
@@ -51,7 +50,21 @@ AdminController.getAdminById = (req, res) => {
 };
 
 AdminController.getAdminByUsername = (req, res) => {
-  //TODO
+  let adminUsername = req.params.username;
+  let getAdminByUsername_Promise = AdminModel.findOne({username: adminUsername}).exec();
+
+  getAdminByUsername_Promise
+    .then(admin => {
+      return admin
+        ? res.status(200).json(admin)
+        : res
+            .status(404)
+            .json({ error: `Cannot find Admin with username: ${adminUsername}` });
+    })
+    .catch(err => {
+      console.log(err);
+      return res.status(500).json({ error: err });
+    });
 };
 
 // Update Admins.

@@ -20,7 +20,6 @@ StudentController.storeStudent = (req, res) => {
 };
 
 // Retrieve Students.
-//TODO: Retrieve Student by username
 StudentController.getAllStudents = (req, res) => {
   let getAllStudents_Promise = StudentModel.find({}).exec();
   getAllStudents_Promise
@@ -42,7 +41,7 @@ StudentController.getStudentById = (req, res) => {
         ? res.status(200).json(student)
         : res
             .status(404)
-            .json({ error: `Can not find student with id: ${studentID}` });
+            .json({ error: `Cannot find student with id: ${studentID}` });
     })
     .catch(err => {
       console.log(err);
@@ -51,7 +50,21 @@ StudentController.getStudentById = (req, res) => {
 };
 
 StudentController.getStudentByUsername = (req, res) => {
-  //coming soon
+  let studentUsername = req.params.username;
+  let getStudentByUsername_Promise = StudentModel.findOne({username: studentUsername}).exec();
+
+  getStudentByUsername_Promise
+    .then(student => {
+      return student
+        ? res.status(200).json(student)
+        : res
+            .status(404)
+            .json({ error: `Cannot find student with username: ${studentUsername}` });
+    })
+    .catch(err => {
+      console.log(err);
+      return res.status(500).json({ error: err });
+    });
 };
 
 // Update students.

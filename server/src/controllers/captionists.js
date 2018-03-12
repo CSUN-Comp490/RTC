@@ -43,7 +43,7 @@ CaptionistController.getCaptionistById = (req, res) => {
         : res
             .status(404)
             .json({
-              error: `Can not find Captionist with id: ${captionistID}`
+              error: `Cannot find Captionist with id: ${captionistID}`
             });
     })
     .catch(err => {
@@ -53,7 +53,24 @@ CaptionistController.getCaptionistById = (req, res) => {
 };
 
 CaptionistController.getCaptionistByUsername = (req, res) => {
-  //in progress
+  let captionistUsername = req.params.username;
+  let getCaptionistByUsername_Promise = CaptionistModel.findOne(
+    {username: captionistUsername}).exec();
+
+  getCaptionistByUsername_Promise
+    .then(captionist => {
+      return captionist
+        ? res.status(200).json(captionist)
+        : res
+            .status(404)
+            .json({
+              error: `Cannot find Captionist with username: ${captionistUsername}`
+            });
+    })
+    .catch(err => {
+      console.log(err);
+      return res.status(500).json({ error: err });
+    });
 };
 
 // Update Captionists.
