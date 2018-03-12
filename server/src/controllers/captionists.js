@@ -132,7 +132,23 @@ CaptionistController.deleteCaptionistById = (req, res) => {
 };
 
 CaptionistController.deleteCaptionistByUsername = (req, res) => {
-  //TODO
+  let captionistUsername = req.params.username;
+  let findByUsernameAndRemovePromise = CaptionistModel.findOneAndRemove(
+    {usermname: captionistUsername}
+  ).exec();
+
+  findByUsernameAndRemovePromise
+    .then(captionist => {
+      return captionist
+        ? res.status(201).json(captionist)
+        : res
+            .status(404)
+            .json({ error: `No captionist found with username: ${captionistUsername}` });
+    })
+    .catch(err => {
+      console.log("Error: " + err.message);
+      return res.status(500).json({ error: err.message });
+    });
 };
 
 module.exports = CaptionistController;
