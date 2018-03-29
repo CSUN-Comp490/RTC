@@ -45,17 +45,17 @@ Any unknown html tag are bootstrap-vue.js syntax that are currently unidentified
             <h3 class="raleway--regular align-middle">Guest speaker lecture</h3>
           </div>
 
-          <div class="unedited">
-            <div class="buttonsWrapper">
-              <p class="pull-left">Unedited</p>
+          <div class="unedited ">
+            <div class="buttonsWrapper"> <!-- TODO: style buttonsWrapper-->
+              <p class="pull-left mt-2">Unedited</p>
               <button type="button" class="btn">View</button>
               <button type="button" class="btn ">Download</button>
             </div>
           </div>
 
-          <div class="edited">
+          <div class="edited ">
             <div class="buttonsWrapper">
-              <p class="pull-left">Edited</p>
+              <p class="pull-left mt-2">Edited</p>
               <button type="button" class="btn">View</button>
               <button type="button" class="btn ">Download</button>
             </div>
@@ -63,107 +63,7 @@ Any unknown html tag are bootstrap-vue.js syntax that are currently unidentified
         <!--end div for ONE SINGLE card-->
         </div>
 
-        <div class="sessionsContainer ">
-          <div class="date pull-left ">
-            <div class="month">
-              <!--TODO: get month's first three letters; hard-coded for now-->
-              <h3 class="raleway--regular ">Jan</h3>
-            </div>
-            <div class="dateNumber">
-              <!--TODO: get date number; hard-coded for now-->
-              <h2 class="">15</h2>
-            </div>
-          </div>
 
-          <div class="sessionTitle ">
-            <h3 class="raleway--regular align-middle">Guest speaker lecture</h3>
-          </div>
-
-          <div class="unedited">
-            <div class="buttonsWrapper">
-              <p class="pull-left">Unedited</p>
-              <button type="button" class="btn">View</button>
-              <button type="button" class="btn ">Download</button>
-            </div>
-          </div>
-
-          <div class="edited">
-            <div class="buttonsWrapper">
-              <p class="pull-left">Edited</p>
-              <button type="button" class="btn">View</button>
-              <button type="button" class="btn ">Download</button>
-            </div>
-          </div>
-          <!--end div for ONE SINGLE card-->
-        </div>
-
-        <div class="sessionsContainer ">
-          <div class="date pull-left ">
-            <div class="month">
-              <!--TODO: get month's first three letters; hard-coded for now-->
-              <h3 class="raleway--regular ">Jan</h3>
-            </div>
-            <div class="dateNumber">
-              <!--TODO: get date number; hard-coded for now-->
-              <h2 class="">15</h2>
-            </div>
-          </div>
-
-          <div class="sessionTitle ">
-            <h3 class="raleway--regular align-middle">Guest speaker lecture</h3>
-          </div>
-
-          <div class="unedited">
-            <div class="buttonsWrapper">
-              <p class="pull-left">Unedited</p>
-              <button type="button" class="btn">View</button>
-              <button type="button" class="btn ">Download</button>
-            </div>
-          </div>
-
-          <div class="edited">
-            <div class="buttonsWrapper">
-              <p class="pull-left">Edited</p>
-              <button type="button" class="btn">View</button>
-              <button type="button" class="btn ">Download</button>
-            </div>
-          </div>
-          <!--end div for ONE SINGLE card-->
-        </div>
-
-        <div class="sessionsContainer ">
-          <div class="date pull-left ">
-            <div class="month">
-              <!--TODO: get month's first three letters; hard-coded for now-->
-              <h3 class="raleway--regular ">Jan</h3>
-            </div>
-            <div class="dateNumber">
-              <!--TODO: get date number; hard-coded for now-->
-              <h2 class="">15</h2>
-            </div>
-          </div>
-
-          <div class="sessionTitle ">
-            <h3 class="raleway--regular align-middle">Guest speaker lecture</h3>
-          </div>
-
-          <div class="unedited">
-            <div class="buttonsWrapper">
-              <p class="pull-left">Unedited</p>
-              <button type="button" class="btn">View</button>
-              <button type="button" class="btn ">Download</button>
-            </div>
-          </div>
-
-          <div class="edited">
-            <div class="buttonsWrapper">
-              <p class="pull-left">Edited</p>
-              <button type="button" class="btn">View</button>
-              <button type="button" class="btn ">Download</button>
-            </div>
-          </div>
-          <!--end div for ONE SINGLE card-->
-        </div>
 
 
 
@@ -194,7 +94,7 @@ export default{
     border-radius: 20px;
     /*padding: -15px !important;*/
   }
-  #pastSession .container-fluid {
+  #pastSession  {
     /*Has the height of the pastSessions box always take up 80% of the viewport*/
     height: 80vh !important;
     margin-bottom: 40px;
@@ -202,16 +102,19 @@ export default{
   #pastSession .container {
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 5px;
+    padding: 15px;
   }
   .pastSession__heading {
     /*background-color: white;*/
     width: 180px;
   }
-  .pastSession__sessions .card {
+  .pastSession__sessions  {
     border-radius: 10px;
     position: relative;
-
+  }
+  .pastSession__sessions p {
+    margin-left: 10px;
+    font-size: 1.2em;
   }
   .sessionsContainer {
     border-radius: 10px;
