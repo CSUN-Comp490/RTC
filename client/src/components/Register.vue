@@ -45,7 +45,6 @@
         <!--<div class="register__extraLinks pull-right invisible">-->
           <!--<p><a href="" class="pull-right" v-on:click="navigateTo({name: 'login'})">Login</a></p>-->
         <!--</div>-->
-
       </div>
     </form>
   </div>

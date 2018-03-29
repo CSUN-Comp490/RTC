@@ -1,55 +1,180 @@
-<!--Currently contains positioning issues in regards to responsiveness.
+<!--
 Header buttons needs to have separate button classes made.
-Actual logo needs to be added.
-All syntax in regards to template and grid system uses bootstrap-vue.js.
-All syntax in regards to buttons uses HTML syntax instead of bootstrap-vue.js.
 Any unknown html tag are bootstrap-vue.js syntax that are currently unidentified.-->
+<!--TODO: !responsive cols?    card layout    change from hard-coded text-->
 
 <template>
-  <div
-    id="e3"
-    style="max-width: 600px; margin: auto;"
-    class="grey lighten-3"
-  >
-    <v-toolbar class="blue">
-      <v-toolbar-title class="white--text">Past Sessions</v-toolbar-title>
-    </v-toolbar>
-    <v-container
-      fluid
-      style="min-height: 0;"
-      grid-list-lg
-    >
-      <v-layout row wrap>
-        <v-flex xs12>
-          <v-card color="blue-grey darken-2" class="white--text">
-            <v-card-title primary-title>
-              <div class="headline">Comp 490</div>
-            </v-card-title>
-            <v-container fluid grid-list-lg>
-              <v-layout row>
-                <v-flex xs6>
-                  <div>
-                    <div class="headline">Guest Speaker</div>
-                    <div>Joe Smith</div>
-                  </div>
-                </v-flex>
-                <v-flex xs6>
-                 <v-layout coloumn>
-                  <v-card-actions>
-                      <v-btn flat dark>View</v-btn>
-                  </v-card-actions>
-                  <v-card-actions>
-                      <v-btn flat dark>Download</v-btn>
-                  </v-card-actions>
-                  </v-layout>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-card>
-        </v-flex>
-      </v-layout>
-    </v-container>
+  <div id="pastSession" class="p-3 container-fluid d-flex flex-column varela col-xs-12 offset-xs-0 col-sm-12 offset-sm-0 col-md-10 offset-md-2 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3
+    col-lg-offset-3 col-md-offset-1 col-sm-offset-0 col-xs-offset-0 col-xl-offset-3">
+    <div class="container">
+      <div class="pastSession__heading text-left">
+        <h1>Past Sessions</h1>
+        <!--TODO: class name goes here; hard-coded for now-->
+        <h2 class="raleway--medium">COMP 490</h2>
+      <!--end div pastSession__heading-->
+      </div>
+
+      <div class="pastSession__month">
+        <!--TODO: have this get the current month; hard-coded for now-->
+        <h2 class="raleway--regular h6">January</h2>
+      </div>
+
+
+
+      <!--Each card serves as an individual session
+          Each card has 4 main divs:
+          date: for displaying session's date
+          sessionTitle: the caption session's title
+          unedited: the div for the unedited caption text file
+          edited: the div for the edited caption text file-->
+      <div class="pastSession__sessions">
+
+        <div class="sessionsContainer ">
+          <div class="date pull-left ">
+            <div class="month">
+              <!--TODO: get month's first three letters; hard-coded for now-->
+              <h3 class="raleway--regular ">Jan</h3>
+            </div>
+            <div class="dateNumber">
+              <!--TODO: get date number; hard-coded for now-->
+              <h2 class="">15</h2>
+            </div>
+          </div>
+
+          <div class="sessionTitle ">
+            <h3 class="raleway--regular align-middle">Guest speaker lecture</h3>
+          </div>
+
+          <div class="unedited">
+            <div class="buttonsWrapper">
+              <p class="pull-left">Unedited</p>
+              <button type="button" class="btn">View</button>
+              <button type="button" class="btn ">Download</button>
+            </div>
+          </div>
+
+          <div class="edited">
+            <div class="buttonsWrapper">
+              <p class="pull-left">Edited</p>
+              <button type="button" class="btn">View</button>
+              <button type="button" class="btn ">Download</button>
+            </div>
+          </div>
+        <!--end div for ONE SINGLE card-->
+        </div>
+
+        <div class="sessionsContainer ">
+          <div class="date pull-left ">
+            <div class="month">
+              <!--TODO: get month's first three letters; hard-coded for now-->
+              <h3 class="raleway--regular ">Jan</h3>
+            </div>
+            <div class="dateNumber">
+              <!--TODO: get date number; hard-coded for now-->
+              <h2 class="">15</h2>
+            </div>
+          </div>
+
+          <div class="sessionTitle ">
+            <h3 class="raleway--regular align-middle">Guest speaker lecture</h3>
+          </div>
+
+          <div class="unedited">
+            <div class="buttonsWrapper">
+              <p class="pull-left">Unedited</p>
+              <button type="button" class="btn">View</button>
+              <button type="button" class="btn ">Download</button>
+            </div>
+          </div>
+
+          <div class="edited">
+            <div class="buttonsWrapper">
+              <p class="pull-left">Edited</p>
+              <button type="button" class="btn">View</button>
+              <button type="button" class="btn ">Download</button>
+            </div>
+          </div>
+          <!--end div for ONE SINGLE card-->
+        </div>
+
+        <div class="sessionsContainer ">
+          <div class="date pull-left ">
+            <div class="month">
+              <!--TODO: get month's first three letters; hard-coded for now-->
+              <h3 class="raleway--regular ">Jan</h3>
+            </div>
+            <div class="dateNumber">
+              <!--TODO: get date number; hard-coded for now-->
+              <h2 class="">15</h2>
+            </div>
+          </div>
+
+          <div class="sessionTitle ">
+            <h3 class="raleway--regular align-middle">Guest speaker lecture</h3>
+          </div>
+
+          <div class="unedited">
+            <div class="buttonsWrapper">
+              <p class="pull-left">Unedited</p>
+              <button type="button" class="btn">View</button>
+              <button type="button" class="btn ">Download</button>
+            </div>
+          </div>
+
+          <div class="edited">
+            <div class="buttonsWrapper">
+              <p class="pull-left">Edited</p>
+              <button type="button" class="btn">View</button>
+              <button type="button" class="btn ">Download</button>
+            </div>
+          </div>
+          <!--end div for ONE SINGLE card-->
+        </div>
+
+        <div class="sessionsContainer ">
+          <div class="date pull-left ">
+            <div class="month">
+              <!--TODO: get month's first three letters; hard-coded for now-->
+              <h3 class="raleway--regular ">Jan</h3>
+            </div>
+            <div class="dateNumber">
+              <!--TODO: get date number; hard-coded for now-->
+              <h2 class="">15</h2>
+            </div>
+          </div>
+
+          <div class="sessionTitle ">
+            <h3 class="raleway--regular align-middle">Guest speaker lecture</h3>
+          </div>
+
+          <div class="unedited">
+            <div class="buttonsWrapper">
+              <p class="pull-left">Unedited</p>
+              <button type="button" class="btn">View</button>
+              <button type="button" class="btn ">Download</button>
+            </div>
+          </div>
+
+          <div class="edited">
+            <div class="buttonsWrapper">
+              <p class="pull-left">Edited</p>
+              <button type="button" class="btn">View</button>
+              <button type="button" class="btn ">Download</button>
+            </div>
+          </div>
+          <!--end div for ONE SINGLE card-->
+        </div>
+
+
+
+      <!--end div pastSession__sessions-->
+      </div>
+
+    </div>
+
+  <!--end div pastSession-->
   </div>
+
 </template>
 
 <script>
@@ -62,93 +187,119 @@ export default{
 }
 </script>
 
-<style>
-.header{
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  width: 100%;
-  height: 60px;
-  background-color: #192f5f;
-  color: #ffffff;
-}
-.logo{
-  font-size: 40px;
-  font-family: "Helvetica Rounded";
-  letter-spacing: 2px;
-}
-.headerButton{
-  position: absolute;
-  width: 200px;
-  top: 30%;
-  color: white;
-  background: none;
-  border: none;
-}
-.headerLine{
-  border-left: 1px solid white;
-  height: 20px;
-  position: absolute;
-  top: 20px;
-  left: 100px;
-}
-.titleContainer{
-  position: absolute;
-  right: 14%;
-  left: 0;
-  top: 150px;
-}
-.classContainerOne{
-  position: absolute;
-  width: 70%;
-  left: 7%;
-  right: 0;
-  margin: auto;
-  top: 180px;
-}
-.classContainerTwo{
-  position: absolute;
-  width: 70%;
-  left: 7%;
-  right: 0;
-  margin: auto;
-  top: 280px;
-}
-.classContainerThree{
-  position: absolute;
-  width: 70%;
-  left: 7%;
-  right: 0;
-  margin: auto;
-  top: 390px;
-}
-.classes{
-  position: absolute;
-  font-size: 14px;
-  text-align: right;
-  right: 10px;
-  left: 0;
-}
-.buttonPosition{
-  position: absolute;
-  left: -23%;
-  right: 0;
-}
-.buttonPage{
-  font-size: 12px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  border-radius: 5px;
-  border: none;
-  background-color: #cbcbcb;
-  width: 90px;
-}
-.verticalLine{
-  border-left: 1px solid black;
-  height: 70px;
-  position: absolute;
-  left: 10%;
-  right: 0;
-}
+<style scoped>
+  #pastSession {
+    background-color: #8CB8DC;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
+    /*padding: -15px !important;*/
+  }
+  #pastSession .container-fluid {
+    /*Has the height of the pastSessions box always take up 80% of the viewport*/
+    height: 80vh !important;
+    margin-bottom: 40px;
+  }
+  #pastSession .container {
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 5px;
+  }
+  .pastSession__heading {
+    /*background-color: white;*/
+    width: 180px;
+  }
+  .pastSession__sessions .card {
+    border-radius: 10px;
+    position: relative;
+
+  }
+  .sessionsContainer {
+    border-radius: 10px;
+    background-color: white !important;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+  }
+  /*For the month (1st 3 letters) and date number on the top left corner*/
+  .pastSession__sessions .date {
+    background-color: #000033;
+    color: #fff;
+    /*position: absolute;*/
+    /*top: 0px;*/
+    /*left: 0px;*/
+    /*min-width: 60px;*/
+    /*min-height: 75px;*/
+    border-radius: 10px 0px 0px 0px;
+    /*margin-top: 0px;*/
+    /*margin-left: 0px;*/
+    padding: 10px 15px;
+  }
+  .pastSession__sessions .sessionTitle {
+    min-height: 100px;
+    padding: 10px;
+  }
+  .pastSession__sessions .unedited {
+    background-color: #edecf1;
+    margin-top: 15px;
+  }
+  .pastSession__sessions edited {
+
+  }
+  #pastSession button {
+    /*!important overrides the bootstrap stylings! */
+    border-radius: 6px !important;
+    background-color: #40599c !important;
+    color: #fff !important;
+  }
+
+
+  /*Font stuff*/
+  .pastSession__heading h1 {
+    font-size: 2em;
+  }
+  .pastSession__heading h2 {
+    font-size: 1.5em;
+  }
+  .pastSession__month h2{
+    font-size: 2em;
+  }
+  .pastSession__sessions h3 {
+    font-size: 1.3em;
+    margin: -5px;
+  }
+  .pastSession__sessions h2 {
+    font-size: 3em;
+    margin: -5px;
+  }
+
+
+
+  /*Scrollbar*/
+  #pastSession .container::-webkit-scrollbar {
+      width: 14px;
+      /*height: 12px;*/
+
+  }
+  #pastSession .container::-webkit-scrollbar-track {
+    width: 15px;
+    -webkit-border-radius: 5px;
+    background-color: rgba(109,109,118,0.5);
+    -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,0.3);
+  }
+  #pastSession .container::-webkit-scrollbar-track-piece {
+    width: 15px;
+    -webkit-border-radius: 5px;
+    background-color: rgba(109,109,118,0.5);
+    -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,0.3);
+  }
+  #pastSession .container::-webkit-scrollbar-thumb {
+    width: 15px;
+    -webkit-border-radius: 8px;
+    background-clip: padding-box;
+    background-color:#000;
+    -webkit-box-shadow: inset 0 0 6px rgba(90,90,90,0.6);
+  }
+
+
+
 </style>
