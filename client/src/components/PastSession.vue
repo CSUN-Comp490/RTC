@@ -1,7 +1,7 @@
 <!--
 Header buttons needs to have separate button classes made.
 Any unknown html tag are bootstrap-vue.js syntax that are currently unidentified.-->
-<!--TODO: !responsive cols?    card layout    change from hard-coded text-->
+<!--TODO: change from hard-coded text-->
 
 <template>
   <div id="pastSession" class="p-3 container-fluid d-flex flex-column varela col-xs-12 offset-xs-0 col-sm-12 offset-sm-0 col-md-10 offset-md-2 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3
@@ -27,9 +27,9 @@ Any unknown html tag are bootstrap-vue.js syntax that are currently unidentified
           sessionTitle: the caption session's title
           unedited: the div for the unedited caption text file
           edited: the div for the edited caption text file-->
-      <div class="pastSession__sessions">
+      <div class="pastSession__sessions col-xs-12">
 
-        <div class="sessionsContainer ">
+        <div class="sessionsContainer col-xs-12">
           <div class="date pull-left ">
             <div class="month">
               <!--TODO: get month's first three letters; hard-coded for now-->
@@ -46,22 +46,94 @@ Any unknown html tag are bootstrap-vue.js syntax that are currently unidentified
           </div>
 
           <div class="unedited ">
-            <div class="buttonsWrapper"> <!-- TODO: style buttonsWrapper-->
-              <p class="pull-left mt-2">Unedited</p>
-              <button type="button" class="btn">View</button>
-              <button type="button" class="btn ">Download</button>
+            <div class="buttonsWrapper ">
+              <p class="pull-left mt-2 col-12">Unedited</p>
+
+              <div class="buttons col-xs-12">
+                <button type="button" class="btn">View</button>
+                <button type="button" class="btn ">Download</button>
+
+              </div>
             </div>
           </div>
 
           <div class="edited ">
             <div class="buttonsWrapper">
-              <p class="pull-left mt-2">Edited</p>
-              <button type="button" class="btn">View</button>
-              <button type="button" class="btn ">Download</button>
+              <p class="pull-left mt-2 col-xs-12">Edited</p>
+
+              <div class="buttons ">
+                <div class="top-row col-xs-12">
+                  <button type="button" class="btn">View</button>
+                  <button type="button" class="btn ">Download</button>
+                </div>
+                <div class="top-row col-xs-12">
+                  <button type="button" class="btn">Edit</button>
+                  <button type="button" class="btn ">Publish</button>
+                </div>
+              </div>
             </div>
           </div>
+        </div>
         <!--end div for ONE SINGLE card-->
         </div>
+
+      <!--Each card serves as an individual session
+          Each card has 4 main divs:
+          date: for displaying session's date
+          sessionTitle: the caption session's title
+          unedited: the div for the unedited caption text file
+          edited: the div for the edited caption text file-->
+      <div class="pastSession__sessions col-xs-12">
+
+        <div class="sessionsContainer col-xs-12">
+          <div class="date pull-left ">
+            <div class="month">
+              <!--TODO: get month's first three letters; hard-coded for now-->
+              <h3 class="raleway--regular ">Jan</h3>
+            </div>
+            <div class="dateNumber">
+              <!--TODO: get date number; hard-coded for now-->
+              <h2 class="">15</h2>
+            </div>
+          </div>
+
+          <div class="sessionTitle ">
+            <h3 class="raleway--regular align-middle">Guest speaker lecture</h3>
+          </div>
+
+          <div class="unedited ">
+            <div class="buttonsWrapper ">
+              <p class="pull-left mt-2 col-xs-12">Unedited</p>
+
+              <div class="buttons col-xs-12">
+                <button type="button" class="btn">View</button>
+                <button type="button" class="btn ">Download</button>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="edited ">
+            <div class="buttonsWrapper">
+              <p class="pull-left mt-2 col-xs-12">Edited</p>
+
+              <div class="buttons ">
+                <div class="top-row col-xs-12">
+                  <button type="button" class="btn">View</button>
+                  <button type="button" class="btn ">Download</button>
+                </div>
+
+                <!--TODO: if person is captionist, this option should show-->
+                <div class="top-row col-xs-12">
+                  <button type="button" class="btn">Edit</button>
+                  <button type="button" class="btn ">Publish</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--end div for ONE SINGLE card-->
+      </div>
 
 
 
@@ -70,7 +142,6 @@ Any unknown html tag are bootstrap-vue.js syntax that are currently unidentified
       <!--end div pastSession__sessions-->
       </div>
 
-    </div>
 
   <!--end div pastSession-->
   </div>
@@ -88,21 +159,17 @@ export default{
 </script>
 
 <style scoped>
-  #pastSession {
-    background-color: #8CB8DC;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
-    border-radius: 20px;
-    /*padding: -15px !important;*/
-  }
   #pastSession  {
     /*Has the height of the pastSessions box always take up 80% of the viewport*/
     height: 80vh !important;
-    margin-bottom: 40px;
+    background-color: #8CB8DC;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
   }
   #pastSession .container {
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 15px;
+    padding: 5px;
   }
   .pastSession__heading {
     /*background-color: white;*/
@@ -127,6 +194,7 @@ export default{
   .pastSession__sessions .date {
     background-color: #000033;
     color: #fff;
+    margin-left: -15px;
     /*position: absolute;*/
     /*top: 0px;*/
     /*left: 0px;*/
@@ -141,18 +209,20 @@ export default{
     min-height: 100px;
     padding: 10px;
   }
-  .pastSession__sessions .unedited {
+  .pastSession__sessions .unedited  {
     background-color: #edecf1;
     margin-top: 15px;
   }
-  .pastSession__sessions edited {
-
+  .pastSession__sessions .edited  {
+    margin-top: 15px;
   }
   #pastSession button {
     /*!important overrides the bootstrap stylings! */
     border-radius: 6px !important;
     background-color: #40599c !important;
     color: #fff !important;
+    height: 30px;
+    padding: 5px;
   }
 
 
