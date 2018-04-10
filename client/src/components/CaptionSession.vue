@@ -39,14 +39,16 @@
       this.setEditorStyle()
     }
 
+    //    TODO: style editor for web responsiveness
     setEditorStyle () {
       // styling for the editor
       let editor = document.getElementById('editor')
       editor.style.borderBottomLeftRadius = '10px'
       editor.style.borderBottomRightRadius = '10px'
-      editor.style.height = '500px'
+      editor.style.height = '70vh'
       // console.log(editor)
 
+      //      TODO: style toolbar for web responsiveness
       // styling for the toolbar
       let toolbar = document.getElementsByClassName('ql-toolbar ql-snow').item(0)
       toolbar.style.borderTopLeftRadius = '10px'
@@ -135,14 +137,21 @@
 </script>
 
 <style scoped>
+  body {
+    /*TODO: hide main body scroll bar*/
+    overflow-y: hidden !important;
+  }
   .container-fluid {
     position: fixed;
     width: 100%;
     height: 100%;
+    overflow-y: hidden;
   }
+
+  /*TODO: style classNameBar*/
   #classNameBar {
     background-color: #bcbcd1;
-    position: relative;
+    /*position: relative;*/
     height: 100px;
     width: 100%;
     border-radius: 20px;
@@ -155,11 +164,11 @@
     top: 48px;
     left: 125px;
   }
-  .buttonPosition {
-    position: absolute;
-    top: 58px;
-    right: 130px;
-  }
+  /*.buttonPosition {*/
+    /*position: absolute;*/
+    /*top: 58px;*/
+    /*right: 130px;*/
+  /*}*/
   .buttonStyle {
     background-color: #40599c;
     color: white;
@@ -173,6 +182,7 @@
   #quill-container {
     position: relative;
     width: 90%;
+    height: 90vh;
     top: 20px;
     margin-left: auto;
     margin-right: auto;
