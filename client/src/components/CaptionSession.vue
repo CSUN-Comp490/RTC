@@ -45,7 +45,7 @@
       let editor = document.getElementById('editor')
       editor.style.borderBottomLeftRadius = '10px'
       editor.style.borderBottomRightRadius = '10px'
-      editor.style.height = '70vh'
+      editor.style.height = '68vh'
       // console.log(editor)
 
       //      TODO: style toolbar for web responsiveness
@@ -152,7 +152,7 @@
   #classNameBar {
     background-color: #bcbcd1;
     /*position: relative;*/
-    height: 100px;
+    height: 10vh;
     width: 100%;
     border-radius: 20px;
     box-shadow: 0px 1px 15px;
