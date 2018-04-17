@@ -5,12 +5,13 @@
 <template>
   <div class="container-fluid" style="padding: 0px">
     <div id="classNameBar"> <!--Bar underneath nav bar, contains class name and buttons-->
-      <div id="className">
+
+      <div id="className raleway--medium mx-auto">
         CLASS NAME
       </div>
       <div class="buttonPosition">
-        <span><button type="button" class="buttonStyle"@click="download()">Download</button></span>
-        <span><button type="button" class="buttonStyle" @click="returnPage()">End Session</button></span>
+        <span><button type="button" class="btn btn-primary bt-sm"@click="download()">Download</button></span>
+        <span><button type="button" class="btn btn-primary btn-sm" @click="returnPage()">End Session</button></span>
       </div>
     </div>
 
@@ -39,22 +40,19 @@
       this.setEditorStyle()
     }
 
-    //    TODO: style editor for web responsiveness
+    //    TODO: no overflow for specific editor icons (text type, underline color, highlight color
     setEditorStyle () {
       // styling for the editor
       let editor = document.getElementById('editor')
       editor.style.borderBottomLeftRadius = '10px'
       editor.style.borderBottomRightRadius = '10px'
-      editor.style.height = '68vh'
-      // console.log(editor)
+      editor.style.height = '62vh'
 
-      //      TODO: style toolbar for web responsiveness
-      // styling for the toolbar
       let toolbar = document.getElementsByClassName('ql-toolbar ql-snow').item(0)
       toolbar.style.borderTopLeftRadius = '10px'
       toolbar.style.borderTopRightRadius = '10px'
-      toolbar.style.height = '45px'
-      // console.log(toolbar)
+      toolbar.style.height = '50px'
+      toolbar.style.overflowY = 'scroll'
     }
   }
 
@@ -152,14 +150,17 @@
   #classNameBar {
     background-color: #bcbcd1;
     /*position: relative;*/
-    height: 10vh;
+    height: 14%;
+    /*margin-top: -20px;*/
+    padding-top: 20px;
+    /*margin-bottom: 30px;*/
     width: 100%;
-    border-radius: 20px;
+    border-radius: 0px 0px 20px 20px;
     box-shadow: 0px 1px 15px;
   }
   #className {
-    font-family: "Varela Round";
-    font-size: 30px;
+
+    font-size: 2em;
     position: absolute;
     top: 48px;
     left: 125px;
