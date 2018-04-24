@@ -8,12 +8,12 @@
         <div class="buttons col-sm-12 mt-4">
 
           <!--TODO: get class name for the caption session!-->
-          <h4 class="raleway--medium col-sm-5 col-xs-12 pull-left">CLASS NAME</h4>
+          <h4 class="raleway--medium col-sm-5 col-xs-12 col-md-6 pull-left">CLASS NAME</h4>
 
-          <div class="buttons__single col-sm-3 col-xs-6">
+          <div class="buttons__single col-sm-3 col-xs-6 col-md-2 col-md-offset-2">
             <button type="button" class="btn btn-primary bt-sm buttonStyle"@click="download()">Download</button>
           </div>
-          <div class="buttons__single col-sm-3 col-xs-5">
+          <div class="buttons__single col-sm-3 col-xs-5 col-md-2">
             <button type="button" class="btn btn-primary btn-sm buttonStyle" @click="returnPage()">End Session</button>
           </div>
         </div>
@@ -60,6 +60,14 @@
       toolbar.style.height = '50px'
       toolbar.style.width = '100%'
       toolbar.style.overflowY = 'scroll'
+      toolbar.style.position = 'relative'
+      toolbar.classList.add('clearfix')
+
+      // Let's the icons in the toolbar have its overflow pop out; scrollable even outside its container.
+      let icon = document.getElementsByClassName('ql-toolbar ql-formats ql-header ql-picker')
+      icon.style.position = 'absolute'
+      icon.style.zIndex = '10000'
+      icon.classList.add('pop-out')
     }
   }
 
@@ -167,6 +175,19 @@
     margin-left: auto;
     margin-right: auto;
   }
+
+  .pop-out {
+
+  }
+  .clearfix:before,
+  .clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    overflow: hidden;
+  }
+  .clearfix:after { clear: both; }
+  .clearfix { zoom: 1; } /* IE < 8 */
   /*::-webkit-scrollbar-track {
     background: none;
   }
