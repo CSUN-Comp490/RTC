@@ -21,6 +21,9 @@
     </div>
 
     <!--Quill component-->
+    <!--
+      .quill-container > .quillWrapper > .ql-toolbar > .ql-formats
+    -->
     <div id="quill-container col-xs-12">
         <vue-editor
           v-model="content"
@@ -59,15 +62,8 @@
       toolbar.style.borderTopRightRadius = '10px'
       toolbar.style.height = '50px'
       toolbar.style.width = '100%'
+      toolbar.style.overflowX = 'hidden'
       toolbar.style.overflowY = 'scroll'
-      toolbar.style.position = 'relative'
-      toolbar.classList.add('clearfix')
-
-      // Let's the icons in the toolbar have its overflow pop out; scrollable even outside its container.
-      let icon = document.getElementsByClassName('ql-toolbar ql-formats ql-header ql-picker')
-      icon.style.position = 'absolute'
-      icon.style.zIndex = '10000'
-      icon.classList.add('pop-out')
     }
   }
 
@@ -176,18 +172,6 @@
     margin-right: auto;
   }
 
-  .pop-out {
-
-  }
-  .clearfix:before,
-  .clearfix:after {
-    content: ".";
-    display: block;
-    height: 0;
-    overflow: hidden;
-  }
-  .clearfix:after { clear: both; }
-  .clearfix { zoom: 1; } /* IE < 8 */
   /*::-webkit-scrollbar-track {
     background: none;
   }
