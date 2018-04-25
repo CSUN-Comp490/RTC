@@ -6,12 +6,16 @@ module.exports = function(io) {
   // Create a new student.
   router.post("/", controller.storeStudent);
     
+  router.post("/login", controller.login);
+
   // Get all students.
   router.get("/", controller.getAllStudents);
   // Get an student by id
   router.get("/id/:id", controller.getStudentById);
   // Get an student by username
   router.get("/username/:username", controller.getStudentByUsername);
+  // Get an student by email
+  router.get("/email/:email", controller.getStudentByEmail);
 
   // Update student by id
   router.put("/id/:id", controller.updateStudentById);

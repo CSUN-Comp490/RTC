@@ -32,12 +32,23 @@ mongoose.connect(
 
 // Body Parser Middleware
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const port = process.env.PORT || 8080;
 
+var whitelist = ['http://localhost:8081']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
 // CORS Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 
 //Setup routes
 app.use("/api/admins", AdminRoutes(io));

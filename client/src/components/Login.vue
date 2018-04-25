@@ -62,10 +62,13 @@ export default {
   methods: {
     async login () {
       try {
+        console.log(123)
         const response = await AuthenticationService.login({
           email: this.email,
           password: this.password
         })
+        console.log('made it')
+        console.log(response)
         window.localStorage.setItem('userToken', JSON.stringify(response))
         // Test token from server
         var responseToken = window.localStorage.getItem('userToken')
@@ -93,6 +96,7 @@ export default {
           }
         })
       } catch (error) {
+        console.log(456)
         this.error = error.response.data.error
       }
     }

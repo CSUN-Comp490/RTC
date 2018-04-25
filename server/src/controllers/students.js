@@ -2,9 +2,26 @@ const _ = require("underscore");
 const StudentModel = require("../models/student");
 let StudentController = {};
 
+StudentController.login = (req, res) => {
+  let studentEmail = req.body.email;
+  let getStudentByEmailPromise = StudentModel.findOne({ email: studentEmail }).exec();
+
+  getStudentByEmailPromise
+    .then(student => {
+      return student
+        ? res.status(200).json({email: req.body.email, password: req.body.password})
+        : res.status(404)
+          .json({ error: `Not valid login with email: ${studentEmail}` });
+    })
+    .catch(err => {
+      console.log(err);
+      return res.status(500).json({ error: err });
+    });
+}
+
 //Create students.
 StudentController.storeStudent = (req, res) => {
-  let student = new StudentModel(req.body);
+  let student = new StudentModel(req);
   let createStudentPromise = student.save();
 
   createStudentPromise
@@ -32,7 +49,7 @@ StudentController.getAllStudents = (req, res) => {
 };
 
 StudentController.getStudentById = (req, res) => {
-  let studentID = req.params.id;
+  let studentID = req.body.id;
   let getStudentByIdPromise = StudentModel.findById(studentID).exec();
 
   getStudentByIdPromise
@@ -50,7 +67,7 @@ StudentController.getStudentById = (req, res) => {
 };
 
 StudentController.getStudentByUsername = (req, res) => {
-  let studentUsername = req.params.username;
+  let studentUsername = req.body.username;
   let getStudentByUsernamePromise = StudentModel.findOne({username: studentUsername}).exec();
 
   getStudentByUsernamePromise
@@ -67,9 +84,26 @@ StudentController.getStudentByUsername = (req, res) => {
     });
 };
 
+StudentController.getStudentByEmail = (req, res) => {
+  let studentEmail = req.body.email;
+  let getStudentByEmailPromise = StudentModel.findOne({email: studentEmail}).exec();
+
+  getStudentByEmailPromise
+    .then(student => {
+      return student
+        ? res.status(200).json(student)
+        : res.status(404)
+             .json({ error: `Cannot find student with email: ${studentEmail}` });
+    })
+    .catch(err => {
+      console.log(err);
+      return res.status(500).json({ error: err });
+    });
+};
+
 // Update students.
 StudentController.updateStudentById = (req, res) => {
-  let studentID = req.params.id;
+  let studentID = req.body.id;
   let updateStudentByIdPromise = StudentModel.findById(studentID).exec();
   updateStudentByIdPromise
     .then(student => {
@@ -85,7 +119,7 @@ StudentController.updateStudentById = (req, res) => {
 };
 
 StudentController.updateStudentByUsername = (req, res) => {
-  let studentUsername = req.params.username;
+  let studentUsername = req.body.username;
   let updateStudentByUsernamePromise = StudentModel.findOne({username: studentUsername}).exec();
   updateStudentByUsernamePromise
     .then(student => {
@@ -102,7 +136,7 @@ StudentController.updateStudentByUsername = (req, res) => {
 
 // Delete students.
 StudentController.deleteStudentById = (req, res) => {
-  let studentID = req.params.id;
+  let studentID = req.body.id;
   let findByIdAndRemovePromise = StudentModel.findByIdAndRemove(
     studentID
   ).exec();
@@ -122,7 +156,7 @@ StudentController.deleteStudentById = (req, res) => {
 };
 
 StudentController.deleteStudentByUsername = (req, res) => {
-  let studentUsername = req.params.username;
+  let studentUsername = req.body.username;
   let findByUsernameAndRemovePromise = StudentModel.findOneAndRemove(
     {username: studentUsername}
   ).exec();
