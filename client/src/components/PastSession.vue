@@ -4,7 +4,7 @@ Any unknown html tag are bootstrap-vue.js syntax that are currently unidentified
 <!--TODO: change from hard-coded text-->
 
 <template>
-  <div id="pastSession" class="p-3 container-fluid d-flex flex-column varela col-xs-12 offset-xs-0 col-sm-12 offset-sm-0 col-md-10 offset-md-2 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3
+  <div id="pastSession" class="mt-1 p-3 container-fluid d-flex flex-column varela col-xs-12 offset-xs-0 col-sm-12 offset-sm-0 col-md-10 offset-md-2 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3
     col-lg-offset-3 col-md-offset-1 col-sm-offset-0 col-xs-offset-0 col-xl-offset-3">
     <div class="container">
       <div class="pastSession__heading text-left">
