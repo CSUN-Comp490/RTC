@@ -4,13 +4,17 @@
 
 <template>
   <div class="container-fluid" style="padding: 0px">
-    <div id="classNameBar"> <!--Bar underneath nav bar, contains class name and buttons-->
-      <div id="className">
-        CLASS NAME
+    <div id="classNameBar ">
+      <div class="buttons col-sm-12 mt-4">
+
+        <!--TODO: get class name for the caption session!-->
+        <h4 class="raleway--medium col-sm col-xs-12 col-md-6 pull-left">CLASS NAME</h4>
+
+        <div class="buttons__single col-sm  col-xs-12 col-md-5 col-md-offset-1">
+          <button type="button" class="btn btn-primary bt-sm buttonStyle"@click="download()">Download</button>
+        </div>
       </div>
-      <div class="buttonPosition">
-        <span><button type="button" class="buttonStyle"@click="download()">Download</button></span>
-      </div>
+
     </div>
 
     <!--Quill component-->
@@ -43,15 +47,16 @@
       let editor = document.getElementById('editor')
       editor.style.borderBottomLeftRadius = '10px'
       editor.style.borderBottomRightRadius = '10px'
-      editor.style.height = '500px'
-      // console.log(editor)
+      editor.style.height = '55vh'
+      editor.style.width = '100%'
 
-      // styling for the toolbar
       let toolbar = document.getElementsByClassName('ql-toolbar ql-snow').item(0)
       toolbar.style.borderTopLeftRadius = '10px'
       toolbar.style.borderTopRightRadius = '10px'
-      toolbar.style.height = '45px'
-      // console.log(toolbar)
+      toolbar.style.height = '50px'
+      toolbar.style.width = '100%'
+      toolbar.style.overflowX = 'hidden'
+      toolbar.style.overflowY = 'scroll'
     }
   }
 
@@ -111,45 +116,28 @@
 </script>
 
 <style scoped>
+  body {
+    /*TODO: hide main body scroll bar*/
+    overflow-y: hidden !important;
+    overflow-x: hidden !important;
+  }
   .container-fluid {
     position: fixed;
     width: 100%;
     height: 100%;
-  }
-  #classNameBar {
-    background-color: #bcbcd1;
-    position: relative;
-    height: 100px;
-    width: 100%;
-    border-radius: 20px;
-    box-shadow: 0px 1px 15px;
-  }
-  #className {
-    font-family: "Varela Round";
-    font-size: 30px;
-    position: absolute;
-    top: 48px;
-    left: 125px;
-  }
-  .buttonPosition {
-    position: absolute;
-    top: 58px;
-    right: 130px;
+    overflow-y: hidden;
+    overflow-x: hidden;
   }
   .buttonStyle {
-    background-color: #40599c;
-    color: white;
-    font-family: "Varela Round";
-    border-radius: 8px;
-    width: 100px;
-    height: 25px;
-    margin-left: 10px;
-    box-shadow: 0px 0px 2px black;
+    background-color: #40599c !important;
+    color: white !important;
+    font-family: "Varela Round" !important;
+    border-radius: 8px !important;
+    box-shadow: 0px 0px 2px black !important;
   }
   #quill-container {
-    position: relative;
-    width: 90%;
-    top: 20px;
+    width: 94%;
+    height: 80vh;
     margin-left: auto;
     margin-right: auto;
   }
