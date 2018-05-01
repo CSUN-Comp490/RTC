@@ -39,6 +39,13 @@
           </button>
         </li>
 
+        <li class="nav-item">
+          <button v-on:click="navigateTo({name: 'register'})" v-if="$store.state.isUserLoggedIn" flat to="register" class="nav-item link">
+            <span class="glyphicon glyphicon-star"></span>
+            Register
+          </button>
+        </li>
+
         <li class="nav-item pull-right">
           <button v-if="$store.state.isUserLoggedIn" flat @click="logout" class="nav-item link">
             <span class="glyphicon glyphicon-log-out"></span>
