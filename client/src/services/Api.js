@@ -5,9 +5,13 @@ import axios from 'axios'
 // var pathArray = window.location.pathname.split('/')
 
 var instance = axios.create({
-  baseURL: 'http://localhost:8080/'
-  // baseURL: baseUrl + host + pathArray[1] + `:8080/`
-  // ,withCredentials: true
+  baseURL: 'http://localhost:8080/',
+  responseType: 'json',
+  dataType: 'json',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+  }
 })
 
 export default {instance}

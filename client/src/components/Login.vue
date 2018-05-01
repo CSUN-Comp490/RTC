@@ -56,49 +56,63 @@ export default {
       email: '',
       password: '',
       error: null,
-      backgroundtile: '../assets/backgroundTile.png'
+      backgroundtile: '../assets/backgroundTile.png',
+      response: null
     }
   },
   methods: {
     async login () {
       try {
         console.log(123)
-        const response = await AuthenticationService.login({
+        this.response = await AuthenticationService.login({
           email: this.email,
           password: this.password
         })
-        console.log('made it')
-        console.log(response)
-        window.localStorage.setItem('userToken', JSON.stringify(response))
-        // Test token from server
-        var responseToken = window.localStorage.getItem('userToken')
-        console.log(responseToken)
-        this.$store.dispatch('setToken', response.data.token)
-        this.$store.dispatch('setUser', response.data.user)
-        this.$store.dispatch('setRole', response.data.role)
-        // Redirect to respective page based on role
-        var routeName = null
-        var userRole = this.$store.state.role
-        var username = response.data.user.username
-        if (userRole === 'admin') {
-          routeName = 'admin'
-        } else if (userRole === 'captionist') {
-          routeName = 'captionist'
-        } else {
-          routeName = 'student'
-        }
-        // Push page - similar to router-link :to'...'
-        this.$router.push({
-          name: routeName,
-          // retica.cc/#/routeName/username
-          params: {
-            username
-          }
-        })
+          .then((response) => {
+            console.log('this is it')
+            this.response = response
+          })
+          .catch((err) => {
+            console.log('error')
+            this.error = err
+            // return err
+          })
+        console.log('maybe?')
       } catch (error) {
         console.log(456)
-        this.error = error.response.data.error
+        this.error = error
       }
+      console.log('made it')
+      console.log(this.response)
+      window.localStorage.setItem('userToken', JSON.stringify(this.response))
+      // window.localStorage.setItem('userToken', this.response)
+      // Test token from server
+      var responseToken = window.localStorage.getItem('userToken')
+      console.log(responseToken)
+      // this.$store.dispatch('setToken', response.data.token)
+      // this.$store.dispatch('setUser', response.data.user)
+      // this.$store.dispatch('setRole', response.data.role)
+      // Redirect to respective page based on role
+      var routeName = null
+      console.log(this.response)
+      console.log('here?')
+      var userRole = this.response
+      var username = this.response.username
+      if (userRole === 'admin') {
+        routeName = 'admin'
+      } else if (userRole === 'captionist') {
+        routeName = 'captionist'
+      } else {
+        routeName = 'student'
+      }
+      // Push page - similar to router-link :to'...'
+      this.$router.push({
+        name: routeName,
+        // retica.cc/#/routeName/username
+        params: {
+          username
+        }
+      })
     }
   },
   components: {
