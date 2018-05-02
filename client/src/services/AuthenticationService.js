@@ -8,9 +8,17 @@ export default {
   },
 
   // sends info from login form to server
-  login (credentials) {
-    var result = Api.instance.post('api/students/login', credentials)
-    // console.log(result)
-    return result
+  async login (credentials) {
+    console.log('trying')
+    await Api.instance.post('api/students/login', credentials)
+      .then((response) => {
+        console.log('then')
+        console.log(response.data)
+        return response.data
+      })
+      .catch((error) => {
+        console.log('error')
+        return error
+      })
   }
 }

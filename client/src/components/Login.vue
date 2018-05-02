@@ -7,7 +7,7 @@
 
   <div id="login container-fluid" class="varela" v-bind:style="{ backgroundImage: 'url(' + backgroundtile + ')' }">
 
-    <form class=" login__form col-sm-12 col-xs-12 col-md-8 col-lg-6 col-xl-6 col-sm-offset-0 col-xs-offset-0 col-md-offset- col-lg-offset-3 col-xl-offset-3 align-middle ">
+    <div class=" login__form col-sm-12 col-xs-12 col-md-8 col-lg-6 col-xl-6 col-sm-offset-0 col-xs-offset-0 col-md-offset- col-lg-offset-3 col-xl-offset-3 align-middle ">
 
       <div class=" login__innerContainer">
 
@@ -28,6 +28,7 @@
         <div class="error" v-html="error"></div> <br>
 
         <div class="login__loginButton">
+          <!-- <button class="btn varela" >Login</button> -->
           <button class="btn varela" v-on:click="login">Login</button>
         </div>
 
@@ -40,7 +41,7 @@
 
       </div>
 
-    </form>
+    </div>
   </div>
 
 </template>
@@ -48,71 +49,64 @@
 
 
 <script>
-import AuthenticationService from '@/services/AuthenticationService'
+// import AuthenticationService from '@/services/AuthenticationService'
 import Panel from '@/components/Panel'
+import Api from '@/services/Api'
 export default {
+  beforeCreate () {
+    console.log('store', this.$store)
+    console.log('router', this.$router)
+  },
   data () {
     return {
       email: '',
       password: '',
       error: null,
       backgroundtile: '../assets/backgroundTile.png',
-      response: null
+      user: null
     }
   },
   methods: {
     async login () {
-      try {
-        console.log(123)
-        this.response = await AuthenticationService.login({
-          email: this.email,
-          password: this.password
-        })
-          .then((response) => {
-            console.log('this is it')
-            this.response = response
-          })
-          .catch((err) => {
-            console.log('error')
-            this.error = err
-            // return err
-          })
-        console.log('maybe?')
-      } catch (error) {
-        console.log(456)
-        this.error = error
-      }
-      console.log('made it')
-      console.log(this.response)
-      window.localStorage.setItem('userToken', JSON.stringify(this.response))
-      // window.localStorage.setItem('userToken', this.response)
-      // Test token from server
-      var responseToken = window.localStorage.getItem('userToken')
-      console.log(responseToken)
-      // this.$store.dispatch('setToken', response.data.token)
-      // this.$store.dispatch('setUser', response.data.user)
-      // this.$store.dispatch('setRole', response.data.role)
-      // Redirect to respective page based on role
-      var routeName = null
-      console.log(this.response)
-      console.log('here?')
-      var userRole = this.response
-      var username = this.response.username
-      if (userRole === 'admin') {
-        routeName = 'admin'
-      } else if (userRole === 'captionist') {
-        routeName = 'captionist'
-      } else {
-        routeName = 'student'
-      }
-      // Push page - similar to router-link :to'...'
-      this.$router.push({
-        name: routeName,
-        // retica.cc/#/routeName/username
-        params: {
-          username
-        }
+      await Api.instance.post('api/students/login', {
+        email: this.email,
+        password: this.password
       })
+        .then(response => {
+          this.user = response.data
+          window.localStorage.setItem('userToken', JSON.stringify(this.user.token))
+          // Test token from server
+          var responseToken = window.localStorage.getItem('userToken')
+          this.$store.dispatch('setToken', responseToken)
+          this.$store.dispatch('setUser', this.user)
+          this.$store.dispatch('setRole', 'student')
+          // Redirect to respective page based on role
+          var routeName = null
+          var userRole = 'student'
+          if (userRole === 'admin') {
+            routeName = 'admin'
+          } else if (userRole === 'captionist') {
+            routeName = 'captionist'
+          } else {
+            routeName = 'student'
+          }
+          // Push page - similar to router-link :to'...'
+          this.$router.push({
+            name: routeName,
+            // retica.cc/#/routeName/username
+            params: {
+              id: this.user.id
+            }
+          })
+        })
+        .catch((error) => {
+          console.log(error)
+          try {
+            this.error = error.response.data.error
+          } catch (error) {
+            this.error = 'Login Failed Unexpectedly'
+          }
+        })
     }
   },
   components: {

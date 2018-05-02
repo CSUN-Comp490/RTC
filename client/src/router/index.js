@@ -72,6 +72,7 @@ var router = new Router({
 router.beforeEach((to, from, next) => {
   // Get the token from server
   const authUser = JSON.parse(window.localStorage.getItem('userToken'))
+  console.log(authUser)
   // If the page requires authentication
   if (to.meta.requiresAuth) {
     // If the page requires admin authentication and the user is an admin

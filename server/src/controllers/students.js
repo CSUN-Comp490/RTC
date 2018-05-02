@@ -1,6 +1,16 @@
 const _ = require("underscore");
 const StudentModel = require("../models/student");
+const jwt = require('jsonwebtoken')
+const config = require('../config/config')
 let StudentController = {};
+
+// Signs a user with jwt to return a jwt token
+function jwtSignUser(user) {
+  const ONE_WEEK = 60 * 60 * 24 * 7
+  return jwt.sign(user, config.authentication.jwtSecret, {
+    expiresIn: ONE_WEEK
+  })
+}
 
 StudentController.login = (req, res) => {
   let studentEmail = req.body.email;
@@ -8,13 +18,23 @@ StudentController.login = (req, res) => {
 
   getStudentByEmailPromise
     .then(student => {
+      // console.log(student);
       return student
-        ? res.status(200).json({email: req.body.email, password: req.body.password})
+        // ? res.status(200).json({student: student})
+        ? res.status(200).json({
+          email: student.email, 
+          password: student.password,
+          id: student.id, 
+          classes: student.classes, 
+          username: student.username, 
+          name: student.name, 
+          token: jwtSignUser(student.toJSON())
+        })
         : res.status(404)
           .json({ error: `Not valid login with email: ${studentEmail}` });
     })
     .catch(err => {
-      console.log(err);
+      // console.log(err);
       return res.status(500).json({ error: err });
     });
 }
