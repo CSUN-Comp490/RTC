@@ -28,7 +28,7 @@ StudentController.login = (req, res) => {
           classes: student.classes, 
           username: student.username, 
           name: student.name, 
-          token: jwtSignUser(student.toJSON())
+          token: 'student'
         })
         : res.status(404)
           .json({ error: `Not valid login with email: ${studentEmail}` });

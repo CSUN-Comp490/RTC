@@ -9,9 +9,9 @@
       {{ classSchedule }}
     </div>
 
-    <!--button position and button styling, need to implement binds-->
+    <!-- button position and button styling, need to implement binds-->
     <div :style="buttonPosition">
-      <div :style="buttonStyleOne">
+      <div v-if="role == 'captionist'" :style="buttonStyleOne">
         <button style="padding: 5px">Start Session</button>
       </div>
       <div :style="buttonStyleTwo">
@@ -27,7 +27,8 @@
     props: {
       classID: Object,
       classIsNamed: Object,
-      classSchedule: Object
+      classSchedule: Object,
+      role: String
     },
     data: function () {
       return {

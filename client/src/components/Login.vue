@@ -74,7 +74,9 @@ export default {
       })
         .then(response => {
           this.user = response.data
-          window.localStorage.setItem('userToken', JSON.stringify(this.user.token))
+          // console.log(JSON.parse(this.user.token))
+          // window.localStorage.setItem('userToken', this.user.token)
+          window.localStorage.setItem('userToken', JSON.stringify(this.user))
           // Test token from server
           var responseToken = window.localStorage.getItem('userToken')
           this.$store.dispatch('setToken', responseToken)
@@ -90,6 +92,7 @@ export default {
           } else {
             routeName = 'student'
           }
+          console.log(this.user.id)
           // Push page - similar to router-link :to'...'
           this.$router.push({
             name: routeName,

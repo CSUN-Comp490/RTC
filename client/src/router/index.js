@@ -72,18 +72,17 @@ var router = new Router({
 router.beforeEach((to, from, next) => {
   // Get the token from server
   const authUser = JSON.parse(window.localStorage.getItem('userToken'))
-  console.log(authUser)
   // If the page requires authentication
   if (to.meta.requiresAuth) {
     // If the page requires admin authentication and the user is an admin
-    if (to.meta.adminAuth && authUser.data.role === 'admin') {
+    if (to.meta.adminAuth && authUser.token === 'admin') {
       next({name: 'admin'})
     // If the page requires captionist authentication and the user is a captionist
-    } else if (to.meta.captionistAuth && authUser.data.role === 'captionist') {
+    } else if (to.meta.captionistAuth && authUser.token === 'captionist') {
       next({name: 'captionist'})
     // If the page requires student authentication and the user is a student
-    } else if (to.meta.studentAuth && authUser.data.role === 'student') {
-      next({name: 'student'})
+    } else if (to.meta.studentAuth && authUser.token === 'student') {
+      next()
     // If the user is not a valid user, just route them to the login page
     } else {
       next({name: 'login'})
