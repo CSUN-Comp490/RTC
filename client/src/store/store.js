@@ -11,10 +11,24 @@ export default new Vuex.Store({
     role: null,
     isUserLoggedIn: false
   },
+  getters: {
+    getToken (state) {
+      console.log('getToken')
+      return state.token
+    },
+    getUser (state) {
+      console.log('getUser')
+      return state.user
+    },
+    getRole (state) {
+      console.log('getRole')
+      return state.role
+    }
+  },
   mutations: {
     setToken (state, token) {
       state.token = token
-      if (token) {
+      if (token != null) {
         state.isUserLoggedIn = true
       } else {
         state.isUserLoggedIn = false

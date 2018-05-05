@@ -50,12 +50,14 @@
 
 <script>
 // import AuthenticationService from '@/services/AuthenticationService'
+import store from '@/store/store'
+import router from '@/router/index'
 import Panel from '@/components/Panel'
 import Api from '@/services/Api'
 export default {
   beforeCreate () {
-    console.log('store', this.$store)
-    console.log('router', this.$router)
+    console.log('store', store)
+    console.log('router', router)
   },
   data () {
     return {
@@ -79,9 +81,9 @@ export default {
           window.localStorage.setItem('userToken', JSON.stringify(this.user))
           // Test token from server
           var responseToken = window.localStorage.getItem('userToken')
-          this.$store.dispatch('setToken', responseToken)
-          this.$store.dispatch('setUser', this.user)
-          this.$store.dispatch('setRole', 'student')
+          store.dispatch('setToken', responseToken)
+          store.dispatch('setUser', this.user)
+          store.dispatch('setRole', 'student')
           // Redirect to respective page based on role
           var routeName = null
           var userRole = 'student'
@@ -94,7 +96,7 @@ export default {
           }
           console.log(this.user.id)
           // Push page - similar to router-link :to'...'
-          this.$router.push({
+          router.push({
             name: routeName,
             // retica.cc/#/routeName/username
             params: {

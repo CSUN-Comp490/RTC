@@ -12,7 +12,7 @@
     <!-- button position and button styling, need to implement binds-->
     <div :style="buttonPosition">
       <div v-if="role == 'captionist'" :style="buttonStyleOne">
-        <button style="padding: 5px">Start Session</button>
+        <button style="padding: 5px" v-on:click="navigateTo({name: 'session', params: {}})">Start Session</button>
       </div>
       <div :style="buttonStyleTwo">
         <button style="padding: 5px">Past Captions</button>

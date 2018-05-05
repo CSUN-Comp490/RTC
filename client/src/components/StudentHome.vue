@@ -49,6 +49,8 @@
 </template>
 
 <script>
+  import store from '@/store/store'
+  import router from '@/router/index'
   import classGen from '@/components/ClassGenerator'
   import Api from '@/services/Api'
   export default {
@@ -56,7 +58,7 @@
       return {
         // userInfo: Array,
         userClassInformation: [],
-        // userClassInformation: this.$store.state.user != null ? this.$store.state.user.classes : [
+        // userClassInformation: store.state.user != null ? store.state.user.classes : [
         // {
         //   classID: 'COMP 491',
         //   className: 'Senior Design 2.0',
@@ -89,8 +91,8 @@
       }
     },
     beforeCreate () {
-      console.log('store', this.$store)
-      console.log('router', this.$router)
+      console.log('store', store)
+      console.log('router', router)
     },
     created: function () { // calls the function after the vue instance is created
       // this.getUser()
@@ -125,7 +127,7 @@
       // },
       getClasses: function () {
         const classObjectArray = [] // create array for storage
-        var classes = this.$store.state.user != null ? this.$store.state.user.classes : []
+        var classes = store.state.user != null ? store.state.user.classes : []
         console.log(classes)
 
         for (let classID in classes) { // iterate through every class id in the array

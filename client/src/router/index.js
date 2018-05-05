@@ -9,6 +9,7 @@ import CaptionSession from '@/components/CaptionSession'
 import StudentSession from '@/components/StudentSession'
 import PastSessions from '@/components/PastSession'
 import Main from '@/components/Main'
+import store from '@/store/store'
 
 Vue.use(Router)
 
@@ -72,22 +73,43 @@ var router = new Router({
 router.beforeEach((to, from, next) => {
   // Get the token from server
   const authUser = JSON.parse(window.localStorage.getItem('userToken'))
+  console.log(to.name)
   // If the page requires authentication
   if (to.meta.requiresAuth) {
+    console.log('START')
     // If the page requires admin authentication and the user is an admin
     if (to.meta.adminAuth && authUser.token === 'admin') {
-      next({name: 'admin'})
-    // If the page requires captionist authentication and the user is a captionist
-    } else if (to.meta.captionistAuth && authUser.token === 'captionist') {
-      next({name: 'captionist'})
-    // If the page requires student authentication and the user is a student
-    } else if (to.meta.studentAuth && authUser.token === 'student') {
+      console.log('admin')
       next()
-    // If the user is not a valid user, just route them to the login page
+      // If the page requires captionist authentication and the user is a captionist
+    } else if (to.meta.captionistAuth && authUser.token === 'captionist') {
+      console.log('captionist')
+      next()
+      // If the page requires student authentication and the user is a student
+    } else if (to.meta.studentAuth && authUser.token === 'student') {
+      console.log('student')
+      next()
+      // If the user is not a valid user, just route them to the login page
     } else {
-      next({name: 'login'})
+      console.log('login')
+      next({ name: 'login' })
+    }
+  } else if (to.name === 'root' && to.name === 'login' && authUser != null) {
+    if (authUser.token === 'admin') {
+      console.log('admin-login')
+      next({ 'name': 'admin' })
+    } else if (authUser.token === 'captionist') {
+      console.log('cap-login')
+      next({ 'name': 'captionist' })
+    } else if (authUser.token === 'student') {
+      console.log('student-login')
+      next({
+        'name': 'student',
+        'params': {'id': store.getters.getUser.id}
+      })
     }
   } else {
+    console.log('next')
     next()
   }
 })

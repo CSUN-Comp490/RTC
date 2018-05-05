@@ -60,17 +60,21 @@
 
 
 <script>
+  import store from '@/store/store'
+  import router from '@/router/index'
+
   export default{
     methods: {
       navigateTo (route) {
-        this.$router.push(route)
+        router.push(route)
       },
       logout () {
-        this.$store.dispatch('setToken', null)
-        this.$store.dispatch('setUser', null)
-        this.$store.dispatch('setRole', null)
-        this.$router.push({
-          name: 'root'
+        window.localStorage.clear()
+        store.dispatch('setToken', null)
+        store.dispatch('setUser', null)
+        store.dispatch('setRole', null)
+        router.push({
+          name: 'login'
         })
       }
     }
