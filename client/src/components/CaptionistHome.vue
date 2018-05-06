@@ -37,6 +37,7 @@
           v-bind:classID="objects.classID"
           v-bind:classIsNamed="objects.className"
           v-bind:classSchedule="objects.classSchedule"
+          v-bind:role="'captionist'"
         ></class-generator>
       </div>
     </div>

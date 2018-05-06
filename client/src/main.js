@@ -2,7 +2,8 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import router from './router'
+// import router from './router'
+import router from '@/router/index'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -18,6 +19,14 @@ Vue.use(Vuetify)
 Vue.use(BootstrapVue)
 
 sync(store, router)
+
+var responseToken = window.localStorage.getItem('userToken')
+if (responseToken != null) {
+  console.log(responseToken)
+  store.dispatch('setToken', responseToken)
+  store.dispatch('setRole', 'student')
+  store.dispatch('setUser', JSON.parse(responseToken))
+}
 
 Vue.component('classGenerator', ClassGenerator) // component to generate classes
 
