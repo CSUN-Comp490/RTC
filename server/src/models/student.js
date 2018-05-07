@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const StudentSchema = new Schema({
   username: {
     type: String,
-    required: true,
+    required: false,
     index: {
       unique: true
     }
@@ -19,12 +19,17 @@ const StudentSchema = new Schema({
 
   name: {
     type: String,
-    required: true
+    required: false
   },
 
   email: {
     type: String,
     required: true
+  },
+
+  role: {
+    type: String,
+    default: 'student'
   },
 
   classes: [

@@ -41,7 +41,7 @@ var router = new Router({
       component: CaptionistHome,
       // meta: {requiresAuth: true, adminAuth: false, captionistAuth: true, studentAuth: false}
       // FOR DEMO
-      meta: {requiresAuth: false, adminAuth: false, captionistAuth: false, studentAuth: false}
+      meta: {requiresAuth: true, adminAuth: false, captionistAuth: true, studentAuth: false}
     },
     {
       path: '/pastsession/:sessionid',
@@ -73,6 +73,7 @@ var router = new Router({
 router.beforeEach((to, from, next) => {
   // Get the token from server
   const authUser = JSON.parse(window.localStorage.getItem('userToken'))
+  console.log(authUser)
   console.log(to.name)
   // If the page requires authentication
   if (to.meta.requiresAuth) {

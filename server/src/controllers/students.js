@@ -15,7 +15,7 @@ function jwtSignUser(user) {
 StudentController.login = (req, res) => {
   let studentEmail = req.body.email;
   let getStudentByEmailPromise = StudentModel.findOne({ email: studentEmail }).exec();
-
+  console.log('Im in the student login')
   getStudentByEmailPromise
     .then(student => {
       // console.log(student);
@@ -32,6 +32,7 @@ StudentController.login = (req, res) => {
         })
         : res.status(404)
           .json({ error: `Not valid login with email: ${studentEmail}` });
+        
     })
     .catch(err => {
       // console.log(err);
@@ -41,7 +42,7 @@ StudentController.login = (req, res) => {
 
 //Create students.
 StudentController.storeStudent = (req, res) => {
-  let student = new StudentModel(req);
+  let student = new StudentModel(req.body);
   let createStudentPromise = student.save();
 
   createStudentPromise
@@ -49,6 +50,7 @@ StudentController.storeStudent = (req, res) => {
       return res.status(201).json(student);
     })
     .catch(err => {
+      console.log(err)
       const DUPLICATE_KEY = 11000;
       return err.code === DUPLICATE_KEY
         ? res.status(400).json(err.errmsg)

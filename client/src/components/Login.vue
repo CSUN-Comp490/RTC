@@ -12,6 +12,7 @@
       <div class=" login__innerContainer">
 
         <h1 class="login__heading">Login</h1>
+
         <div class="form-group">
           <p>Email</p>
           <input type="text" label="Email" v-model="email" placeholder="email" size="30"
@@ -23,6 +24,15 @@
                  class="password input raleway--regular"> <br>
         </div>
 
+        <div class="form-group">
+          <p>Role</p>
+          <select label="Role" v-model="token" class="role inputs raleway--regular">
+            <option value="" disabled selected>Select your role</option>
+            <option value="Student">Student</option>
+            <option value="Captionist">Captionist</option>
+            <option value="Admin">Admin</option>
+          </select>
+        </div>
 
 
         <div class="error" v-html="error"></div> <br>
@@ -53,7 +63,7 @@
 import store from '@/store/store'
 import router from '@/router/index'
 import Panel from '@/components/Panel'
-import Api from '@/services/Api'
+import AuthenticationService from '@/services/AuthenticationService'
 export default {
   beforeCreate () {
     console.log('store', store)
@@ -63,6 +73,7 @@ export default {
     return {
       email: '',
       password: '',
+      token: '',
       error: null,
       backgroundtile: '../assets/backgroundTile.png',
       user: null
@@ -70,12 +81,14 @@ export default {
   },
   methods: {
     async login () {
-      await Api.instance.post('api/students/login', {
+      AuthenticationService.login({
         email: this.email,
-        password: this.password
+        password: this.password,
+        token: this.token
       })
         .then(response => {
-          this.user = response.data
+          console.log(response)
+          this.user = response
           // console.log(JSON.parse(this.user.token))
           // window.localStorage.setItem('userToken', this.user.token)
           window.localStorage.setItem('userToken', JSON.stringify(this.user))
@@ -86,12 +99,12 @@ export default {
           store.dispatch('setRole', 'student')
           // Redirect to respective page based on role
           var routeName = null
-          var userRole = 'student'
+          var userRole = this.user.token
           if (userRole === 'admin') {
             routeName = 'admin'
           } else if (userRole === 'captionist') {
             routeName = 'captionist'
-          } else {
+          } else if (userRole === 'student') {
             routeName = 'student'
           }
           console.log(this.user.id)

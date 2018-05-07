@@ -17,6 +17,15 @@
                  class="lastName inputs raleway--regular"> <br>
         </div>
         <div class="form-group">
+          <p>Role</p>
+          <select label="Role" v-model="role" class="role inputs raleway--regular">
+            <option value="" disabled selected>Select your role</option>
+            <option value="Student">Student</option>
+            <option value="Captionist">Captionist</option>
+            <option value="Admin">Admin</option>
+          </select>
+        </div>
+        <div class="form-group">
           <p>Email</p>
           <input type="text" label="Email" v-model="email" placeholder="email" size="30"
                  class="email inputs raleway--regular"> <br>
@@ -39,7 +48,7 @@
 
         <div class="error" v-html="error"></div> <br>
 
-        <button class="btn varela" v-on:click="register">Register</button>
+        <button class="btn varela" v-on:click="register()">Register</button>
 
         <!--Only needed if extra Login clickable link is needed?-->
         <!--<div class="register__extraLinks pull-right invisible">-->
@@ -59,6 +68,7 @@ export default {
     return {
       firstName: '',
       lastName: '',
+      role: '',
       school: '',
       email: '',
       password: '',
@@ -72,6 +82,7 @@ export default {
         await AuthenticationService.register({
           firstName: this.firstName,
           lastName: this.lastName,
+          role: this.role,
           school: this.school,
           email: this.email,
           password: this.password
@@ -122,7 +133,7 @@ export default {
   }
 
   /*<!--For the text fields-->*/
-  input {
+  input, select {
     background-color: #fff;
     padding: 8px 15px;
     border: 1px solid #bbb;
