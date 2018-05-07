@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Api from '@/services/Api'
 
 Vue.use(Vuex)
 
@@ -13,15 +14,15 @@ export default new Vuex.Store({
   },
   getters: {
     getToken (state) {
-      console.log('getToken')
+      // console.log('getToken')
       return state.token
     },
     getUser (state) {
-      console.log('getUser')
+      // console.log('getUser')
       return state.user
     },
     getRole (state) {
-      console.log('getRole')
+      // console.log('getRole')
       return state.role
     }
   },
@@ -50,6 +51,19 @@ export default new Vuex.Store({
     },
     setRole ({commit}, role) {
       commit('setRole', role)
+    },
+    async updateUser ({commit}, user) {
+      console.log('Old User' + user)
+      await Api.instance.get('api/' + user.token + 's/id/' + user.id)
+        .then(response => {
+          console.log('New User' + response.data)
+          commit('setUser', response.data)
+          commit('setToken', JSON.stringify(response.data))
+          commit('setRole', response.data.token)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   }
 })
