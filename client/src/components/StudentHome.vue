@@ -49,10 +49,12 @@
 </template>
 
 <script>
-  import store from '@/store/store'
-  import router from '@/router/index'
+  // import store from '@/store/store'
+  import { store, mapGetters } from '@/store/store'
+  // import { mapGetters } from 'vuex'
+  // import router from '@/router/index'
   import classGen from '@/components/ClassGenerator'
-  import Api from '@/services/Api'
+
   export default {
     data: function () {
       return {
@@ -91,70 +93,41 @@
       }
     },
     beforeCreate () {
-      console.log('store', store)
-      console.log('router', router)
+      // console.log('store', store)
+      // console.log('router', router)
     },
     created: function () { // calls the function after the vue instance is created
       // this.getUser()
-      this.getClasses()
+      this.getClassData()
     },
     methods: {
-      // getUser: function () {
-      //   Api.get(this.$route.path) // calls the api using the pages current route
-      //     .then(function (response) {
-      //       console.log(response)
-      //       const userData = JSON.parse(response.data) // assign the parsed data to a variable
-      //       const userInfoArray = [] // create an array for storage
-      //       const classes = [] // for comparison
-
-      //       for (let element in userData) { // iterate through captionist attributes
-      //         const userElement = userData[element]
-      //         if (userElement === classes) { // if the attribute is named classes and an array
-      //           for (let userClass in userElement) { // iterate through classes array
-      //             userInfoArray.push(userClass) // add each class id to array
-      //           }
-      //         }
-      //       }
-
-      //       console.log(userInfoArray)
-      //       this.userInfo = userInfoArray // assign the array to an array in the data section
-      //     })
-      //     .catch(function (error) { // return message in case of error
-      //       console.log(error)
-      //       const errorMessage = 'An error occured.' + error
-      //       return errorMessage
-      //     })
-      // },
-      getClasses: function () {
+      getClassData () {
         const classObjectArray = [] // create array for storage
-        var classes = store.state.user != null ? store.state.user.classes : []
+        var classes = getUser.classes
         console.log(classes)
+        // console.log(this.classArray)
 
-        for (let classID in classes) { // iterate through every class id in the array
-          Api.get('/courseid/' + classID) // retrieve the classes information
-            .then(function (res) {
-              console.log(res)
-              const classElements = JSON.parse(res.data) // assign the data to variable
-
-              // create an object and assign the selected datas elements to the
-              // objects elements
-              var classObject = {
-                classID: classElements[0],
-                className: classElements[2],
-                classSchedule: classElements[4] + classElements[5]
-              }
-
-              classObjectArray.push(classObject) // add the object to the array
-            })
-            .catch(function (error) { // generate error message
-              console.log(error)
-              const errorMessage = 'An error occured.' + error
-              return errorMessage
-            })
+        for (let classId in classes) { // iterate through every class id in the array
+          let classElements = getClass(classId)
+          var classObject = {
+            classID: classElements[0],
+            className: classElements[2],
+            classSchedule: classElements[4] + classElements[5]
+          }
+          classObjectArray.push(classObject) // add the object to the array
         }
 
-        this.userClassInformation = classObjectArray // assign the array to an array in the data section
+        // this.userClassInformation = classObjectArray // assign the array to an array in the data section
+        // console.log(classObjectArray)
+        // console.log(this.userClassInformation)
       }
+    },
+    computed: {
+      ...mapGetters([
+        'getUser',
+        // 'getClass',
+        'getClasses'
+      ])
     },
     components: {
       'class-generator': classGen // create tags for the component

@@ -22,10 +22,11 @@ sync(store, router)
 
 var responseToken = window.localStorage.getItem('userToken')
 if (responseToken != null) {
-  console.log(responseToken)
+  // console.log(responseToken)
   store.dispatch('setToken', responseToken)
   store.dispatch('setRole', 'student')
   store.dispatch('setUser', JSON.parse(responseToken))
+  store.dispatch('setClasses')
 }
 
 Vue.component('classGenerator', ClassGenerator) // component to generate classes

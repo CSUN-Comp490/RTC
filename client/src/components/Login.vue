@@ -64,7 +64,7 @@ export default {
       email: '',
       password: '',
       error: null,
-      backgroundtile: '../assets/backgroundTile.png',
+      backgroundtile: '@/assets/backgroundTile.png',
       user: null
     }
   },

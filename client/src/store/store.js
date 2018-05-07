@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Api from '@/services/Api'
 
 Vue.use(Vuex)
 
@@ -9,6 +10,7 @@ export default new Vuex.Store({
     token: null,
     user: null,
     role: null,
+    classes: [],
     isUserLoggedIn: false
   },
   getters: {
@@ -23,6 +25,12 @@ export default new Vuex.Store({
     getRole (state) {
       console.log('getRole')
       return state.role
+    },
+    getClasses (state) {
+      return state.classes
+    },
+    getClass (state) {
+      return state.classes.id === classId
     }
   },
   mutations: {
@@ -39,6 +47,9 @@ export default new Vuex.Store({
     },
     setRole (state, role) {
       state.role = role
+    },
+    setClasses (state, classes) {
+      state.classes = classes
     }
   },
   actions: {
@@ -50,6 +61,17 @@ export default new Vuex.Store({
     },
     setRole ({commit}, role) {
       commit('setRole', role)
+    },
+    async setClasses ({commit}) {
+      await Api.instance.get('/api/classes') // retrieve the classes information
+        .then((response) => {
+          console.log(response.map)
+          commit('setClasses', response.data)
+        })
+        .catch((error) => { // generate error message
+          console.log(error)
+          return 'An error occured.' + error
+        })
     }
   }
 })
