@@ -128,7 +128,7 @@
       getClasses: function () {
         const classObjectArray = [] // create array for storage
         var classes = store.state.user != null ? store.state.user.classes : []
-        console.log(classes)
+        // console.log(classes)
 
         for (let classID in classes) { // iterate through every class id in the array
           Api.get('/courseid/' + classID) // retrieve the classes information

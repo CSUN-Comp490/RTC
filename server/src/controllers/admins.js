@@ -38,7 +38,15 @@ AdminController.getAdminById = (req, res) => {
   getAdminByIdPromise
     .then(admin => {
       return admin
-        ? res.status(200).json(admin)
+        ? res.status(200).json({
+          email: admin.email,
+          password: admin.password,
+          id: admin.id,
+          classes: admin.classes,
+          username: admin.username,
+          name: admin.name,
+          token: 'admin'
+        })
         : res
             .status(404)
             .json({ error: `Cannot find Admin with id: ${adminID}` });
@@ -56,7 +64,15 @@ AdminController.getAdminByUsername = (req, res) => {
   getAdminByUsernamePromise
     .then(admin => {
       return admin
-        ? res.status(200).json(admin)
+        ? res.status(200).json({
+          email: admin.email,
+          password: admin.password,
+          id: admin.id,
+          classes: admin.classes,
+          username: admin.username,
+          name: admin.name,
+          token: 'admin'
+        })
         : res
             .status(404)
             .json({ error: `Cannot find Admin with username: ${adminUsername}` });

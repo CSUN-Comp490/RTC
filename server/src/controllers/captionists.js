@@ -68,7 +68,15 @@ CaptionistController.getCaptionistById = (req, res) => {
   getCaptionistByIdPromise
     .then(captionist => {
       return captionist
-        ? res.status(200).json(captionist)
+        ? res.status(200).json({
+          email: captionist.email,
+          password: captionist.password,
+          id: captionist.id,
+          classes: captionist.classes,
+          username: captionist.username,
+          name: captionist.name,
+          token: 'captionist'
+        })
         : res
             .status(404)
             .json({
@@ -89,7 +97,15 @@ CaptionistController.getCaptionistByUsername = (req, res) => {
   getCaptionistByUsernamePromise
     .then(captionist => {
       return captionist
-        ? res.status(200).json(captionist)
+        ? res.status(200).json({
+          email: captionist.email,
+          password: captionist.password,
+          id: captionist.id,
+          classes: captionist.classes,
+          username: captionist.username,
+          name: captionist.name,
+          token: 'captionist'
+        })
         : res
             .status(404)
             .json({

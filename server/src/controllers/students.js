@@ -71,13 +71,21 @@ StudentController.getAllStudents = (req, res) => {
 };
 
 StudentController.getStudentById = (req, res) => {
-  let studentID = req.body.id;
+  let studentID = req.params.id;
   let getStudentByIdPromise = StudentModel.findById(studentID).exec();
 
   getStudentByIdPromise
     .then(student => {
       return student
-        ? res.status(200).json(student)
+        ? res.status(200).json({
+          email: student.email,
+          password: student.password,
+          id: student.id,
+          classes: student.classes,
+          username: student.username,
+          name: student.name,
+          token: 'student'
+        })
         : res
             .status(404)
             .json({ error: `Cannot find student with id: ${studentID}` });
@@ -89,13 +97,21 @@ StudentController.getStudentById = (req, res) => {
 };
 
 StudentController.getStudentByUsername = (req, res) => {
-  let studentUsername = req.body.username;
+  let studentUsername = req.params.username;
   let getStudentByUsernamePromise = StudentModel.findOne({username: studentUsername}).exec();
 
   getStudentByUsernamePromise
     .then(student => {
       return student
-        ? res.status(200).json(student)
+        ? res.status(200).json({
+          email: student.email,
+          password: student.password,
+          id: student.id,
+          classes: student.classes,
+          username: student.username,
+          name: student.name,
+          token: 'student'
+        })
         : res
             .status(404)
             .json({ error: `Cannot find student with username: ${studentUsername}` });
@@ -107,18 +123,27 @@ StudentController.getStudentByUsername = (req, res) => {
 };
 
 StudentController.getStudentByEmail = (req, res) => {
-  let studentEmail = req.body.email;
+  let studentEmail = req.params.email;
   let getStudentByEmailPromise = StudentModel.findOne({email: studentEmail}).exec();
 
   getStudentByEmailPromise
     .then(student => {
+      // console.log(student);
       return student
-        ? res.status(200).json(student)
+        // ? res.status(200).json({student: student})
+        ? res.status(200).json({
+          email: student.email,
+          password: student.password,
+          id: student.id,
+          classes: student.classes,
+          username: student.username,
+          name: student.name,
+          token: 'student'
+        })
         : res.status(404)
-             .json({ error: `Cannot find student with email: ${studentEmail}` });
+          .json({ error: `Cannot find student with email: ${studentEmail}` });
     })
     .catch(err => {
-      console.log(err);
       return res.status(500).json({ error: err });
     });
 };
