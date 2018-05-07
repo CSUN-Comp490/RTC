@@ -4,6 +4,7 @@ import Api from '@/services/Api'
 export default {
   // sends info from register form to server
   register (credentials) {
+    console.log(credentials)
     if (credentials.role === 'Student') {
       return Api.instance.post('api/students/', credentials)
     } else if (credentials.role === 'Captionist') {

@@ -3,18 +3,9 @@ mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
 
 const StudentSchema = new Schema({
-  username: {
-    type: String,
-    required: false,
-    index: {
-      unique: true
-    }
-  },
-
   password: {
     type: String,
-    required: true,
-    select: false
+    required: true
   },
 
   name: {

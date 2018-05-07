@@ -1,7 +1,7 @@
 <template>
   <div id="register" class="varela">
 
-    <form class=" register__form col-sm-12 col-xs-12 col-md-8 col-lg-6 col-xl-6 col-sm-offset-0 col-xs-offset-0 col-md-offset-3 col-lg-offset-3 col-xl-offset-3  align-middle">
+    <div class=" register__form col-sm-12 col-xs-12 col-md-8 col-lg-6 col-xl-6 col-sm-offset-0 col-xs-offset-0 col-md-offset-3 col-lg-offset-3 col-xl-offset-3  align-middle">
 
       <div class=" register__innerContainer ">
 
@@ -55,7 +55,7 @@
           <!--<p><a href="" class="pull-right" v-on:click="navigateTo({name: 'login'})">Login</a></p>-->
         <!--</div>-->
       </div>
-    </form>
+    </div>
   </div>
 
 </template>
@@ -78,7 +78,6 @@ export default {
   },
   methods: {
     async register () {
-      try {
         await AuthenticationService.register({
           firstName: this.firstName,
           lastName: this.lastName,
@@ -87,11 +86,13 @@ export default {
           email: this.email,
           password: this.password
         })
-        // this.$store.dispatch('setToken', response.data.token)
-        // this.$store.dispatch('setUser', response.data.user)
-      } catch (error) {
-        this.error = error.response.data.error
-      }
+        .then((response) => {
+          // this.$store.dispatch('setToken', response.data.token)
+          // this.$store.dispatch('setUser', response.data.user)
+        })
+        .catch((error) {
+          this.error = error.response.data.error
+        })
     }
   },
   components: {

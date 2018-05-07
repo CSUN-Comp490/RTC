@@ -3,11 +3,6 @@ mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
 
 const CaptionistSchema = new Schema({
-  username: {
-    type: String,
-    required: false
-  },
-  
   name: {
     type: String,
     required: false
