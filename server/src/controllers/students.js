@@ -47,7 +47,15 @@ StudentController.storeStudent = (req, res) => {
 
   createStudentPromise
     .then(student => {
-      return res.status(201).json(student);
+      return res.status(201).json({
+          email: student.email, 
+          password: student.password,
+          id: student.id, 
+          classes: student.classes, 
+          username: student.username, 
+          name: student.name, 
+          token: 'student'
+      })
     })
     .catch(err => {
       console.log(err)
@@ -76,6 +84,7 @@ StudentController.getStudentById = (req, res) => {
 
   getStudentByIdPromise
     .then(student => {
+      console.log(student)
       return student
         ? res.status(200).json({
           email: student.email,

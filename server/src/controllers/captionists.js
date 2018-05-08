@@ -39,7 +39,14 @@ CaptionistController.storeCaptionist = (req, res) => {
 
   createCaptionistPromise
     .then(captionist => {
-      return res.status(201).json(captionist);
+      return res.status(201).json({
+        email: captionist.email,
+        id: captionist.id,
+        classes: captionist.classes,
+        username: captionist.username,
+        name: captionist.name,
+        token: 'captionist'
+      })
     })
     .catch(err => {
       const DUPLICATE_KEY = 11000;

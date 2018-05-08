@@ -24,6 +24,7 @@ var responseToken = window.localStorage.getItem('userToken')
 if (responseToken != null) {
   console.log('Local Token: ' + responseToken)
   store.dispatch('updateUser', JSON.parse(responseToken))
+  store.dispatch('setClasses')
   // store.dispatch('setToken', responseToken)
   // store.dispatch('setRole', 'student')
   // store.dispatch('setUser', JSON.parse(responseToken))

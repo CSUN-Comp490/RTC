@@ -35,7 +35,6 @@ export default {
           return response.data
         })
     }
-    console.log('WTF Why arent you showing up')
     return response
   }
 }

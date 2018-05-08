@@ -61,6 +61,8 @@
 </template>
 
 <script>
+import store from '@/store/store'
+import router from '@/router/index'
 import AuthenticationService from '@/services/AuthenticationService'
 import Panel from '@/components/Panel'
 export default {
@@ -78,19 +80,45 @@ export default {
   },
   methods: {
     async register () {
-        await AuthenticationService.register({
-          firstName: this.firstName,
-          lastName: this.lastName,
-          role: this.role,
-          school: this.school,
-          email: this.email,
-          password: this.password
-        })
+      await AuthenticationService.register({
+        firstName: this.firstName,
+        lastName: this.lastName,
+        role: this.role,
+        school: this.school,
+        email: this.email,
+        password: this.password
+      })
         .then((response) => {
-          // this.$store.dispatch('setToken', response.data.token)
-          // this.$store.dispatch('setUser', response.data.user)
+          this.user = response
+          // console.log(JSON.parse(this.user.token))
+          // window.localStorage.setItem('userToken', this.user.token)
+          window.localStorage.setItem('userToken', JSON.stringify(this.user))
+          // Test token from server
+          var responseToken = window.localStorage.getItem('userToken')
+          store.dispatch('setToken', responseToken)
+          store.dispatch('setUser', this.user)
+          store.dispatch('setRole', 'student')
+          // Redirect to respective page based on role
+          var routeName = null
+          var userRole = this.user.token
+          if (userRole === 'admin') {
+            routeName = 'admin'
+          } else if (userRole === 'captionist') {
+            routeName = 'captionist'
+          } else if (userRole === 'student') {
+            routeName = 'student'
+          }
+          console.log(this.user.id)
+          // Push page - similar to router-link :to'...'
+          router.push({
+            name: routeName,
+            // retica.cc/#/routeName/username
+            params: {
+              id: this.user.id
+            }
+          })
         })
-        .catch((error) {
+        .catch((error) => {
           this.error = error.response.data.error
         })
     }
