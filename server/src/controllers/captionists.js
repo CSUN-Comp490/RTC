@@ -1,6 +1,36 @@
 const _ = require("underscore");
 const CaptionistModel = require("../models/captionist");
+const jwt = require('jsonwebtoken')
+const config = require('../config/config')
 let CaptionistController = {};
+
+// Signs a user with jwt to return a jwt token
+function jwtSignUser(user) {
+  const ONE_WEEK = 60 * 60 * 24 * 7
+  return jwt.sign(user, config.authentication.jwtSecret, {
+    expiresIn: ONE_WEEK
+  })
+}
+
+CaptionistController.login = (req, res) => {
+  let captionistEmail = req.body.email;
+  let getCaptionistByEmailPromise = CaptionistModel.findOne({email: captionistEmail }).exec();
+  getCaptionistByEmailPromise
+    .then(captionist => {
+      console.log(captionist)
+      return captionist
+      ? res.status(200).json({
+        email: captionist.email,
+        id: captionist.id,
+        classes: captionist.classes,
+        username: captionist.username,
+        name: captionist.name,
+        token: 'captionist'
+      })
+      : res.status(404)
+        .json({ error: `Not a valid login with email: ${captionistEmail}` })
+    })
+}
 
 //Create Captionists.
 CaptionistController.storeCaptionist = (req, res) => {
@@ -9,7 +39,14 @@ CaptionistController.storeCaptionist = (req, res) => {
 
   createCaptionistPromise
     .then(captionist => {
-      return res.status(201).json(captionist);
+      return res.status(201).json({
+        email: captionist.email,
+        id: captionist.id,
+        classes: captionist.classes,
+        username: captionist.username,
+        name: captionist.name,
+        token: 'captionist'
+      })
     })
     .catch(err => {
       const DUPLICATE_KEY = 11000;
@@ -38,7 +75,15 @@ CaptionistController.getCaptionistById = (req, res) => {
   getCaptionistByIdPromise
     .then(captionist => {
       return captionist
-        ? res.status(200).json(captionist)
+        ? res.status(200).json({
+          email: captionist.email,
+          password: captionist.password,
+          id: captionist.id,
+          classes: captionist.classes,
+          username: captionist.username,
+          name: captionist.name,
+          token: 'captionist'
+        })
         : res
             .status(404)
             .json({
@@ -59,7 +104,15 @@ CaptionistController.getCaptionistByUsername = (req, res) => {
   getCaptionistByUsernamePromise
     .then(captionist => {
       return captionist
-        ? res.status(200).json(captionist)
+        ? res.status(200).json({
+          email: captionist.email,
+          password: captionist.password,
+          id: captionist.id,
+          classes: captionist.classes,
+          username: captionist.username,
+          name: captionist.name,
+          token: 'captionist'
+        })
         : res
             .status(404)
             .json({

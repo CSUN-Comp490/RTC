@@ -1,7 +1,7 @@
 <template>
   <div id="register" class="varela">
 
-    <form class=" register__form col-sm-12 col-xs-12 col-md-8 col-lg-6 col-xl-6 col-sm-offset-0 col-xs-offset-0 col-md-offset-3 col-lg-offset-3 col-xl-offset-3  align-middle">
+    <div class=" register__form col-sm-12 col-xs-12 col-md-8 col-lg-6 col-xl-6 col-sm-offset-0 col-xs-offset-0 col-md-offset-3 col-lg-offset-3 col-xl-offset-3  align-middle">
 
       <div class=" register__innerContainer ">
 
@@ -15,6 +15,15 @@
           <p>Last name</p>
           <input type="text" label="Last name" v-model="lastName" placeholder="last name" size="30"
                  class="lastName inputs raleway--regular"> <br>
+        </div>
+        <div class="form-group">
+          <p>Role</p>
+          <select label="Role" v-model="role" class="role inputs raleway--regular">
+            <option value="" disabled selected>Select your role</option>
+            <option value="Student">Student</option>
+            <option value="Captionist">Captionist</option>
+            <option value="Admin">Admin</option>
+          </select>
         </div>
         <div class="form-group">
           <p>Email</p>
@@ -39,19 +48,21 @@
 
         <div class="error" v-html="error"></div> <br>
 
-        <button class="btn varela" v-on:click="register">Register</button>
+        <button class="btn varela" v-on:click="register()">Register</button>
 
         <!--Only needed if extra Login clickable link is needed?-->
         <!--<div class="register__extraLinks pull-right invisible">-->
           <!--<p><a href="" class="pull-right" v-on:click="navigateTo({name: 'login'})">Login</a></p>-->
         <!--</div>-->
       </div>
-    </form>
+    </div>
   </div>
 
 </template>
 
 <script>
+import store from '@/store/store'
+import router from '@/router/index'
 import AuthenticationService from '@/services/AuthenticationService'
 import Panel from '@/components/Panel'
 export default {
@@ -59,6 +70,7 @@ export default {
     return {
       firstName: '',
       lastName: '',
+      role: '',
       school: '',
       email: '',
       password: '',
@@ -68,19 +80,47 @@ export default {
   },
   methods: {
     async register () {
-      try {
-        await AuthenticationService.register({
-          firstName: this.firstName,
-          lastName: this.lastName,
-          school: this.school,
-          email: this.email,
-          password: this.password
+      await AuthenticationService.register({
+        firstName: this.firstName,
+        lastName: this.lastName,
+        role: this.role,
+        school: this.school,
+        email: this.email,
+        password: this.password
+      })
+        .then((response) => {
+          this.user = response
+          // console.log(JSON.parse(this.user.token))
+          // window.localStorage.setItem('userToken', this.user.token)
+          window.localStorage.setItem('userToken', JSON.stringify(this.user))
+          // Test token from server
+          var responseToken = window.localStorage.getItem('userToken')
+          store.dispatch('setToken', responseToken)
+          store.dispatch('setUser', this.user)
+          store.dispatch('setRole', 'student')
+          // Redirect to respective page based on role
+          var routeName = null
+          var userRole = this.user.token
+          if (userRole === 'admin') {
+            routeName = 'admin'
+          } else if (userRole === 'captionist') {
+            routeName = 'captionist'
+          } else if (userRole === 'student') {
+            routeName = 'student'
+          }
+          console.log(this.user.id)
+          // Push page - similar to router-link :to'...'
+          router.push({
+            name: routeName,
+            // retica.cc/#/routeName/username
+            params: {
+              id: this.user.id
+            }
+          })
         })
-        // this.$store.dispatch('setToken', response.data.token)
-        // this.$store.dispatch('setUser', response.data.user)
-      } catch (error) {
-        this.error = error.response.data.error
-      }
+        .catch((error) => {
+          this.error = error.response.data.error
+        })
     }
   },
   components: {
@@ -122,7 +162,7 @@ export default {
   }
 
   /*<!--For the text fields-->*/
-  input {
+  input, select {
     background-color: #fff;
     padding: 8px 15px;
     border: 1px solid #bbb;

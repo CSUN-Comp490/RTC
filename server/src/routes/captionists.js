@@ -5,6 +5,8 @@ let router = express.Router();
 module.exports = function(io) {
   // Create a new captionist.
   router.post("/", controller.storeCaptionist);
+
+  router.post("/login", controller.login)
     
   // Get all captionists.
   router.get("/", controller.getAllCaptionists);

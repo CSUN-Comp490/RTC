@@ -15,7 +15,7 @@ function jwtSignUser(user) {
 StudentController.login = (req, res) => {
   let studentEmail = req.body.email;
   let getStudentByEmailPromise = StudentModel.findOne({ email: studentEmail }).exec();
-
+  console.log('Im in the student login')
   getStudentByEmailPromise
     .then(student => {
       // console.log(student);
@@ -32,6 +32,7 @@ StudentController.login = (req, res) => {
         })
         : res.status(404)
           .json({ error: `Not valid login with email: ${studentEmail}` });
+        
     })
     .catch(err => {
       // console.log(err);
@@ -41,14 +42,23 @@ StudentController.login = (req, res) => {
 
 //Create students.
 StudentController.storeStudent = (req, res) => {
-  let student = new StudentModel(req);
+  let student = new StudentModel(req.body);
   let createStudentPromise = student.save();
 
   createStudentPromise
     .then(student => {
-      return res.status(201).json(student);
+      return res.status(201).json({
+          email: student.email, 
+          password: student.password,
+          id: student.id, 
+          classes: student.classes, 
+          username: student.username, 
+          name: student.name, 
+          token: 'student'
+      })
     })
     .catch(err => {
+      console.log(err)
       const DUPLICATE_KEY = 11000;
       return err.code === DUPLICATE_KEY
         ? res.status(400).json(err.errmsg)
@@ -69,13 +79,22 @@ StudentController.getAllStudents = (req, res) => {
 };
 
 StudentController.getStudentById = (req, res) => {
-  let studentID = req.body.id;
+  let studentID = req.params.id;
   let getStudentByIdPromise = StudentModel.findById(studentID).exec();
 
   getStudentByIdPromise
     .then(student => {
+      console.log(student)
       return student
-        ? res.status(200).json(student)
+        ? res.status(200).json({
+          email: student.email,
+          password: student.password,
+          id: student.id,
+          classes: student.classes,
+          username: student.username,
+          name: student.name,
+          token: 'student'
+        })
         : res
             .status(404)
             .json({ error: `Cannot find student with id: ${studentID}` });
@@ -87,13 +106,21 @@ StudentController.getStudentById = (req, res) => {
 };
 
 StudentController.getStudentByUsername = (req, res) => {
-  let studentUsername = req.body.username;
+  let studentUsername = req.params.username;
   let getStudentByUsernamePromise = StudentModel.findOne({username: studentUsername}).exec();
 
   getStudentByUsernamePromise
     .then(student => {
       return student
-        ? res.status(200).json(student)
+        ? res.status(200).json({
+          email: student.email,
+          password: student.password,
+          id: student.id,
+          classes: student.classes,
+          username: student.username,
+          name: student.name,
+          token: 'student'
+        })
         : res
             .status(404)
             .json({ error: `Cannot find student with username: ${studentUsername}` });
@@ -105,18 +132,27 @@ StudentController.getStudentByUsername = (req, res) => {
 };
 
 StudentController.getStudentByEmail = (req, res) => {
-  let studentEmail = req.body.email;
+  let studentEmail = req.params.email;
   let getStudentByEmailPromise = StudentModel.findOne({email: studentEmail}).exec();
 
   getStudentByEmailPromise
     .then(student => {
+      // console.log(student);
       return student
-        ? res.status(200).json(student)
+        // ? res.status(200).json({student: student})
+        ? res.status(200).json({
+          email: student.email,
+          password: student.password,
+          id: student.id,
+          classes: student.classes,
+          username: student.username,
+          name: student.name,
+          token: 'student'
+        })
         : res.status(404)
-             .json({ error: `Cannot find student with email: ${studentEmail}` });
+          .json({ error: `Cannot find student with email: ${studentEmail}` });
     })
     .catch(err => {
-      console.log(err);
       return res.status(500).json({ error: err });
     });
 };

@@ -41,7 +41,7 @@ var router = new Router({
       component: CaptionistHome,
       // meta: {requiresAuth: true, adminAuth: false, captionistAuth: true, studentAuth: false}
       // FOR DEMO
-      meta: {requiresAuth: false, adminAuth: false, captionistAuth: false, studentAuth: false}
+      meta: {requiresAuth: true, adminAuth: false, captionistAuth: true, studentAuth: false}
     },
     {
       path: '/pastsession/:sessionid',
@@ -73,43 +73,43 @@ var router = new Router({
 router.beforeEach((to, from, next) => {
   // Get the token from server
   const authUser = JSON.parse(window.localStorage.getItem('userToken'))
-  console.log(to.name)
+  console.log('Where to? ' + to.name)
   // If the page requires authentication
   if (to.meta.requiresAuth) {
-    console.log('START')
+    // console.log('START')
     // If the page requires admin authentication and the user is an admin
     if (to.meta.adminAuth && authUser.token === 'admin') {
-      console.log('admin')
+      // console.log('admin')
       next()
       // If the page requires captionist authentication and the user is a captionist
     } else if (to.meta.captionistAuth && authUser.token === 'captionist') {
-      console.log('captionist')
+      // console.log('captionist')
       next()
       // If the page requires student authentication and the user is a student
     } else if (to.meta.studentAuth && authUser.token === 'student') {
-      console.log('student')
+      // console.log('student')
       next()
       // If the user is not a valid user, just route them to the login page
     } else {
-      console.log('login')
+      // console.log('login')
       next({ name: 'login' })
     }
   } else if (to.name === 'root' && to.name === 'login' && authUser != null) {
     if (authUser.token === 'admin') {
-      console.log('admin-login')
+      // console.log('admin-login')
       next({ 'name': 'admin' })
     } else if (authUser.token === 'captionist') {
-      console.log('cap-login')
+      // console.log('cap-login')
       next({ 'name': 'captionist' })
     } else if (authUser.token === 'student') {
-      console.log('student-login')
+      // console.log('student-login')
       next({
         'name': 'student',
         'params': {'id': store.getters.getUser.id}
       })
     }
   } else {
-    console.log('next')
+    // console.log('next')
     next()
   }
 })
