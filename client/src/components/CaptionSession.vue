@@ -69,9 +69,9 @@
     components: {
       VueEditor
     },
-    // props: {
-    //   roomnumber: ''
-    // },
+    props: {
+      roomnumber: ''
+    },
     data () {
       return {
         room: null,
@@ -88,6 +88,7 @@
     mounted () {
       // join room from room number (defined in url)
       console.log(router)
+      console.log('room number', this.roomnumber)
       this.room = router.params.roomnumber.toString()
       socket.on('connect', () => {
         socket.emit('join', this.room)
@@ -127,7 +128,7 @@
       // Fix this method to return to captionist home page
       returnPage () {
         // console.log(this.$route.params)
-        Api.instance.put('api/sessions/id/' + this.$route.params.roomnumber, {
+        Api.instance.put('api/sessions/id/' + this.roomnumber, {
           live: false
         })
           .then(response => {
