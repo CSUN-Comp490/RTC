@@ -19,142 +19,73 @@
     <!--generates class list and main interface for captionist home page
         loops through an array of objects and binds each objects
         data fields to the ClassGenerator components props-->
-    <!-- <div  class="classList"> -->
-    <div v-if="!(userClassInformation.length == 0)" class="classList">
-      <div v-for="objects in userClassInformation">
+    <div class="classList" v-if="!(this.getClassData.length == 0)">
+      <div v-for="objects in this.getClassData">
         <class-generator
-          v-bind:classID="objects.classID"
-          v-bind:classIsNamed="objects.className"
-          v-bind:classSchedule="objects.classSchedule"
-          v-bind:role="'student'"
-        &gt;</class-generator>
+            v-bind:classID="objects.classID"
+            v-bind:classIsNamed="objects.className"
+            v-bind:classSchedule="objects.classSchedule"
+            v-bind:role="'student'"      
+        ></class-generator>
       </div>
     </div>
     <p v-else class="classList">Looks like you have no classes!</p>
 
-    <!--HARD CODED FOR TESTING AND DEMO PURPOSES-->
-    <!-- <div v-if="!(this.classArray.length == 0)" class="classList">
-      <div v-for="objects in classArray">
-        <class-generator
-          v-bind:classID="objects.classID"
-          v-bind:classIsNamed="objects.className"
-          v-bind:classSchedule="objects.classSchedule"
-          v-bind:role="'student'"
-        ></class-generator>
-      </div>
-    </div>
-    <p v-else class="classList">Looks like you have no classes!</p> -->
   </div>
 </template>
 
 <script>
   import store from '@/store/store'
-  import router from '@/router/index'
+  // import { state, mapGetters } from '@/store/store'
+  // import router from '@/router/index'
   import classGen from '@/components/ClassGenerator'
-  import Api from '@/services/Api'
+
   export default {
     data: function () {
       return {
         // userInfo: Array,
-        userClassInformation: [],
-        // userClassInformation: store.state.user != null ? store.state.user.classes : [
-        // {
-        //   classID: 'COMP 491',
-        //   className: 'Senior Design 2.0',
-        //   classSchedule: 'MoWe 9:30 a.m. to 10:45 a.m.'
-        // }
-        // ],
-        // HARD CODED FOR TESTING AND DEMO PURPOSES
-        classArray: [
-          {
-            classID: 'COMP 490',
-            className: 'Senior Design',
-            classSchedule: 'MoWe 9:30 a.m. to 10:45 a.m.'
-          },
-          {
-            classID: 'COMP 484',
-            className: 'Web Engineering I',
-            classSchedule: 'TuTh 4:30 p.m. to 6:45 p.m.'
-          },
-          {
-            classID: 'COMP 482',
-            className: 'Algorithm Design',
-            classSchedule: 'MoWe 11:00 a.m. to 12:15 p.m.'
-          },
-          {
-            classID: 'COMP 469',
-            className: 'Artificial Intelligence',
-            classSchedule: 'TuTh 2:00 p.m. to 3:15 p.m.'
-          }
-        ]
+        // userClassInformation: []
+        userClassInformation: []
       }
     },
     beforeCreate () {
       console.log('store', store)
-      console.log('router', router)
+      // console.log('router', router)
     },
     created: function () { // calls the function after the vue instance is created
-      // this.getUser()
-      this.getClasses()
+      // this.getClassData()
     },
-    methods: {
-      // getUser: function () {
-      //   Api.get(this.$route.path) // calls the api using the pages current route
-      //     .then(function (response) {
-      //       console.log(response)
-      //       const userData = JSON.parse(response.data) // assign the parsed data to a variable
-      //       const userInfoArray = [] // create an array for storage
-      //       const classes = [] // for comparison
-
-      //       for (let element in userData) { // iterate through captionist attributes
-      //         const userElement = userData[element]
-      //         if (userElement === classes) { // if the attribute is named classes and an array
-      //           for (let userClass in userElement) { // iterate through classes array
-      //             userInfoArray.push(userClass) // add each class id to array
-      //           }
-      //         }
-      //       }
-
-      //       console.log(userInfoArray)
-      //       this.userInfo = userInfoArray // assign the array to an array in the data section
-      //     })
-      //     .catch(function (error) { // return message in case of error
-      //       console.log(error)
-      //       const errorMessage = 'An error occured.' + error
-      //       return errorMessage
-      //     })
-      // },
-      getClasses: function () {
+    computed: {
+      getClassData () {
         const classObjectArray = [] // create array for storage
-        var classes = store.state.user != null ? store.state.user.classes : []
-        console.log(classes)
+        var classes = store.state.classes
+        var myClasses = store.state.user.classes
+        // console.log(123)
+        // console.log(classes, myClasses)
 
-        for (let classID in classes) { // iterate through every class id in the array
-          Api.get('/courseid/' + classID) // retrieve the classes information
-            .then((res) => {
-              console.log(res)
-              const classElements = JSON.parse(res.data) // assign the data to variable
+        // iterate through every class id in the array
+        for (var classId in myClasses) {
+          // console.log('for')
+          // var classElements = classes[0]
+          var classElements = classes.filter(function (element) {
+            console.log(element)
+            return element.classID === myClasses[classId]
+          })
+          console.log(classElements)
 
-              // create an object and assign the selected datas elements to the
-              // objects elements
-              var classObject = {
-                classID: classElements[0],
-                className: classElements[2],
-                classSchedule: classElements[4] + classElements[5]
-              }
-
-              classObjectArray.push(classObject) // add the object to the array
-            })
-            .catch((error) => { // generate error message
-              console.log(error)
-              const errorMessage = 'An error occured.' + error
-              return errorMessage
-            })
+          var classObject = {
+            classID: classElements.classID,
+            className: classElements.className,
+            classSchedule: classElements.days + ' ' + classElements.time
+          }
+          classObjectArray.push(classObject) // add the object to the array
         }
 
         this.userClassInformation = classObjectArray // assign the array to an array in the data section
+        return classObjectArray
       }
     },
+
     components: {
       'class-generator': classGen // create tags for the component
     }

@@ -38,8 +38,19 @@ CaptionistController.storeCaptionist = (req, res) => {
   let createCaptionistPromise = captionist.save();
   createCaptionistPromise
     .then(captionist => {
+<<<<<<< HEAD
       console.log(captionist)
       return res.status(201).json(captionist);
+=======
+      return res.status(201).json({
+        email: captionist.email,
+        id: captionist.id,
+        classes: captionist.classes,
+        username: captionist.username,
+        name: captionist.name,
+        token: 'captionist'
+      })
+>>>>>>> bee3e3ef5ba77f6448dc572c66012bd00585e8ae
     })
     .catch(err => {
       const DUPLICATE_KEY = 11000;
@@ -68,7 +79,15 @@ CaptionistController.getCaptionistById = (req, res) => {
   getCaptionistByIdPromise
     .then(captionist => {
       return captionist
-        ? res.status(200).json(captionist)
+        ? res.status(200).json({
+          email: captionist.email,
+          password: captionist.password,
+          id: captionist.id,
+          classes: captionist.classes,
+          username: captionist.username,
+          name: captionist.name,
+          token: 'captionist'
+        })
         : res
             .status(404)
             .json({
@@ -89,7 +108,15 @@ CaptionistController.getCaptionistByUsername = (req, res) => {
   getCaptionistByUsernamePromise
     .then(captionist => {
       return captionist
-        ? res.status(200).json(captionist)
+        ? res.status(200).json({
+          email: captionist.email,
+          password: captionist.password,
+          id: captionist.id,
+          classes: captionist.classes,
+          username: captionist.username,
+          name: captionist.name,
+          token: 'captionist'
+        })
         : res
             .status(404)
             .json({

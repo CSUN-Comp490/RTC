@@ -11,8 +11,9 @@
 
     <!-- button position and button styling, need to implement binds-->
     <div :style="buttonPosition">
-      <div v-if="role == 'captionist'" :style="buttonStyleOne">
-        <button style="padding: 5px" v-on:click="navigateTo({name: 'session', params: {}})">Start Session</button>
+      <div v-if="role === 'captionist'" :style="buttonStyleOne">
+        <button style="padding: 5px">Start Session</button>
+        <!-- <button style="padding: 5px" v-on:click="navigateTo({name: 'session', params: {}})">Start Session</button> -->
       </div>
       <div :style="buttonStyleTwo">
         <button style="padding: 5px">Past Captions</button>
@@ -25,10 +26,10 @@
   export default {
     name: 'class-generator',
     props: {
-      classID: Object,
-      classIsNamed: Object,
-      classSchedule: Object,
-      role: String
+      classID: '',
+      classIsNamed: '',
+      classSchedule: '',
+      role: ''
     },
     data: function () {
       return {
