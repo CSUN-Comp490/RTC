@@ -130,16 +130,16 @@
       },
       // Fix this method to return to captionist home page
       returnPage () {
-        console.log(this.$route.params)
+        // console.log(this.$route.params)
         Api.instance.put('api/sessions/id/' + this.$route.params.roomnumber, {
           live: false
         })
           .then(response => {
-            console.log(response.data)
+            console.log(response.data.courseID)
             router.push({
               name: 'captionist',
               params: {
-                id: response.courseID
+                id: response.data.courseID
               }
             })
           })
