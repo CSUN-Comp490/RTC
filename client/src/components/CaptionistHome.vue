@@ -48,7 +48,6 @@
 
 <script>
   import store from '@/store/store'
-  // import { state, mapGetters } from '@/store/store'
   // import router from '@/router/index'
   import classGen from '@/components/ClassGenerator'
 
@@ -85,6 +84,7 @@
 
           if (classElements.length > 0) {
             var classObject = {
+              id: classElements[0]._id,
               classID: classElements[0].classID,
               className: classElements[0].className,
               classSchedule: classElements[0].days + ' ' + classElements.time

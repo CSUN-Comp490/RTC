@@ -17,19 +17,22 @@
       </div>
       <div v-if="role != 'captionist'" :style="buttonStyleOne">
         <!-- <button style="padding: 5px">Join Live Session</button> -->
-        <button style="padding: 5px" v-on:click="navigateTo({name: 'studentsession', params: {roomnumber: ''}})" flat to="studentsession">Join Live Session</button>
+        <button style="padding: 5px" v-on:click="navigateTo({name: 'studentsession', params: {roomnumber: id}})" flat to="studentsession">Join Live Session</button>
       </div>
       <div :style="buttonStyleTwo">
-        <button style="padding: 5px">Past Captions</button>
+        <button style="padding: 5px" v-on:click="navigateTo({name: 'pastsession', params: {id: ''}})">Past Captions</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  export default {
+  import router from '@/router/index'
+
+export default {
     name: 'class-generator',
     props: {
+      id: '',
       classID: '',
       classIsNamed: '',
       classSchedule: '',
@@ -73,7 +76,7 @@
     },
     methods: {
       navigateTo (route) {
-        this.$router.push(route)
+        router.push(route)
       }
     }
   }
