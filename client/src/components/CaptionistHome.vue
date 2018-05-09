@@ -17,23 +17,10 @@
       </div>
     </div>
 
-    <!--generates class list and main interface for captionist home page
-        loops through an array of objects and binds each objects
-        data fields to the ClassGenerator components props-->
-    <!--<div class="classList">-->
-      <!--<div v-for="objects in userClassInformation">-->
-        <!--<class-generator-->
-          <!--v-bind:classID="objects.classID"-->
-          <!--v-bind:classIsNamed="objects.className"-->
-          <!--v-bind:classSchedule="objects.classSchedule"-->
-        <!--&gt;</class-generator>-->
-      <!--</div>-->
-    <!--</div>-->
-
-    <!--HARD CODED FOR TESTING AND DEMO PURPOSES-->
     <div class="classList" v-if="!(this.getClassData.length == 0)">
       <div v-for="objects in this.getClassData">
         <class-generator
+            v-bind:id="objects.id"
             v-bind:classID="objects.classID"
             v-bind:classIsNamed="objects.className"
             v-bind:classSchedule="objects.classSchedule"

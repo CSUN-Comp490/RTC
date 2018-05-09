@@ -117,17 +117,20 @@
 
 
 <script>
+  import store from '@/store/store'
+  import router from '@/router/index'
+
   export default{
     methods: {
       navigateTo (route) {
-        this.$router.push(route)
+        router.push(route)
       },
       logout () {
-        this.$store.dispatch('setToken', null)
-        this.$store.dispatch('setUser', null)
-        this.$store.dispatch('setRole', null)
+        store.dispatch('setToken', null)
+        store.dispatch('setUser', null)
+        store.dispatch('setRole', null)
         // TODO: Redirect to homepage
-        this.$router.push({
+        router.push({
           name: 'root'
         })
       }

@@ -31,6 +31,12 @@ const SessionSchema = new Schema({
     type: Boolean,
     required: true,
     default: false
+  },
+
+  live: {
+    type: Boolean,
+    required: true,
+    default: true
   }
 
 });

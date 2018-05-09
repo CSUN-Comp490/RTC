@@ -4,6 +4,7 @@
   <div class="row" v-bind:style="displayStyle">
     <!--class id, class name, and class schedule-->
     <div style="padding-right: 20px; width: 250px" v-bind:style="classListStyle">
+      {{ id }}<br>
       {{ classID }}<br>
       {{ classIsNamed }}<br>
       {{ classSchedule }}
@@ -13,23 +14,25 @@
     <div :style="buttonPosition">
       <div v-if="role === 'captionist'" :style="buttonStyleOne">
         <!-- <button style="padding: 5px">Start Session</button> -->
-        <button style="padding: 5px" v-on:click="navigateTo({name: 'captionsession', params: {roomnumber: ''}})" flat to="captionsession">Start Session</button>
+        <button style="padding: 5px" v-on:click="createSession(id)">Start Session</button>
       </div>
       <div v-if="role != 'captionist'" :style="buttonStyleOne">
         <!-- <button style="padding: 5px">Join Live Session</button> -->
-        <button style="padding: 5px" v-on:click="navigateTo({name: 'studentsession', params: {roomnumber: id}})" flat to="studentsession">Join Live Session</button>
+        <button style="padding: 5px" v-on:click="navigateTo({name: 'studentsession', params: {roomnumber: id}})">Join Live Session</button>
       </div>
       <div :style="buttonStyleTwo">
-        <button style="padding: 5px" v-on:click="navigateTo({name: 'pastsession', params: {id: ''}})">Past Captions</button>
+        <button style="padding: 5px" v-on:click="navigateTo({name: 'pastsession', params: id})">Past Captions</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import store from '@/store/store'
   import router from '@/router/index'
+  import Api from '@/services/Api'
 
-export default {
+  export default {
     name: 'class-generator',
     props: {
       id: '',
@@ -77,6 +80,26 @@ export default {
     methods: {
       navigateTo (route) {
         router.push(route)
+      },
+      createSession (id) {
+        Api.instance.post('api/sessions/', {
+          courseID: this.id,
+          sessionName: new Date(),
+          captionist: store.state.user.id
+        })
+          .then(response => {
+            console.log(response.data.id)
+            router.push({
+              name: 'captionsession',
+              params: {
+                roomnumber: response.data._id
+              }
+            })
+          })
+          .catch(error => {
+            console.log(error)
+            return error
+          })
       }
     }
   }

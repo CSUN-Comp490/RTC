@@ -34,6 +34,7 @@ var router = new Router({
       path: '/captionist/session/:roomnumber',
       name: 'captionsession',
       component: CaptionSession,
+      // props: {default: true},
       meta: { requiresAuth: true, adminAuth: false, captionistAuth: true, studentAuth: false }
     },
     {
