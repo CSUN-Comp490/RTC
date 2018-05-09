@@ -4,7 +4,7 @@
   <div class="row" v-bind:style="displayStyle">
     <!--class id, class name, and class schedule-->
     <div style="padding-right: 20px; width: 250px" v-bind:style="classListStyle">
-      {{ id }}<br>
+      <!-- {{ id }}<br> -->
       {{ classID }}<br>
       {{ classIsNamed }}<br>
       {{ classSchedule }}
@@ -16,9 +16,9 @@
         <!-- <button style="padding: 5px">Start Session</button> -->
         <button style="padding: 5px" v-on:click="createSession(id)">Start Session</button>
       </div>
-      <div v-if="role != 'captionist'" :style="buttonStyleOne">
+      <div v-else-if="role != 'captionist' && isLive" :style="buttonStyleOne">
         <!-- <button style="padding: 5px">Join Live Session</button> -->
-        <button style="padding: 5px" v-on:click="navigateTo({name: 'studentsession', params: {roomnumber: id}})">Join Live Session</button>
+        <button style="padding: 5px" v-on:click="navigateTo({name: 'studentsession', params: {roomnumber: sessionId}})">Join Live Session</button>
       </div>
       <div :style="buttonStyleTwo">
         <button style="padding: 5px" v-on:click="navigateTo({name: 'pastsession', params: id})">Past Captions</button>
@@ -43,6 +43,8 @@
     },
     data: function () {
       return {
+        live: false,
+        sessionId: {},
         displayStyle: { // styling data for classGenerator
           display: 'block',
           border: '3px',
@@ -77,7 +79,36 @@
         }
       }
     },
+    computed: {
+      isLive () {
+        this.getSessions()
+        console.log('back')
+        return this.live
+      }
+    },
     methods: {
+      getSessions () {
+        // var live = false
+        Api.instance.get('/api/sessions/courseid/' + this.id)
+          .then(response => {
+            console.log('classID', this.classID)
+            let sessions = response.data
+            // this.sessions = sessions
+            let liveSessions = sessions.filter(function (session) {
+              return session.live
+            })
+            console.log(liveSessions)
+            if (liveSessions.length > 0) {
+              this.sessionId = liveSessions[0]._id
+              this.live = true
+            }
+          })
+          .catch(error => {
+            return error
+          })
+        console.log('after')
+        // return live
+      },
       navigateTo (route) {
         router.push(route)
       },
