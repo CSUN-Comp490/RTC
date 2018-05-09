@@ -33,21 +33,21 @@ var router = new Router({
     {
       path: '/captionist/session/:roomnumber',
       name: 'captionsession',
-      component: CaptionSession
+      component: CaptionSession,
+      props: true,
+      meta: { requiresAuth: true, adminAuth: false, captionistAuth: true, studentAuth: false }
     },
     {
       path: '/captionist/:id',
       name: 'captionist',
       component: CaptionistHome,
-      // meta: {requiresAuth: true, adminAuth: false, captionistAuth: true, studentAuth: false}
-      // FOR DEMO
       meta: {requiresAuth: true, adminAuth: false, captionistAuth: true, studentAuth: false}
     },
     {
-      path: '/pastsession/:sessionid',
-      name: 'PastSessions',
+      path: '/pastsession/:id',
+      name: 'pastsession',
       component: PastSessions,
-      meta: {requiresAuth: false, adminAuth: false, captionistAuth: false, studentAuth: false}
+      meta: {requiresAuth: true, adminAuth: false, captionistAuth: false, studentAuth: false}
     },
     {
       path: '/student/:id',
@@ -58,7 +58,8 @@ var router = new Router({
     {
       path: '/student/session/:roomnumber',
       name: 'studentsession',
-      component: StudentSession
+      component: StudentSession,
+      meta: { requiresAuth: true, adminAuth: false, captionistAuth: false, studentAuth: true }
     },
     {
       path: '/admin/:id',
@@ -75,6 +76,7 @@ router.beforeEach((to, from, next) => {
   // Get the token from server
   const authUser = JSON.parse(window.localStorage.getItem('userToken'))
   console.log('Where to? ' + to.name)
+  console.log(to)
   // If the page requires authentication
   if (to.meta.requiresAuth) {
     // console.log('START')
@@ -90,9 +92,12 @@ router.beforeEach((to, from, next) => {
     } else if (to.meta.studentAuth && authUser.token === 'student') {
       // console.log('student')
       next()
+    } else if (to.name === 'pastsession') {
+      console.log('pastsession')
+      next()
       // If the user is not a valid user, just route them to the login page
     } else {
-      // console.log('login')
+      console.log('login')
       next({ name: 'login' })
     }
   } else if (to.name === 'root' && to.name === 'login' && authUser != null) {

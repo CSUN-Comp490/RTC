@@ -6,6 +6,7 @@ let SessionController = {};
 SessionController.storeSession = (req, res) => {
   let Session = new SessionModel(req.body);
   let createSession_Promise = Session.save();
+  console.log('Entering the Matrix...', req.body)
 
   createSession_Promise
     .then(Session => {

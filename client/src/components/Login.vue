@@ -26,11 +26,11 @@
 
         <div class="form-group">
           <p>Role</p>
-          <select label="Role" v-model="token" class="role inputs raleway--regular">
-            <option value="" disabled selected>Select your role</option>
-            <option value="Student">Student</option>
-            <option value="Captionist">Captionist</option>
-            <option value="Admin">Admin</option>
+          <select label="Role" v-model="token" class="role inputs raleway--regular" required>
+            <option value="" disable selected hidden>select role</option>
+            <option value="Student">student</option>
+            <option value="Captionist">captionist</option>
+            <option value="Admin">admin</option>
           </select>
         </div>
 
@@ -39,7 +39,7 @@
 
         <div class="login__loginButton">
           <!-- <button class="btn varela" >Login</button> -->
-          <button class="btn varela" v-on:click="login">Login</button>
+          <button class="btn varela" v-on:click="login" onclick="this.blur()">Login</button>
         </div>
 
         <!--Only needed if links "Forgot Password" and extra clickable Register links are needed?-->
@@ -167,14 +167,30 @@ export default {
   .login__extraLinks {
     margin-top: 10px;
   }
-
-
-
-  input {
+  .btn {
+    padding-top: 7px;
+  }
+  .btn:focus {
+    outline: none;
+  }
+  input, select {
     background-color: #fff;
     padding: 8px 15px;
     border: 1px solid #bbb;
     border-radius: 8px;
+    outline: none;
+  }
+  input:focus {
+    background-color: #d4ecff;
+  }
+  select:focus {
+    background-color: #d4ecff;
+  }
+  select {
+    width: 257px;
+  }
+  select:invalid {
+    color: #6f706b;
   }
   button {
     /*!important overrides the bootstrap stylings! */
@@ -182,8 +198,13 @@ export default {
     background-color: #0A1D3B !important;
     color: #fff !important;
   }
+  button:hover {
+    background-color: #3373ed !important;
+  }
+  button:focus {
+    outline: none;
+  }
   a {
     color: #1F286A;
   }
-
 </style>

@@ -149,13 +149,15 @@ Any unknown html tag are bootstrap-vue.js syntax that are currently unidentified
 </template>
 
 <script>
-export default{
-  methods: {
-    navigateTo (route) {
-      this.$router.push(route)
+  import router from '@/router/index'
+
+  export default{
+    methods: {
+      navigateTo (route) {
+        router.push(route)
+      }
     }
   }
-}
 </script>
 
 <style scoped>
