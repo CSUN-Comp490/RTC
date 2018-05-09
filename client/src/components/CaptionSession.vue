@@ -10,9 +10,6 @@
     </div>
 
     <!--Quill component-->
-    <!--
-      .quill-container > .quillWrapper > .ql-toolbar > .ql-formats
-    -->
     <div id="quill-container col-xs-12">
         <vue-editor
           v-model="content"
@@ -36,6 +33,7 @@
   import router from '@/router/index'
   import { VueEditor, Quill } from 'vue2-editor'
   import io from 'socket.io-client'
+  import Api from '@/services/Api'
 
   var socket = io.connect('http://localhost:8080') // connect to socket server
 
@@ -71,6 +69,9 @@
     components: {
       VueEditor
     },
+    // props: {
+    //   roomnumber: ''
+    // },
     data () {
       return {
         room: null,
@@ -125,12 +126,23 @@
       },
       // Fix this method to return to captionist home page
       returnPage () {
-        router.push({
-          name: 'captionist',
-          params: {
-            id: router.params.id
-          }
+        // console.log(this.$route.params)
+        Api.instance.put('api/sessions/id/' + this.$route.params.roomnumber, {
+          live: false
         })
+          .then(response => {
+            console.log(response.data.courseID)
+            router.push({
+              name: 'captionist',
+              params: {
+                id: response.data.courseID
+              }
+            })
+          })
+          .catch(error => {
+            console.log(error)
+            return error
+          })
       }
     },
     beforeRouteLeave (to, from, next) {

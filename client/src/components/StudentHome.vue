@@ -23,6 +23,7 @@
     <div class="classList" v-if="!(this.getClassData.length == 0)">
       <div v-for="objects in this.getClassData">
         <class-generator
+            v-bind:id="objects.id"
             v-bind:classID="objects.classID"
             v-bind:classIsNamed="objects.className"
             v-bind:classSchedule="objects.classSchedule"
@@ -74,6 +75,7 @@
 
           if (classElements.length > 0) {
             var classObject = {
+              id: classElements[0]._id,
               classID: classElements[0].classID,
               className: classElements[0].className,
               classSchedule: classElements[0].days + ' ' + classElements.time
