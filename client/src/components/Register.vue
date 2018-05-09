@@ -18,11 +18,11 @@
         </div>
         <div class="form-group">
           <p>Role</p>
-          <select label="Role" v-model="role" class="role inputs raleway--regular">
-            <option value="" disabled selected>Select your role</option>
-            <option value="Student">Student</option>
-            <option value="Captionist">Captionist</option>
-            <option value="Admin">Admin</option>
+          <select label="Role" v-model="role" class="role inputs raleway--regular" required>
+            <option value="" disabled selected hidden>select your role</option>
+            <option value="Student">student</option>
+            <option value="Captionist">captionist</option>
+            <option value="Admin">admin</option>
           </select>
         </div>
         <div class="form-group">
@@ -48,7 +48,7 @@
 
         <div class="error" v-html="error"></div> <br>
 
-        <button class="btn varela" v-on:click="register()">Register</button>
+        <button class="btn varela" v-on:click="register()" onclick="this.blur()">Register</button>
 
         <!--Only needed if extra Login clickable link is needed?-->
         <!--<div class="register__extraLinks pull-right invisible">-->
@@ -160,20 +160,43 @@ export default {
   .register__extraLinks {
     margin-top: 10px;
   }
-
+  .btn {
+    padding: 8px;
+  }
+  .btn:focus {
+    outline: none;
+  }
   /*<!--For the text fields-->*/
   input, select {
     background-color: #fff;
     padding: 8px 15px;
     border: 1px solid #bbb;
     border-radius: 8px;
+    outline: none;
   }
-
+  input:focus {
+    background-color: #d4ecff;
+  }
+  select:focus {
+    background-color: #d4ecff;
+  }
+  select {
+    width: 257px;
+  }
+  select:invalid {
+    color: #6f706b;
+  }
   button {
     /*!important overrides the bootstrap stylings*/
     border-radius: 6px;
     background-color: #0A1D3B !important;
     color: #fff !important;
+  }
+  button:hover {
+    background-color: #3373ed !important;
+  }
+  button:focus {
+    outline: none;
   }
   a {
     color: #1F286A;

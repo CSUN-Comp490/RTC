@@ -4,20 +4,9 @@
 
 <template>
   <div class="container-fluid">
-    <div id="classNameBar ">
-        <div class="buttons col-sm-12 mt-4">
-
-          <!--TODO: get class name for the caption session!-->
-          <h4 class="raleway--medium col-sm-5 col-xs-12 col-md-6 pull-left">CLASS NAME</h4>
-
-          <div class="buttons__single col-sm-3 col-xs-6 col-md-2 col-md-offset-2">
-            <button type="button" class="btn btn-primary bt-sm buttonStyle"@click="download()">Download</button>
-          </div>
-          <div class="buttons__single col-sm-3 col-xs-5 col-md-2">
-            <button type="button" class="btn btn-primary btn-sm buttonStyle" @click="returnPage()">End Session</button>
-          </div>
-        </div>
-
+    <div class="buttons col-sm-12 mt-4">
+      <!--TODO: get class name for the caption session!-->
+      <h4 id="className" class="raleway--medium col-sm-12 col-xs-12 col-md-12 col-lg-12 pull-left">CLASS NAME</h4>
     </div>
 
     <!--Quill component-->
@@ -32,6 +21,13 @@
           :editorOptions="editorSettings"
         ></vue-editor>
     </div>
+    <!--col-sm-3 col-xs-6 col-md-2 col-md-offset-2-->
+      <div class="buttons__single col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <button type="button" class="btn btn-primary bt-sm buttonStyle"@click="download()"
+                onclick="this.blur()">Download</button>
+        <button type="button" class="btn btn-primary btn-sm buttonStyle" @click="returnPage()"
+                onclick="this.blur()">End Session</button>
+      </div>
   </div>
 </template>
 
@@ -154,6 +150,9 @@
     overflow-y: hidden !important;
     overflow-x: hidden !important;
   }
+  button:focus {
+    outline: none;
+  }
   .container-fluid {
     position: fixed;
     width: 100%;
@@ -161,20 +160,36 @@
     overflow-y: hidden;
     overflow-x: hidden;
   }
+  .buttons__single {
+    width: 100%;
+    padding: 10px;
+    margin: auto;
+  }
+  .buttons__single:focus {
+    outline: none;
+  }
   .buttonStyle {
-    background-color: #40599c !important;
+    background-color: #0A1D3B !important;
     color: white !important;
     font-family: "Varela Round" !important;
     border-radius: 8px !important;
-    box-shadow: 0px 0px 2px black !important;
+    border: none;
+  }
+  .buttonStyle:hover {
+    background-color: #3373ed !important;
+  }
+  .buttonStyle:focus {
+    outline: none ;
   }
   #quill-container {
     width: 94%;
-    height: 80vh;
+    /*height: 80vh;*/
     margin-left: auto;
     margin-right: auto;
   }
-
+  #className {
+    top: 5px;
+  }
   /*::-webkit-scrollbar-track {
     background: none;
   }

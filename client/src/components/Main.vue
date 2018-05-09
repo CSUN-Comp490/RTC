@@ -35,7 +35,8 @@
           <div class="content__component buttons openSans--light pull-left pl-5">
             <div class="buttons row mb-4 pr-2">
               <div class="button">
-                <button class="btn varela pull-left" v-on:click="navigateTo({name: 'login'})" v-if="!$store.state.isUserLoggedIn" flat to="login">
+                <button class="btn varela pull-left" v-on:click="navigateTo({name: 'login'})" v-if="!$store.state.isUserLoggedIn" flat to="login"
+                        onclick="this.blur()">
                   Log in
                 </button>
               </div>
@@ -47,7 +48,8 @@
 
             <div class="buttons row">
               <div class="button">
-                <button class="btn varela pull-left" v-on:click="navigateTo({name: 'register'})" v-if="!$store.state.isUserLoggedIn" flat to="register">
+                <button class="btn varela pull-left" v-on:click="navigateTo({name: 'register'})" v-if="!$store.state.isUserLoggedIn" flat to="register"
+                        onclick="this.blur()">
                   Register
                 </button>
               </div>
@@ -81,7 +83,8 @@
           <div class="content__component buttons openSans--light pull-left pl-3 mt-3">
             <div class="buttons row mb-4 pr-2">
               <div class="button">
-                <button class="btn varela pull-left" v-on:click="navigateTo({name: 'login'})" v-if="!$store.state.isUserLoggedIn" flat to="login">
+                <button class="btn varela pull-left" v-on:click="navigateTo({name: 'login'})" v-if="!$store.state.isUserLoggedIn" flat to="login"
+                  onclick="this.blur()">
                   Log in
                 </button>
               </div>
@@ -93,7 +96,8 @@
 
             <div class="buttons row">
               <div class="button">
-                <button class="btn varela pull-left" v-on:click="navigateTo({name: 'register'})" v-if="!$store.state.isUserLoggedIn" flat to="register">
+                <button class="btn varela pull-left" v-on:click="navigateTo({name: 'register'})" v-if="!$store.state.isUserLoggedIn" flat to="register"
+                  onclick="this.blur()">
                   Register
                 </button>
               </div>
@@ -167,6 +171,12 @@
     color: #fff !important;
     padding-left: 10px;
     padding-right: 10px;
+  }
+  button:hover {
+    background-color: #3373ed !important;
+  }
+  button:focus {
+    outline: none;
   }
   .desktop .content__component {
     width: 50%;
