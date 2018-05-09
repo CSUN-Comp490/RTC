@@ -16,7 +16,6 @@
         <p>My Classes</p>
       </div>
     </div>
-
     <!--generates class list and main interface for captionist home page
         loops through an array of objects and binds each objects
         data fields to the ClassGenerator components props-->
@@ -132,7 +131,7 @@
 
         for (let classID in classes) { // iterate through every class id in the array
           Api.get('/courseid/' + classID) // retrieve the classes information
-            .then(function (res) {
+            .then((res) => {
               console.log(res)
               const classElements = JSON.parse(res.data) // assign the data to variable
 
@@ -146,7 +145,7 @@
 
               classObjectArray.push(classObject) // add the object to the array
             })
-            .catch(function (error) { // generate error message
+            .catch((error) => { // generate error message
               console.log(error)
               const errorMessage = 'An error occured.' + error
               return errorMessage

@@ -39,8 +39,6 @@ var router = new Router({
       path: '/captionist/:id',
       name: 'captionist',
       component: CaptionistHome,
-      // meta: {requiresAuth: true, adminAuth: false, captionistAuth: true, studentAuth: false}
-      // FOR DEMO
       meta: {requiresAuth: true, adminAuth: false, captionistAuth: true, studentAuth: false}
     },
     {
@@ -58,6 +56,7 @@ var router = new Router({
       path: '/student/session/:roomnumber',
       name: 'studentsession',
       component: StudentSession
+      // Add meta tag to require authentication
     },
     {
       path: '/admin/:id',
@@ -71,7 +70,7 @@ var router = new Router({
 
 // Routes must be checked before they change pages
 router.beforeEach((to, from, next) => {
-  // Get the token from server
+  // Get the token given by server
   const authUser = JSON.parse(window.localStorage.getItem('userToken'))
   console.log(authUser)
   console.log(to.name)

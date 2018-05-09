@@ -14,7 +14,7 @@ function jwtSignUser(user) {
 
 CaptionistController.login = (req, res) => {
   let captionistEmail = req.body.email;
-  let getCaptionistByEmailPromise = CaptionistModel.findOne({email: captionistEmail }).exec();
+  let getCaptionistByEmailPromise = CaptionistModel.findOne({ email: captionistEmail }).exec();
   getCaptionistByEmailPromise
     .then(captionist => {
       console.log(captionist)
@@ -36,9 +36,9 @@ CaptionistController.login = (req, res) => {
 CaptionistController.storeCaptionist = (req, res) => {
   let captionist = new CaptionistModel(req.body);
   let createCaptionistPromise = captionist.save();
-
   createCaptionistPromise
     .then(captionist => {
+      console.log(captionist)
       return res.status(201).json(captionist);
     })
     .catch(err => {

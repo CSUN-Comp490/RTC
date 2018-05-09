@@ -62,6 +62,7 @@
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
+import router from '@/router/index'
 import Panel from '@/components/Panel'
 export default {
   data () {
@@ -86,6 +87,9 @@ export default {
           school: this.school,
           email: this.email,
           password: this.password
+        })
+        router.push({
+          name: 'login'
         })
         // this.$store.dispatch('setToken', response.data.token)
         // this.$store.dispatch('setUser', response.data.user)

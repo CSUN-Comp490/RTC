@@ -21,8 +21,8 @@
         loops through an array of objects and binds each objects
         data fields to the ClassGenerator components props-->
     <!--<div class="classList">-->
-      <!--<div v-for="objects in userClassInformation">-->
-        <!--<class-generator-->
+      <!--<div v-for="objects in userClassInformation" v-bind:key="objects">-->
+        <!--<class-generator>-->
           <!--v-bind:classID="objects.classID"-->
           <!--v-bind:classIsNamed="objects.className"-->
           <!--v-bind:classSchedule="objects.classSchedule"-->

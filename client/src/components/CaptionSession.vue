@@ -4,12 +4,9 @@
 
 <template>
   <div class="container-fluid">
-    <div id="classNameBar ">
+    <div id="classNameBar">
         <div class="buttons col-sm-12 mt-4">
-
-          <!--TODO: get class name for the caption session!-->
           <h4 class="raleway--medium col-sm-5 col-xs-12 col-md-6 pull-left">CLASS NAME</h4>
-
           <div class="buttons__single col-sm-3 col-xs-6 col-md-2 col-md-offset-2">
             <button type="button" class="btn btn-primary bt-sm buttonStyle"@click="download()">Download</button>
           </div>
@@ -17,9 +14,7 @@
             <button type="button" class="btn btn-primary btn-sm buttonStyle" @click="returnPage()">End Session</button>
           </div>
         </div>
-
     </div>
-
     <!--Quill component-->
     <!--
       .quill-container > .quillWrapper > .ql-toolbar > .ql-formats
@@ -28,7 +23,7 @@
         <vue-editor
           v-model="content"
           id="editor"
-          placeholder="All your base are belong to us..."
+          placeholder="Click here and start typing..."
           :editorOptions="editorSettings"
         ></vue-editor>
     </div>
@@ -48,7 +43,7 @@
       this.setEditorStyle()
     }
 
-    //    TODO: no overflow for specific editor icons (text type, underline color, highlight color
+    // TODO: no overflow for specific editor icons (text type, underline color, highlight color
     setEditorStyle () {
       // styling for the editor
       let editor = document.getElementById('editor')
@@ -86,7 +81,7 @@
         }
       }
     },
-    mounted () {
+    created () {
       // join room from room number (defined in url)
       this.room = this.$route.params.roomnumber.toString()
       socket.on('connect', () => {

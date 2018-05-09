@@ -1,22 +1,16 @@
 <!--NOT YET WEB RESPONSIVE
     Can make toolbar button to change text editor background color
     Unable to edit scrollbar-->
-
 <template>
   <div class="container-fluid" style="padding: 0px">
-    <div id="classNameBar ">
+    <div id="classNameBar">
       <div class="buttons col-sm-12 mt-4">
-
-        <!--TODO: get class name for the caption session!-->
         <h4 class="raleway--medium col-sm col-xs-12 col-md-6 pull-left">CLASS NAME</h4>
-
         <div class="buttons__single col-sm  col-xs-12 col-md-5 col-md-offset-1">
           <button type="button" class="btn btn-primary bt-sm buttonStyle"@click="download()">Download</button>
         </div>
       </div>
-
     </div>
-
     <!--Quill component-->
     <div id="quill-container">
       <vue-editor
@@ -33,7 +27,7 @@
   import { VueEditor, Quill } from 'vue2-editor'
   import io from 'socket.io-client'
 
-  var socket = io('localhost:8080') // connect to socket server
+  var socket = io.connect('localhost:8080') // connect to socket server
 
   // custom module to edit css styling of imported editor
   class EditorStyle {
@@ -81,7 +75,7 @@
         }
       }
     },
-    mounted () {
+    created () {
       // join room from room number (defined in url)
       this.room = this.$route.params.roomnumber.toString()
       socket.on('connect', () => {
