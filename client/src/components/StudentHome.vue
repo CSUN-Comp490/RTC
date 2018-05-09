@@ -44,8 +44,6 @@
   export default {
     data: function () {
       return {
-        // userInfo: Array,
-        // userClassInformation: []
         userClassInformation: []
       }
     },
@@ -53,33 +51,35 @@
       console.log('store', store)
       // console.log('router', router)
     },
-    created: function () { // calls the function after the vue instance is created
-      // this.getClassData()
-    },
     computed: {
+      getUser () {
+        if (store.state.user != null) {
+          return store.state.user
+        } else {
+          return {}
+        }
+      },
       getClassData () {
         const classObjectArray = [] // create array for storage
         var classes = store.state.classes
-        var myClasses = store.state.user.classes
-        // console.log(123)
-        // console.log(classes, myClasses)
+        var myClasses = this.getUser.classes
 
         // iterate through every class id in the array
         for (var classId in myClasses) {
-          // console.log('for')
+          // console.log(classes[0])
           // var classElements = classes[0]
           var classElements = classes.filter(function (element) {
-            console.log(element)
-            return element.classID === myClasses[classId]
+            return element._id === myClasses[classId]
           })
-          console.log(classElements)
 
-          var classObject = {
-            classID: classElements.classID,
-            className: classElements.className,
-            classSchedule: classElements.days + ' ' + classElements.time
+          if (classElements.length > 0) {
+            var classObject = {
+              classID: classElements[0].classID,
+              className: classElements[0].className,
+              classSchedule: classElements[0].days + ' ' + classElements.time
+            }
+            classObjectArray.push(classObject) // add the object to the array
           }
-          classObjectArray.push(classObject) // add the object to the array
         }
 
         this.userClassInformation = classObjectArray // assign the array to an array in the data section

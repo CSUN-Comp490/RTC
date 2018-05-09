@@ -12,8 +12,12 @@
     <!-- button position and button styling, need to implement binds-->
     <div :style="buttonPosition">
       <div v-if="role === 'captionist'" :style="buttonStyleOne">
-        <button style="padding: 5px">Start Session</button>
-        <!-- <button style="padding: 5px" v-on:click="navigateTo({name: 'session', params: {}})">Start Session</button> -->
+        <!-- <button style="padding: 5px">Start Session</button> -->
+        <button style="padding: 5px" v-on:click="navigateTo({name: 'captionsession', params: {roomnumber: ''}})" flat to="captionsession">Start Session</button>
+      </div>
+      <div v-if="role != 'captionist'" :style="buttonStyleOne">
+        <!-- <button style="padding: 5px">Join Live Session</button> -->
+        <button style="padding: 5px" v-on:click="navigateTo({name: 'studentsession', params: {roomnumber: ''}})" flat to="studentsession">Join Live Session</button>
       </div>
       <div :style="buttonStyleTwo">
         <button style="padding: 5px">Past Captions</button>
@@ -65,6 +69,11 @@
           margin: '5px',
           marginLeft: '10px'
         }
+      }
+    },
+    methods: {
+      navigateTo (route) {
+        this.$router.push(route)
       }
     }
   }

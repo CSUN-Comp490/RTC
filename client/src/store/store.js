@@ -47,6 +47,9 @@ export default new Vuex.Store({
     },
     setClasses (state, classes) {
       state.classes = classes
+    },
+    clearClasses (state) {
+      state.classes = []
     }
   },
   actions: {
@@ -59,8 +62,8 @@ export default new Vuex.Store({
     setRole ({commit}, role) {
       commit('setRole', role)
     },
-    async setClasses ({commit}) {
-      await Api.instance.get('/api/classes/')
+    setClasses ({commit}) {
+      Api.instance.get('/api/classes/')
         .then(response => {
           commit('setClasses', response.data)
         })
@@ -68,9 +71,12 @@ export default new Vuex.Store({
           console.log(error)
         })
     },
-    async updateUser ({commit}, user) {
+    clearClasses ({commit}) {
+      commit('clearClasses')
+    },
+    updateUser ({commit}, user) {
       console.log('Old User' + user)
-      await Api.instance.get('api/' + user.token + 's/id/' + user.id)
+      Api.instance.get('api/' + user.token + 's/id/' + user.id)
         .then(response => {
           console.log('New User' + response.data)
           let user = response.data

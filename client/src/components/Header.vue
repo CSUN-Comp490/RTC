@@ -73,6 +73,7 @@
         store.dispatch('setToken', null)
         store.dispatch('setUser', null)
         store.dispatch('setRole', null)
+        store.dispatch('clearClasses')
         router.push({
           name: 'login'
         })

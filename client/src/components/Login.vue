@@ -97,6 +97,7 @@ export default {
           store.dispatch('setToken', responseToken)
           store.dispatch('setUser', this.user)
           store.dispatch('setRole', 'student')
+          store.dispatch('setClasses')
           // Redirect to respective page based on role
           var routeName = null
           var userRole = this.user.token

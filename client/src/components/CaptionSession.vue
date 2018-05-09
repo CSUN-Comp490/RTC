@@ -36,6 +36,8 @@
 </template>
 
 <script>
+  // import store from '@/store/store'
+  import router from '@/router/index'
   import { VueEditor, Quill } from 'vue2-editor'
   import io from 'socket.io-client'
 
@@ -88,7 +90,8 @@
     },
     mounted () {
       // join room from room number (defined in url)
-      this.room = this.$route.params.roomnumber.toString()
+      console.log(router)
+      this.room = router.params.roomnumber.toString()
       socket.on('connect', () => {
         socket.emit('join', this.room)
       })
@@ -126,10 +129,10 @@
       },
       // Fix this method to return to captionist home page
       returnPage () {
-        this.$router.push({
-          name: 'root',
+        router.push({
+          name: 'captionist',
           params: {
-            id: this.$router.params.id
+            id: router.params.id
           }
         })
       }

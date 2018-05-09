@@ -46,7 +46,8 @@ var router = new Router({
     {
       path: '/pastsession/:sessionid',
       name: 'PastSessions',
-      component: PastSessions
+      component: PastSessions,
+      meta: {requiresAuth: false, adminAuth: false, captionistAuth: false, studentAuth: false}
     },
     {
       path: '/student/:id',
